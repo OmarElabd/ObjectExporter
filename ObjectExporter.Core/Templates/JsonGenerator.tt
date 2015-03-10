@@ -1,0 +1,92 @@
+﻿<#@ template language="C#" #>
+<#@ parameter name="objectExpression" type="EnvDTE.Expression" #>
+<#@ parameter name="maxDepth" type="System.Int32" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System.Collections.Generic" #>
+<# ExportMembers(objectExpression, 0, true); #>
+<#+
+    bool isFirstElement = true;
+    
+    public void ExportMembers(Expression expression, int recursionLevel, bool isLast)
+    {
+        if(!GeneratorHelper.IsSerializable(expression.Name))
+        {
+            return;
+        }
+        else if(GeneratorHelper.CanBeExpressedAsSingleType(expression.Type))
+        {
+            WriteLine("");
+            #>"<#= expression.Name #>": <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+        }
+        else if (expression.DataMembers.Count == 0)
+        {
+            WriteLine("");
+            if(expression.Name.Contains("<") || expression.Name.Contains(">") || expression.Name.Contains("[") || expression.Name.Contains("]"))
+            {
+                #><#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+            else
+            {   
+                #>"<#= expression.Name #>": <#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+        }
+        else if (expression.DataMembers.Count > 0 && recursionLevel <= maxDepth)
+        {
+            //used for the very first object (top most) to be completed as var objName = new objType, without a space in between.
+            if(isFirstElement)
+            {
+                isFirstElement = false;
+            }
+            else
+            {
+                WriteLine("");
+            }
+
+            if(GeneratorHelper.IsTypeOfCollection(expression.Type))
+            {
+                #>"<#= expression.Name #>": <#+ 
+                WriteLine(""); #>[<#+
+            }
+            else
+            {
+                #>{<#+
+            }
+
+            var expressionList = new List<Expression>();
+            foreach(Expression exp in expression.DataMembers)
+            {
+                if(GeneratorHelper.IsSerializable(exp.Name))
+                {
+                    expressionList.Add(exp);
+                }
+            }
+
+            foreach(Expression exp in expressionList)
+            {
+                PushIndent("\t");
+                bool isLastItem = expressionList.IsLast(exp);
+                ExportMembers(exp, recursionLevel + 1, isLastItem);
+                PopIndent();
+            }
+
+            TerminateObjectOrCollection(expression.Type);
+            #><#= GeneratorHelper.WriteCommaIfNotLast(isLast) #> <#+
+        }
+    }
+
+    private void TerminateObjectOrCollection(string expressionType)
+    {
+        WriteLine("");
+        if(GeneratorHelper.IsTypeOfCollection(expressionType))
+        {
+            #>]<#+ 
+        }
+        else
+        {
+            #>}<#+     
+        }
+    }
+#>

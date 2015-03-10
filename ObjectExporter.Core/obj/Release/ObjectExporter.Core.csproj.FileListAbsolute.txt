@@ -1,0 +1,6 @@
+C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\bin\Release\ObjectExporter.Core.dll
+C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\bin\Release\ObjectExporter.Core.pdb
+C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\obj\Release\ObjectExporter.Core.csprojResolveAssemblyReference.cache
+C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\obj\Release\ObjectExporter.Core.csproj.ResolveComReference.cache
+C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\obj\Release\ObjectExporter.Core.dll
+C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\obj\Release\ObjectExporter.Core.pdb

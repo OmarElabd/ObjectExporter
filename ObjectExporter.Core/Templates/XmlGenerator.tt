@@ -1,0 +1,69 @@
+﻿<#@ template language="C#" #>
+<#@ parameter name="objectExpression" type="EnvDTE.Expression" #>
+<#@ parameter name="maxDepth" type="System.Int32" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System.Collections.Generic" #>
+<?xml version="1.0" encoding="utf-8"?>
+<# ExportMembers(objectExpression, 0); #>
+<#+
+    bool isFirstElement = true;
+
+    public void ExportMembers(Expression expression, int recursionLevel)
+    {
+        if(!GeneratorHelper.IsSerializable(expression.Name))
+        {
+            return;
+        }
+        else if(expression.Value == "null")
+        {
+            return;
+        }
+        else if(GeneratorHelper.CanBeExpressedAsSingleType(expression.Type))
+        {
+            WriteLine("");
+            #><<#= expression.Name #>><#= GetSingleTypeValue(expression) #></<#= expression.Name #>><#+
+        }
+        else if (expression.DataMembers.Count == 0)
+        {
+            WriteLine("");
+            string node = expression.Name;
+            if(expression.Name.Contains("<") || expression.Name.Contains(">") || expression.Name.Contains("[") || expression.Name.Contains("]"))
+            {
+                node = expression.Type;
+            }
+
+            #><<#= node #>><#= expression.Value #></<#= node #>><#+
+        }
+        else if (expression.DataMembers.Count > 0 && recursionLevel <= maxDepth)
+        {
+            //used for the very first object (top most) to be completed as var objName = new objType, without a space in between.
+            if(isFirstElement)
+            {
+                isFirstElement = false;
+            }
+            else
+            {
+                WriteLine("");
+            }
+
+            string node = expression.Type;
+            if(expression.Type.Contains("<") || expression.Type.Contains(">") || expression.Type.Contains("[") || expression.Type.Contains("]"))
+            {
+                node = expression.Name;
+            }
+
+            #><<#= node #>><#+
+            foreach(Expression dataMember in expression.DataMembers)
+            {
+                PushIndent("\t");
+                ExportMembers(dataMember, recursionLevel+1);
+                PopIndent();
+            }
+            WriteLine("");
+            #></<#= node #>><#+
+        }
+    }
+#>

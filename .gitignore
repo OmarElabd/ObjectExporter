@@ -1,6 +1,14 @@
 *.suo
 *.user
 _ReSharper.*
+_NCrunch_*
+.*crunch*.local.xml
+*.dotCover
+.JustCode
+*.psess
+*.vsp
+*.vspx
+*.vssscc
 ObjectExplorer.Test/obj/
 ObjectExplorer.Test/bin/
 ObjectExporter.Core/bin/

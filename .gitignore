@@ -3,3 +3,7 @@
 _ReSharper.*
 ObjectExplorer.Test/obj/
 ObjectExplorer.Test/bin/
+ObjectExporter.Core/bin/
+ObjectExporter.Core/obj/
+ObjectExporter.VsPackage/bin/
+ObjectExporter.VsPackage/obj/

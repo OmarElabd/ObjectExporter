@@ -68,7 +68,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
                 try
                 {
                     Dictionary<string, string> lookupGeneratedTexts = await exportGenerator.GenerateTextWithKey(cancellationTokenSource.Token);
-                    FormDisplayGeneratedText formDisplayGeneratedText = await CreateAndShowFormAsync(lookupGeneratedTexts, exportType);
+                    FormDisplayGeneratedText formDisplayGeneratedText = await CreateAndShowFormAsync(lookupGeneratedTexts, exportType, cancellationTokenSource.Token);
 
                     //Setup event for when the form is shown to close the waiting dialog
                     formDisplayGeneratedText.Shown += formDisplayGeneratedText_Shown;
@@ -97,6 +97,26 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
         private Task<FormDisplayGeneratedText> CreateAndShowFormAsync(Dictionary<string, string> lookupGeneratedTexts, ExportType exportType)
         {
             return Task.Run(() => new FormDisplayGeneratedText(lookupGeneratedTexts, exportType));
+        }
+
+        private Task<FormDisplayGeneratedText> CreateAndShowFormAsync(Dictionary<string, string> lookupGeneratedTexts, 
+            ExportType exportType, CancellationToken cancellationToken)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    using (cancellationToken.Register(System.Threading.Thread.CurrentThread.Abort))
+                    {
+                        var formGeneratedText = new FormDisplayGeneratedText(lookupGeneratedTexts, exportType);
+                        return formGeneratedText;
+                    }
+                }
+                catch (ThreadAbortException)
+                {
+                    throw;
+                }
+            }, cancellationToken);
         }
 
         void formDisplayGeneratedText_Shown(object sender, EventArgs e)

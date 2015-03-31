@@ -18,22 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B283BD4B-FB2
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://osiris.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ObjectExporter.VsPackage\\ObjectExporter.VsPackage.csproj
-		SccProjectName1 = ObjectExporter.VsPackage
-		SccLocalPath1 = ObjectExporter.VsPackage
-		SccProjectUniqueName2 = ObjectExplorer.Test\\ObjectExplorer.Test.csproj
-		SccProjectTopLevelParentUniqueName2 = ObjectExporter.sln
-		SccProjectName2 = ObjectExplorer.Test
-		SccLocalPath2 = ObjectExplorer.Test
-		SccProjectUniqueName3 = ObjectExporter.Core\\ObjectExporter.Core.csproj
-		SccProjectName3 = ObjectExporter.Core
-		SccLocalPath3 = ObjectExporter.Core
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM

@@ -1,4 +1,4 @@
-﻿namespace ObjectExporter.Core.Templates.Converters
+﻿namespace ObjectExporter.Core.Templates.Converters  
 {
     public class LocalsConverter : IConverter
     {

@@ -19,7 +19,7 @@ namespace ObjectExporter.Core.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+    #line 1 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class CSharpGenerator : CSharpGeneratorBase
     {
@@ -31,14 +31,14 @@ namespace ObjectExporter.Core.Templates
         {
             this.Write("var ");
             
-            #line 9 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+            #line 9 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(objectExpression.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 9 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+            #line 9 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
 ExportMembers(objectExpression, 0, true);
 
@@ -49,7 +49,7 @@ ExportMembers(objectExpression, 0, true);
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 12 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 12 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
     bool isFirstElement = true;
 
@@ -67,28 +67,28 @@ ExportMembers(objectExpression, 0, true);
         #line default
         #line hidden
         
-        #line 24 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 24 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 24 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 24 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 24 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 24 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 24 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 24 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         }
         else if (expression.DataMembers.Count == 0)
@@ -101,14 +101,14 @@ this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
             else
@@ -118,28 +118,28 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
         }
@@ -162,42 +162,42 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
         #line default
         #line hidden
         
-        #line 52 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 52 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 52 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 52 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = new ");
 
         
         #line default
         #line hidden
         
-        #line 52 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 52 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Type));
 
         
         #line default
         #line hidden
         
-        #line 52 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 52 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
  
                 WriteLine(""); 
         
         #line default
         #line hidden
         
-        #line 53 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("{");
 
         
         #line default
         #line hidden
         
-        #line 53 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
             else
@@ -207,35 +207,35 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 57 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 57 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("new ");
 
         
         #line default
         #line hidden
         
-        #line 57 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 57 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Type));
 
         
         #line default
         #line hidden
         
-        #line 57 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 57 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
                 WriteLine(""); 
         
         #line default
         #line hidden
         
-        #line 58 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 58 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("{");
 
         
         #line default
         #line hidden
         
-        #line 58 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 58 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
 
@@ -262,28 +262,28 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 79 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("}");
 
         
         #line default
         #line hidden
         
-        #line 79 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             
         
         #line default
         #line hidden
         
-        #line 80 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 80 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 80 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 80 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         }
     }
@@ -292,7 +292,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.WriteCommaIfN
         #line default
         #line hidden
         
-        #line 1 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 1 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
 private global::EnvDTE.Expression _objectExpressionField;
 

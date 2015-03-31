@@ -1,3 +1,6 @@
+Release Notes (v0.96.1) - 3/31/2015:
+1. Fixed (Issue #)
+
 Release Notes (v0.95) - 3/10/2015:
 1. Fix: Removed progress bar stall when displaying text.
 2. Info: Project is now open sourced, project can be found at http://www.github.com/OmarElabd/ObjectExporter.

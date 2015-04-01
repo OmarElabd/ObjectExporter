@@ -1,5 +1,6 @@
 ﻿using System;
 using EnvDTE;
+using ObjectExporter.Core.Globals;
 
 namespace ObjectExporter.Core.Templates
 {
@@ -65,6 +66,18 @@ namespace ObjectExporter.Core.Templates
             DateTimeOffset dateTimeOffset = new DateTimeOffset(dateTime, offset);
 
             return dateTimeOffset.ToString();
+        }
+
+        public static string ResolveReservedNames(string expressionName)
+        {
+            if (ReservedWords.CSharp.Contains(expressionName))
+            {
+                return ("@" + expressionName);
+            }
+            else
+            {
+                return expressionName;
+            }
         }
     }
 }

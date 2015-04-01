@@ -189,7 +189,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
 
         private void radGridViewCustomExpressions_CellValueChanged(object sender, GridViewCellEventArgs e)
         {
-            if (e.Column.Index == 0) //Expression Name Column
+            if (e.Column.Index == 0 && e.Value != null) //Expression Name Column
             {
                 string expressionName = e.Value.ToString();
                 UpdateIsValidColumnImage(expressionName, e.Row);

@@ -6,33 +6,44 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="EnvDTE" #>
 <#@ import namespace="System.Collections.Generic" #>
-var <#= objectExpression.Name #> = <#
-ExportMembers(objectExpression, 0, true);
+<#
+    if(CanBeExpressedAsSingleType(objectExpression.Type) || objectExpression.DataMembers.Count == 0)
+    {
+        ExportMembers(objectExpression, 0, true);
+    }
+    else
+    {
+        #>var <#= GeneratorHelper.ResolveReservedNames(objectExpression.Name) #> = <#
+        ExportMembers(objectExpression, 0, true);
+    }
 #>;
 <#+
     bool isFirstElement = true;
 
     public void ExportMembers(Expression expression, int recursionLevel, bool isLast)
     {
-        if(!GeneratorHelper.IsSerializable(expression.Name))
+        //resolved reserved keywords such as class, this becomes @class.
+        string expressionName = GeneratorHelper.ResolveReservedNames(expression.Name);
+
+        if(!GeneratorHelper.IsSerializable(expressionName))
         {
             return;
         }
         else if(CanBeExpressedAsSingleType(expression.Type))
         {
             WriteLine("");
-            #><#= expression.Name #> = <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            #><#= expressionName #> = <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
         }
         else if (expression.DataMembers.Count == 0)
         {
             WriteLine("");
-            if(expression.Name.Contains("<") || expression.Name.Contains(">") || expression.Name.Contains("[") || expression.Name.Contains("]"))
+            if(expressionName.Contains("<") || expressionName.Contains(">") || expressionName.Contains("[") || expressionName.Contains("]"))
             {
                 #><#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
             }
             else
             {   
-                #><#= expression.Name #> = <#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+                #><#= expressionName #> = <#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
             }
         }
         else if (expression.DataMembers.Count > 0 && recursionLevel <= maxDepth)
@@ -49,7 +60,7 @@ ExportMembers(objectExpression, 0, true);
 
             if(GeneratorHelper.IsTypeOfCollection(expression.Type))
             {
-                #><#= expression.Name #> = new <#= expression.Type #><#+ 
+                #><#= expressionName #> = new <#= expression.Type #><#+ 
                 WriteLine(""); #>{<#+
             }
             else

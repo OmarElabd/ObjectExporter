@@ -13,19 +13,30 @@
     
     public void ExportMembers(Expression expression, int recursionLevel, bool isLast)
     {
+        //members of objects have a type of: object { theType } - Strip out object { }
+        string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+
         if(!GeneratorHelper.IsSerializable(expression.Name))
         {
             return;
         }
-        else if(GeneratorHelper.CanBeExpressedAsSingleType(expression.Type))
+        else if(GeneratorHelper.CanBeExpressedAsSingleType(expressionType))
         {
             WriteLine("");
-            #>"<#= expression.Name #>": <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+
+            if(GeneratorHelper.IsCollectionMember(expression.Name))
+            {
+                #><#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+            else
+            {
+                #>"<#= expression.Name #>": <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
         }
         else if (expression.DataMembers.Count == 0)
         {
             WriteLine("");
-            if(expression.Name.Contains("<") || expression.Name.Contains(">") || expression.Name.Contains("[") || expression.Name.Contains("]"))
+            if(GeneratorHelper.IsCollectionMember(expression.Name))
             {
                 #><#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
             }
@@ -46,7 +57,11 @@
                 WriteLine("");
             }
 
-            if(GeneratorHelper.IsTypeOfCollection(expression.Type))
+            if(GeneratorHelper.IsCollectionMember(expression.Name) && GeneratorHelper.IsTypeOfCollection(expressionType))
+            {
+                #>[<#+
+            }
+            else if(GeneratorHelper.IsTypeOfCollection(expressionType))
             {
                 #>"<#= expression.Name #>": <#+ 
                 WriteLine(""); #>[<#+
@@ -57,23 +72,23 @@
             }
 
             var expressionList = new List<Expression>();
-            foreach(Expression exp in expression.DataMembers)
+            foreach(Expression dataMember in expression.DataMembers)
             {
-                if(GeneratorHelper.IsSerializable(exp.Name))
+                if(GeneratorHelper.IsSerializable(dataMember.Name))
                 {
                     if(excludePrivates)
                     {
                         //check accessibility
-                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(exp.Name, expression.Type);
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expressionType);
 
                         if(isAccesible)
                         {
-                            expressionList.Add(exp);
+                            expressionList.Add(dataMember);
                         }
                     }
                     else //Add all (including private)
                     {
-                        expressionList.Add(exp);
+                        expressionList.Add(dataMember);
                     }
                 }
             }
@@ -86,7 +101,7 @@
                 PopIndent();
             }
 
-            TerminateObjectOrCollection(expression.Type);
+            TerminateObjectOrCollection(expressionType);
             #><#= GeneratorHelper.WriteCommaIfNotLast(isLast) #> <#+
         }
     }

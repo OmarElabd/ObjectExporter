@@ -18,7 +18,7 @@ namespace ObjectExporter.Core.Models
             _dte2 = dte2;
         }
 
-        public Type GetTypeByName(string name)
+        public Type GetTypeFromString(string type)
         {
             IServiceProvider serviceProvider = new ServiceProvider(_dte2 as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
 
@@ -29,7 +29,7 @@ namespace ObjectExporter.Core.Models
             IVsHierarchy hier;
             sln.GetProjectOfUniqueName(_dte2.ActiveDocument.ProjectItem.ContainingProject.UniqueName, out hier);
 
-            return typeService.GetTypeResolutionService(hier).GetType(name, true);
+            return typeService.GetTypeResolutionService(hier).GetType(type, true);
         }
 
         public List<string> GetAccessibleFieldsAndProperties(Type type)

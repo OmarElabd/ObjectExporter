@@ -45,7 +45,9 @@ namespace ObjectExporter.Core.Templates
         {
             string formattedString;
 
-            switch (expression.Type)
+            string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+
+            switch (expressionType)
             {
                 case "System.Guid":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);

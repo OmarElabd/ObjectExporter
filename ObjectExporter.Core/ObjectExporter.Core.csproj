@@ -60,7 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Templates\CSharpGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSharpGenerator.tt</DependentUpon>
+    </Compile>
     <Compile Include="ExportGenerator.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Globals\ExportType.cs" />
     <Compile Include="Globals\ExpressionSourceType.cs" />
     <Compile Include="Globals\ReservedWords.cs" />
@@ -72,11 +78,6 @@
     <Compile Include="Templates\Converters\CustomExpressionConverter.cs" />
     <Compile Include="Templates\Converters\IConverter.cs" />
     <Compile Include="Templates\Converters\LocalsConverter.cs" />
-    <Compile Include="Templates\CSharpGenerator.cs">
-      <DependentUpon>CSharpGenerator.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\Extensions\CSharpGenerator.extension.cs" />
     <Compile Include="Templates\Extensions\IGenerator.cs" />
     <Compile Include="Templates\Extensions\JsonGenerator.extension.cs" />
@@ -85,22 +86,22 @@
     <Compile Include="Templates\GeneratorFactory.cs" />
     <Compile Include="Templates\GeneratorHelper.cs" />
     <Compile Include="Templates\JsonGenerator.cs">
-      <DependentUpon>JsonGenerator.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>JsonGenerator.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\XmlGenerator.cs">
-      <DependentUpon>XmlGenerator.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>XmlGenerator.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Key.snk" />
     <None Include="Templates\CSharpGenerator.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CSharpGenerator.cs</LastGenOutput>
     </None>
+    <None Include="Key.snk" />
     <None Include="Templates\JsonGenerator.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>JsonGenerator.cs</LastGenOutput>

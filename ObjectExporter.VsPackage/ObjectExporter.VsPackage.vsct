@@ -83,7 +83,14 @@
   </Commands>
 
 
-
+  <KeyBindings>
+    <KeyBinding guid="guidObjectExporter_CmdSet" id="cmdidExportObjects"
+     mod1="Control" key1="E" key2="O" editor="guidVSStd97">
+    </KeyBinding>
+    <KeyBinding guid="guidObjectExporter_CmdSet" id="cmdidExportObjects"
+     mod1="Control" key1="E" mod2="Control" key2="O" editor="guidVSStd97">
+    </KeyBinding>
+  </KeyBindings>
 
 
   <Symbols>

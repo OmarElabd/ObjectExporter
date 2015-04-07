@@ -14,6 +14,9 @@
 
     public void ExportMembers(Expression expression, int recursionLevel)
     {
+        //members of objects have a type of: object { theType } - Strip out object { }
+        string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+
         if(!GeneratorHelper.IsSerializable(expression.Name))
         {
             return;
@@ -22,18 +25,25 @@
         {
             return;
         }
-        else if(GeneratorHelper.CanBeExpressedAsSingleType(expression.Type))
+        else if(GeneratorHelper.CanBeExpressedAsSingleType(expressionType))
         {
             WriteLine("");
-            #><<#= expression.Name #>><#= GetSingleTypeValue(expression) #></<#= expression.Name #>><#+
+            if(GeneratorHelper.IsCollectionMember(expression.Name))
+            {
+                #><<#= expressionType #>><#= GetSingleTypeValue(expression) #></<#= expressionType #>><#+
+            }
+            else
+            {
+                #><<#= expression.Name #>><#= GetSingleTypeValue(expression) #></<#= expression.Name #>><#+
+            }
         }
         else if (expression.DataMembers.Count == 0)
         {
             WriteLine("");
             string node = expression.Name;
-            if(expression.Name.Contains("<") || expression.Name.Contains(">") || expression.Name.Contains("[") || expression.Name.Contains("]"))
+            if(GeneratorHelper.IsCollectionMember(expression.Name))
             {
-                node = expression.Type;
+                node = expressionType;
             }
 
             #><<#= node #>><#= expression.Value #></<#= node #>><#+
@@ -50,8 +60,8 @@
                 WriteLine("");
             }
 
-            string node = expression.Type;
-            if(expression.Type.Contains("<") || expression.Type.Contains(">") || expression.Type.Contains("[") || expression.Type.Contains("]"))
+            string node = expressionType;
+            if(GeneratorHelper.IsTypeOfCollection(expressionType) && !GeneratorHelper.IsCollectionMember(expression.Name))
             {
                 node = expression.Name;
             }
@@ -64,7 +74,7 @@
                     if(excludePrivates)
                     {
                         //check accessibility
-                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expression.Type);
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expressionType);
 
                         if(isAccesible)
                         {

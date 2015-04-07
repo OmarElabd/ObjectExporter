@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EnvDTE;
 using EnvDTE80;
+using ObjectExporter.Core.ExtensionMethods;
 using ObjectExporter.Core.Globals;
 
 namespace ObjectExporter.Core.Templates
@@ -49,12 +50,30 @@ namespace ObjectExporter.Core.Templates
 
         public static bool IsTypeOfCollection(string expressionType)
         {
-            return (expressionType.Contains("<") || expressionType.Contains(">") || expressionType.Contains("[") || expressionType.Contains("]"));
+            return (expressionType.Contains("<") || expressionType.Contains(">") || expressionType.Contains("[") ||
+                expressionType.Contains("]") || expressionType.Contains("Count ="));
+        }
+
+        public static bool IsCollectionMember(string expressionName)
+        {
+            return (expressionName.Contains("[") || expressionName.Contains("]"));
         }
 
         public static string StripCurleyBraces(string input)
         {
             return input.Replace("{", "").Replace("}", "");
+        }
+
+        public static string StripObjectReference(string input)
+        {
+            if (input.Contains("{") && input.Contains("}"))
+            {
+                return input.Between('{', '}').Trim();
+            }
+            else
+            {
+                return input;
+            }
         }
 
         public static string GetBugFixedDateTimeOffset(Expression expression)

@@ -71,61 +71,84 @@ namespace ObjectExporter.Core.Templates
     {
         //resolved reserved keywords such as class, this becomes @class.
         string expressionName = GeneratorHelper.ResolveReservedNames(expression.Name);
+        //members of objects have a type of: object { theType } - Strip out object { }
+        string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
 
         if(!GeneratorHelper.IsSerializable(expressionName))
         {
             return;
         }
-        else if(CanBeExpressedAsSingleType(expression.Type))
+        else if(CanBeExpressedAsSingleType(expressionType))
         {
             WriteLine("");
             
-        
-        #line default
-        #line hidden
-        
-        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(expressionName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
-this.Write(" = ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast)));
-
-        
-        #line default
-        #line hidden
-        
-        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
-
-        }
-        else if (expression.DataMembers.Count == 0)
-        {
-            WriteLine("");
-            if(expressionName.Contains("<") || expressionName.Contains(">") || expressionName.Contains("[") || expressionName.Contains("]"))
+            if(GeneratorHelper.IsCollectionMember(expressionName))
             {
                 
         
         #line default
         #line hidden
         
-        #line 43 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 41 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast)));
+
+        
+        #line default
+        #line hidden
+        
+        #line 41 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+
+            }
+            else
+            {
+                
+        
+        #line default
+        #line hidden
+        
+        #line 45 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(expressionName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 45 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+this.Write(" = ");
+
+        
+        #line default
+        #line hidden
+        
+        #line 45 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast)));
+
+        
+        #line default
+        #line hidden
+        
+        #line 45 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+
+            }
+        }
+        else if (expression.DataMembers.Count == 0)
+        {
+            WriteLine("");
+            if(GeneratorHelper.IsCollectionMember(expressionName))
+            {
+                
+        
+        #line default
+        #line hidden
+        
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 43 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
             else
@@ -135,28 +158,28 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
         #line default
         #line hidden
         
-        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 57 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expressionName));
 
         
         #line default
         #line hidden
         
-        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 57 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 57 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 57 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
         }
@@ -172,49 +195,49 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
                 WriteLine("");
             }
 
-            if(GeneratorHelper.IsTypeOfCollection(expression.Type))
+            if(GeneratorHelper.IsTypeOfCollection(expressionType) && !GeneratorHelper.IsCollectionMember(expressionName))
             {
                 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expressionName));
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = new ");
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(expression.Type));
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(expressionType));
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
  
                 WriteLine(""); 
         
         #line default
         #line hidden
         
-        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 75 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("{");
 
         
         #line default
         #line hidden
         
-        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 75 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
             else
@@ -224,56 +247,56 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("new ");
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(expression.Type));
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(expressionType));
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
                 WriteLine(""); 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 80 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("{");
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 80 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
 
             var expressionList = new List<Expression>();
-            foreach(Expression exp in expression.DataMembers)
+            foreach(Expression dataMember in expression.DataMembers)
             {
-                if(GeneratorHelper.IsSerializable(exp.Name))
+                if(GeneratorHelper.IsSerializable(dataMember.Name))
                 {
                     if(excludePrivates)
                     {
                         //check accessibility
-                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(exp.Name, expression.Type);
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expressionType);
 
                         if(isAccesible)
                         {
-                            expressionList.Add(exp);
+                            expressionList.Add(dataMember);
                         }
                     }
                     else //Add all (including private)
                     {
-                        expressionList.Add(exp);
+                        expressionList.Add(dataMember);
                     }
                 }
             }
@@ -292,28 +315,28 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 104 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 114 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("}");
 
         
         #line default
         #line hidden
         
-        #line 104 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 114 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             
         
         #line default
         #line hidden
         
-        #line 105 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 115 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 105 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 115 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         }
     }

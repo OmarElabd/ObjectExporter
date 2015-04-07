@@ -14,7 +14,6 @@ namespace ObjectExporter.Core.Models
             _retriever = retriever;
         }
 
-
         public bool IsAccessiblePropertyOrField(string childPropertyName, string expressionType)
         {
             if (childPropertyName.Contains("<") || childPropertyName.Contains(">") ||
@@ -30,7 +29,7 @@ namespace ObjectExporter.Core.Models
 
         private List<string> GetAccessibleProperties(string expressionType)
         {
-            Type type = _retriever.GetTypeByName(expressionType);
+            Type type = _retriever.GetTypeFromString(expressionType);
 
             if (AccessiblePropertiesInType.ContainsKey(type))
             {
@@ -43,6 +42,5 @@ namespace ObjectExporter.Core.Models
                 return properties;
             }
         }
-
     }
 }

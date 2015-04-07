@@ -25,20 +25,30 @@
     {
         //resolved reserved keywords such as class, this becomes @class.
         string expressionName = GeneratorHelper.ResolveReservedNames(expression.Name);
+        //members of objects have a type of: object { theType } - Strip out object { }
+        string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
 
         if(!GeneratorHelper.IsSerializable(expressionName))
         {
             return;
         }
-        else if(CanBeExpressedAsSingleType(expression.Type))
+        else if(CanBeExpressedAsSingleType(expressionType))
         {
             WriteLine("");
-            #><#= expressionName #> = <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            
+            if(GeneratorHelper.IsCollectionMember(expressionName))
+            {
+                #><#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+            else
+            {
+                #><#= expressionName #> = <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
         }
         else if (expression.DataMembers.Count == 0)
         {
             WriteLine("");
-            if(expressionName.Contains("<") || expressionName.Contains(">") || expressionName.Contains("[") || expressionName.Contains("]"))
+            if(GeneratorHelper.IsCollectionMember(expressionName))
             {
                 #><#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
             }
@@ -59,35 +69,35 @@
                 WriteLine("");
             }
 
-            if(GeneratorHelper.IsTypeOfCollection(expression.Type))
+            if(GeneratorHelper.IsTypeOfCollection(expressionType) && !GeneratorHelper.IsCollectionMember(expressionName))
             {
-                #><#= expressionName #> = new <#= expression.Type #><#+ 
+                #><#= expressionName #> = new <#= expressionType #><#+ 
                 WriteLine(""); #>{<#+
             }
             else
             {
-                #>new <#= expression.Type #><#+
+                #>new <#= expressionType #><#+
                 WriteLine(""); #>{<#+
             }
 
             var expressionList = new List<Expression>();
-            foreach(Expression exp in expression.DataMembers)
+            foreach(Expression dataMember in expression.DataMembers)
             {
-                if(GeneratorHelper.IsSerializable(exp.Name))
+                if(GeneratorHelper.IsSerializable(dataMember.Name))
                 {
                     if(excludePrivates)
                     {
                         //check accessibility
-                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(exp.Name, expression.Type);
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expressionType);
 
                         if(isAccesible)
                         {
-                            expressionList.Add(exp);
+                            expressionList.Add(dataMember);
                         }
                     }
                     else //Add all (including private)
                     {
-                        expressionList.Add(exp);
+                        expressionList.Add(dataMember);
                     }
                 }
             }

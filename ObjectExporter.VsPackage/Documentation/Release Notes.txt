@@ -1,5 +1,7 @@
 Release Notes (v0.96.1) - 3/31/2015:
 1. Fixed (Issue #)
+2. Can now exclude private properties and fields (includes properties with private setters)
+3. Fixed (Issue #)
 
 Release Notes (v0.95) - 3/10/2015:
 1. Fix: Removed progress bar stall when displaying text.

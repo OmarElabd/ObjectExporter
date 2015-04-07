@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Design;
-using Microsoft.VisualStudio.Shell.Interop;
 using ObjectExporter.Core;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
@@ -54,11 +51,15 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
 
         private async void buttonExport_Click(object sender, EventArgs e)
         {
+            //Create Export Settings
+            bool excludePrivates = radCheckBoxExcludePrivate.Checked;
+            ExportType exportType = GetExportType();
+            int maxDepth = (int) numericUpDownMaxDepth.Value;
+            Options exportOptions = new Options(excludePrivates, maxDepth, exportType);
+
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             waitingDialog = new ProgressDialog(cancellationTokenSource);
 
-            ExportType exportType = GetExportType();
-            int maxDepth = (int)numericUpDownMaxDepth.Value;
 
             List<ExpressionWithSource> expressions = GetAllExpressions();
 
@@ -68,9 +69,8 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
                 this.Hide();
                 waitingDialog.Show(this);
 
-
                 AccessibilityRetriever retriever = new AccessibilityRetriever(dte2);
-                var exportGenerator = new ExportGenerator(exportType, expressions, maxDepth, retriever);
+                var exportGenerator = new ExportGenerator(expressions, retriever, exportOptions);
 
                 try
                 {

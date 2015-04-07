@@ -31,7 +31,7 @@ namespace ObjectExporter.Core.Templates
         {
             this.Write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
             
-            #line 10 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+            #line 11 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
  ExportMembers(objectExpression, 0); 
             
             #line default
@@ -39,7 +39,7 @@ namespace ObjectExporter.Core.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 11 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 12 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
     bool isFirstElement = true;
 
@@ -53,10 +53,6 @@ namespace ObjectExporter.Core.Templates
         {
             return;
         }
-        else if(!_propertyAccessibilityChecker.IsAccessiblePropertyOrField(expression.Name, expression.Type))
-        {
-            return;
-        }
         else if(GeneratorHelper.CanBeExpressedAsSingleType(expression.Type))
         {
             WriteLine("");
@@ -65,56 +61,56 @@ namespace ObjectExporter.Core.Templates
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression)));
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("</");
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
         }
         else if (expression.DataMembers.Count == 0)
@@ -131,56 +127,56 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value));
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("</");
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 39 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
         }
         else if (expression.DataMembers.Count > 0 && recursionLevel <= maxDepth)
@@ -206,34 +202,53 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 59 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 59 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 59 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 59 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
             foreach(Expression dataMember in expression.DataMembers)
             {
-                PushIndent("\t");
-                ExportMembers(dataMember, recursionLevel+1);
-                PopIndent();
+                if(GeneratorHelper.IsSerializable(dataMember.Name))
+                {
+                    if(excludePrivates)
+                    {
+                        //check accessibility
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expression.Type);
+
+                        if(isAccesible)
+                        {
+                            //TODO: replace this
+                            PushIndent("\t");
+                            ExportMembers(dataMember, recursionLevel + 1);
+                            PopIndent();
+                        }
+                    }
+                    else //Add all (including private)
+                    {
+                        PushIndent("\t");
+                        ExportMembers(dataMember, recursionLevel + 1);
+                        PopIndent();
+                    }
+                }
             }
             WriteLine("");
             
@@ -241,28 +256,28 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 86 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("</");
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 86 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 86 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 86 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
         }
     }
@@ -296,6 +311,19 @@ private int maxDepth
     get
     {
         return this._maxDepthField;
+    }
+}
+
+private bool _excludePrivatesField;
+
+/// <summary>
+/// Access the excludePrivates parameter of the template.
+/// </summary>
+private bool excludePrivates
+{
+    get
+    {
+        return this._excludePrivatesField;
     }
 }
 
@@ -333,6 +361,20 @@ if ((maxDepthValueAcquired == false))
     if ((data != null))
     {
         this._maxDepthField = ((int)(data));
+    }
+}
+bool excludePrivatesValueAcquired = false;
+if (this.Session.ContainsKey("excludePrivates"))
+{
+    this._excludePrivatesField = ((bool)(this.Session["excludePrivates"]));
+    excludePrivatesValueAcquired = true;
+}
+if ((excludePrivatesValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("excludePrivates");
+    if ((data != null))
+    {
+        this._excludePrivatesField = ((bool)(data));
     }
 }
 

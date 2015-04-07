@@ -1,6 +1,7 @@
 ﻿<#@ template language="C#" #>
 <#@ parameter name="objectExpression" type="EnvDTE.Expression" #>
 <#@ parameter name="maxDepth" type="System.Int32" #>
+<#@ parameter name="excludePrivates" type="System.Boolean" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -18,10 +19,6 @@
             return;
         }
         else if(expression.Value == "null")
-        {
-            return;
-        }
-        else if(!_propertyAccessibilityChecker.IsAccessiblePropertyOrField(expression.Name, expression.Type))
         {
             return;
         }
@@ -62,9 +59,28 @@
             #><<#= node #>><#+
             foreach(Expression dataMember in expression.DataMembers)
             {
-                PushIndent("\t");
-                ExportMembers(dataMember, recursionLevel+1);
-                PopIndent();
+                if(GeneratorHelper.IsSerializable(dataMember.Name))
+                {
+                    if(excludePrivates)
+                    {
+                        //check accessibility
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expression.Type);
+
+                        if(isAccesible)
+                        {
+                            //TODO: replace this
+                            PushIndent("\t");
+                            ExportMembers(dataMember, recursionLevel + 1);
+                            PopIndent();
+                        }
+                    }
+                    else //Add all (including private)
+                    {
+                        PushIndent("\t");
+                        ExportMembers(dataMember, recursionLevel + 1);
+                        PopIndent();
+                    }
+                }
             }
             WriteLine("");
             #></<#= node #>><#+

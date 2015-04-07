@@ -30,7 +30,7 @@ namespace ObjectExporter.Core.Templates
         public virtual string TransformText()
         {
             
-            #line 9 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+            #line 10 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
     if(CanBeExpressedAsSingleType(objectExpression.Type) || objectExpression.DataMembers.Count == 0)
     {
@@ -44,14 +44,14 @@ namespace ObjectExporter.Core.Templates
             #line hidden
             this.Write("var ");
             
-            #line 16 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+            #line 17 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.ResolveReservedNames(objectExpression.Name)));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 16 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+            #line 17 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         ExportMembers(objectExpression, 0, true);
     }
@@ -63,7 +63,7 @@ namespace ObjectExporter.Core.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 20 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 21 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
     bool isFirstElement = true;
 
@@ -84,28 +84,28 @@ namespace ObjectExporter.Core.Templates
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expressionName));
 
         
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 35 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 36 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         }
         else if (expression.DataMembers.Count == 0)
@@ -118,14 +118,14 @@ this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 43 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 43 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
             else
@@ -135,28 +135,28 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
         #line default
         #line hidden
         
-        #line 46 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expressionName));
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 47 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
         }
@@ -179,42 +179,42 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
         #line default
         #line hidden
         
-        #line 63 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expressionName));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(" = new ");
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Type));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
  
                 WriteLine(""); 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("{");
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
             else
@@ -224,46 +224,57 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 68 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("new ");
 
         
         #line default
         #line hidden
         
-        #line 68 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Type));
 
         
         #line default
         #line hidden
         
-        #line 68 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
                 WriteLine(""); 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("{");
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             }
 
             var expressionList = new List<Expression>();
             foreach(Expression exp in expression.DataMembers)
             {
-                string resolvedExpressionName = GeneratorHelper.ResolveReservedNames(exp.Name);
-                if(GeneratorHelper.IsSerializable(exp.Name)
-                    && _propertyAccessibilityChecker.IsAccessiblePropertyOrField(resolvedExpressionName, expression.Type))                  
+                if(GeneratorHelper.IsSerializable(exp.Name))
                 {
-                    expressionList.Add(exp);
+                    if(excludePrivates)
+                    {
+                        //check accessibility
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(exp.Name, expression.Type);
+
+                        if(isAccesible)
+                        {
+                            expressionList.Add(exp);
+                        }
+                    }
+                    else //Add all (including private)
+                    {
+                        expressionList.Add(exp);
+                    }
                 }
             }
 
@@ -281,28 +292,28 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 92 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 104 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("}");
 
         
         #line default
         #line hidden
         
-        #line 92 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 104 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             
         
         #line default
         #line hidden
         
-        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 105 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 105 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         }
     }
@@ -336,6 +347,19 @@ private int maxDepth
     get
     {
         return this._maxDepthField;
+    }
+}
+
+private bool _excludePrivatesField;
+
+/// <summary>
+/// Access the excludePrivates parameter of the template.
+/// </summary>
+private bool excludePrivates
+{
+    get
+    {
+        return this._excludePrivatesField;
     }
 }
 
@@ -373,6 +397,20 @@ if ((maxDepthValueAcquired == false))
     if ((data != null))
     {
         this._maxDepthField = ((int)(data));
+    }
+}
+bool excludePrivatesValueAcquired = false;
+if (this.Session.ContainsKey("excludePrivates"))
+{
+    this._excludePrivatesField = ((bool)(this.Session["excludePrivates"]));
+    excludePrivatesValueAcquired = true;
+}
+if ((excludePrivatesValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("excludePrivates");
+    if ((data != null))
+    {
+        this._excludePrivatesField = ((bool)(data));
     }
 }
 

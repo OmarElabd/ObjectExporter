@@ -63,16 +63,6 @@ namespace ObjectExplorer.Test
         }
 
         [TestMethod]
-        public void LoadFormSelectObjects()
-        {
-            Mock<Expression> expressionIsValidAlwaysReturnsTrue = new Mock<Expression>();
-            expressionIsValidAlwaysReturnsTrue.Setup(x => x.IsValidValue).Returns(true);
-
-            //FormSelectObjects form = new FormSelectObjects();
-            //form.ShowDialog();
-        }
-
-        [TestMethod]
         public void LoadProgressDialog()
         {
             Mock<CancellationTokenSource> tksMock = new Mock<CancellationTokenSource>();

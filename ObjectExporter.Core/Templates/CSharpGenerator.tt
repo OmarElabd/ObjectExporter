@@ -1,6 +1,7 @@
 ﻿<#@ template language="C#" #>
 <#@ parameter name="objectExpression" type="EnvDTE.Expression" #>
 <#@ parameter name="maxDepth" type="System.Int32" #>
+<#@ parameter name="excludePrivates" type="System.Boolean" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -72,11 +73,22 @@
             var expressionList = new List<Expression>();
             foreach(Expression exp in expression.DataMembers)
             {
-                string resolvedExpressionName = GeneratorHelper.ResolveReservedNames(exp.Name);
-                if(GeneratorHelper.IsSerializable(exp.Name)
-                    && _propertyAccessibilityChecker.IsAccessiblePropertyOrField(resolvedExpressionName, expression.Type))                  
+                if(GeneratorHelper.IsSerializable(exp.Name))
                 {
-                    expressionList.Add(exp);
+                    if(excludePrivates)
+                    {
+                        //check accessibility
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(exp.Name, expression.Type);
+
+                        if(isAccesible)
+                        {
+                            expressionList.Add(exp);
+                        }
+                    }
+                    else //Add all (including private)
+                    {
+                        expressionList.Add(exp);
+                    }
                 }
             }
 

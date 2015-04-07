@@ -49,14 +49,17 @@ namespace ObjectExporter.Core.Templates
             {
                 case "System.Guid":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
-                    return String.Format("Guid.Parse(\"{0}\")", formattedString);
+                    return String.Format("new Guid(\"{0}\")", formattedString);
                 case "System.TimeSpan":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
-                    return String.Format("TimeSpan.Parse(\"{0}\")", formattedString);
+                    TimeSpan timeSpan = TimeSpan.Parse(formattedString);
+
+                    return String.Format("new TimeSpan({0}, {1}, {2}, {3}, {4})", 
+                        timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
                 case "System.DateTimeOffset":
                     if (expression.Value == "{System.DateTimeOffset}")
                     {
-                        //Fix: for some reason the expression.Value is not being set correctly 
+                        //NOTE: for some reason the expression.Value is not being set correctly 
                         //More details can be found here https://connect.microsoft.com/VisualStudio/feedback/details/1159889
                         formattedString = GeneratorHelper.GetBugFixedDateTimeOffset(expression);
                     }
@@ -65,10 +68,20 @@ namespace ObjectExporter.Core.Templates
                         formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     }
 
-                    return String.Format("DateTimeOffset.Parse(\"{0}\")", formattedString);
+                    DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(formattedString);
+
+                    return String.Format("new DateTimeOffset({0}, {1}, {2}, {3}, {4}, {5}, {6}, new TimeSpan({7}, {8}, {9}, {10}, {11}))", 
+                        dateTimeOffset.Year, dateTimeOffset.Month, dateTimeOffset.Day, dateTimeOffset.Hour, 
+                        dateTimeOffset.Minute, dateTimeOffset.Second, dateTimeOffset.Millisecond, 
+                        dateTimeOffset.Offset.Days, dateTimeOffset.Offset.Hours, dateTimeOffset.Offset.Minutes, 
+                        dateTimeOffset.Offset.Seconds, dateTimeOffset.Millisecond);
                 case "System.DateTime":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
-                    return String.Format("DateTime.Parse(\"{0}\")", formattedString);
+                    DateTime dateTime = DateTime.Parse(formattedString);
+
+                    return String.Format("new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6})", 
+                        dateTime.Year, dateTime.Month, dateTime.Month, dateTime.Day, dateTime.Hour, 
+                        dateTime.Minute, dateTime.Second);
                 case "System.Decimal":
                 case "decimal":
                     return Converter.GetDecimalWithLiteral(expression.Value);

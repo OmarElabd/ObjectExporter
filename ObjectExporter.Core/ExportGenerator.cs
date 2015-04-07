@@ -20,15 +20,17 @@ namespace ObjectExporter.Core
 
         private readonly LocalsConverter _localsConverter = new LocalsConverter();
         private readonly CustomExpressionConverter _customExpressionConverter = new CustomExpressionConverter();
-        
-        private readonly PropertyAccessibilityChecker _propertyChecker;
 
-        public ExportGenerator(ExportType type, IEnumerable<ExpressionWithSource> expressionsWithSources,
-            int maxDepth, AccessibilityRetriever retriever)
+        private readonly PropertyAccessibilityChecker _propertyChecker;
+        private readonly bool _excludePrivates;
+
+        public ExportGenerator(IEnumerable<ExpressionWithSource> expressionsWithSources,
+            AccessibilityRetriever retriever, Options exportOptions)
         {
-            _type = type;
+            _type = exportOptions.ExportType;
             _expressionsWithSources = expressionsWithSources;
-            _maxDepth = maxDepth;
+            _maxDepth = exportOptions.MaxDepth;
+            _excludePrivates = exportOptions.ExludePrivateProperties;
             _propertyChecker = new PropertyAccessibilityChecker(retriever);
         }
 
@@ -66,7 +68,7 @@ namespace ObjectExporter.Core
         public async Task<Dictionary<string, string>> GenerateTextWithKey()
         {
             var generatedTaskObjects = new Dictionary<string, Task<string>>();
-            
+
             foreach (ExpressionWithSource expressionWithSource in _expressionsWithSources)
             {
                 Expression expression = expressionWithSource.Expression;
@@ -102,10 +104,12 @@ namespace ObjectExporter.Core
         {
             IGenerator template = GeneratorFactory.CreateGenerator(_type, _propertyChecker);
 
+            //TODO: can most likely remove this templateInitialization and replace with constructor in partial class
             var templateInitialization = new Dictionary<string, object>
             {
                 {"objectExpression", expression},
-                {"maxDepth", _maxDepth}
+                {"maxDepth", _maxDepth},
+                {"excludePrivates", _excludePrivates}
             };
 
             template.Session = templateInitialization;

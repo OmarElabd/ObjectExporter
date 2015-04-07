@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Design;
+using Microsoft.VisualStudio.Shell.Interop;
 using ObjectExporter.Core;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
-using ObjectExporter.UI;
 using Telerik.WinControls.UI;
+using Task = System.Threading.Tasks.Task;
 
 namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
 {
@@ -63,7 +68,9 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
                 this.Hide();
                 waitingDialog.Show(this);
 
-                var exportGenerator = new ExportGenerator(exportType, expressions, maxDepth);
+
+                AccessibilityRetriever retriever = new AccessibilityRetriever(dte2);
+                var exportGenerator = new ExportGenerator(exportType, expressions, maxDepth, retriever);
 
                 try
                 {
@@ -74,7 +81,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
                     formDisplayGeneratedText.Shown += formDisplayGeneratedText_Shown;
                     formDisplayGeneratedText.ShowDialog(this);
                 }
-                catch (ThreadAbortException)
+                catch (ThreadAbortException ex)
                 {
                     waitingDialog.Close();
                 }

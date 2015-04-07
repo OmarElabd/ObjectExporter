@@ -19,7 +19,7 @@ namespace ObjectExporter.Core.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+    #line 1 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class XmlGenerator : XmlGeneratorBase
     {
@@ -31,7 +31,7 @@ namespace ObjectExporter.Core.Templates
         {
             this.Write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
             
-            #line 10 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+            #line 10 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
  ExportMembers(objectExpression, 0); 
             
             #line default
@@ -39,7 +39,7 @@ namespace ObjectExporter.Core.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 11 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 11 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
     bool isFirstElement = true;
 
@@ -53,6 +53,10 @@ namespace ObjectExporter.Core.Templates
         {
             return;
         }
+        else if(!_propertyAccessibilityChecker.IsAccessiblePropertyOrField(expression.Name, expression.Type))
+        {
+            return;
+        }
         else if(GeneratorHelper.CanBeExpressedAsSingleType(expression.Type))
         {
             WriteLine("");
@@ -61,56 +65,56 @@ namespace ObjectExporter.Core.Templates
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression)));
 
         
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("</");
 
         
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 27 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 31 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
         }
         else if (expression.DataMembers.Count == 0)
@@ -127,56 +131,56 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value));
 
         
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("</");
 
         
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 38 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 42 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
         }
         else if (expression.DataMembers.Count > 0 && recursionLevel <= maxDepth)
@@ -202,28 +206,28 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 58 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 58 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 58 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 58 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 62 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
             foreach(Expression dataMember in expression.DataMembers)
             {
@@ -237,28 +241,28 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 66 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("</");
 
         
         #line default
         #line hidden
         
-        #line 66 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 66 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 66 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
         }
     }
@@ -267,7 +271,7 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 1 "C:\Users\Arel\Documents\Visual Studio 2013\Projects\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 1 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
 private global::EnvDTE.Expression _objectExpressionField;
 

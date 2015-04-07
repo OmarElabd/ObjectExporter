@@ -157,7 +157,7 @@ namespace ObjectExporter.Core.Globals
             "while",
             "with",
             "yield",
-            "yield!",
+            "yield!"
         };
     }
 }

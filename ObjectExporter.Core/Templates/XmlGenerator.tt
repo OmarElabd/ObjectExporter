@@ -21,6 +21,10 @@
         {
             return;
         }
+        else if(!_propertyAccessibilityChecker.IsAccessiblePropertyOrField(expression.Name, expression.Type))
+        {
+            return;
+        }
         else if(GeneratorHelper.CanBeExpressedAsSingleType(expression.Type))
         {
             WriteLine("");

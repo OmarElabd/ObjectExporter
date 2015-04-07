@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EnvDTE;
+using EnvDTE80;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
 using ObjectExporter.Core.Templates;
@@ -16,14 +18,18 @@ namespace ObjectExporter.Core
         private readonly IEnumerable<ExpressionWithSource> _expressionsWithSources;
         private readonly int _maxDepth;
 
-        readonly LocalsConverter _localsConverter = new LocalsConverter();
-        readonly CustomExpressionConverter _customExpressionConverter = new CustomExpressionConverter();
+        private readonly LocalsConverter _localsConverter = new LocalsConverter();
+        private readonly CustomExpressionConverter _customExpressionConverter = new CustomExpressionConverter();
+        
+        private readonly PropertyAccessibilityChecker _propertyChecker;
 
-        public ExportGenerator(ExportType type, IEnumerable<ExpressionWithSource> expressionsWithSources, int maxDepth)
+        public ExportGenerator(ExportType type, IEnumerable<ExpressionWithSource> expressionsWithSources,
+            int maxDepth, AccessibilityRetriever retriever)
         {
             _type = type;
             _expressionsWithSources = expressionsWithSources;
             _maxDepth = maxDepth;
+            _propertyChecker = new PropertyAccessibilityChecker(retriever);
         }
 
         public async Task<Dictionary<string, string>> GenerateTextWithKey(CancellationToken cancellationToken)
@@ -94,7 +100,7 @@ namespace ObjectExporter.Core
 
         private string GenerateText(Expression expression, ExpressionSourceType source)
         {
-            IGenerator template = GeneratorFactory.CreateGenerator(_type);
+            IGenerator template = GeneratorFactory.CreateGenerator(_type, _propertyChecker);
 
             var templateInitialization = new Dictionary<string, object>
             {

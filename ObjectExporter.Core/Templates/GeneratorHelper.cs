@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using EnvDTE;
+using EnvDTE80;
 using ObjectExporter.Core.Globals;
 
 namespace ObjectExporter.Core.Templates

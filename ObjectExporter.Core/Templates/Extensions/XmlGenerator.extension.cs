@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using EnvDTE;
+using ObjectExporter.Core.Models;
 using ObjectExporter.Core.Templates.Converters;
 
 namespace ObjectExporter.Core.Templates
@@ -8,6 +9,12 @@ namespace ObjectExporter.Core.Templates
     public partial class XmlGenerator : IGenerator
     {
         public IConverter Converter { get; set; }
+
+        private readonly PropertyAccessibilityChecker _propertyAccessibilityChecker;
+        public XmlGenerator(PropertyAccessibilityChecker checker)
+        {
+            _propertyAccessibilityChecker = checker;
+        }
 
         public void Clear()
         {

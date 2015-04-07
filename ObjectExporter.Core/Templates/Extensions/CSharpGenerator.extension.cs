@@ -1,12 +1,19 @@
 ﻿using System;
 using ObjectExporter.Core.Templates.Converters;
 using EnvDTE;
+using ObjectExporter.Core.Models;
 
 namespace ObjectExporter.Core.Templates
 {
     public partial class CSharpGenerator : IGenerator
     {
         public IConverter Converter { get; set; }
+
+        private readonly PropertyAccessibilityChecker _propertyAccessibilityChecker;
+        public CSharpGenerator(PropertyAccessibilityChecker checker)
+        {
+            _propertyAccessibilityChecker = checker;
+        }
 
         private bool CanBeExpressedAsSingleType(string expressionType)
         {
@@ -27,7 +34,6 @@ namespace ObjectExporter.Core.Templates
                     return false;
             }
         }
-
 
         public void Clear()
         {

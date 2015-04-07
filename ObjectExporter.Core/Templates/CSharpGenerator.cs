@@ -259,7 +259,9 @@ this.Write("{");
             var expressionList = new List<Expression>();
             foreach(Expression exp in expression.DataMembers)
             {
-                if(GeneratorHelper.IsSerializable(exp.Name))
+                string resolvedExpressionName = GeneratorHelper.ResolveReservedNames(exp.Name);
+                if(GeneratorHelper.IsSerializable(exp.Name)
+                    && _propertyAccessibilityChecker.IsAccessiblePropertyOrField(resolvedExpressionName, expression.Type))                  
                 {
                     expressionList.Add(exp);
                 }
@@ -279,28 +281,28 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 90 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 92 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("}");
 
         
         #line default
         #line hidden
         
-        #line 90 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 92 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             
         
         #line default
         #line hidden
         
-        #line 91 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 91 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         }
     }

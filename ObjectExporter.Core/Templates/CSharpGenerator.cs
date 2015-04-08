@@ -279,32 +279,41 @@ this.Write("{");
 
             }
 
-            var expressionList = new List<Expression>();
-            foreach(Expression dataMember in expression.DataMembers)
+            var expressionMembers = expression.DataMembers.Cast<Expression>().ToList();
+            var cleanedExpressionMembers = new List<Expression>();
+
+            for(int i = 0; i < expressionMembers.Count; i++)
             {
-                if(GeneratorHelper.IsSerializable(dataMember.Name))
+                Expression currentExpression = expressionMembers[i];
+                
+                //Add base type members to the list at the current level
+                if(GeneratorHelper.IsBase(currentExpression))
+                {
+                    expressionMembers.AddRange(currentExpression.DataMembers.Cast<Expression>());
+                }
+                else if(GeneratorHelper.IsSerializable(currentExpression.Name))
                 {
                     if(excludePrivates)
                     {
                         //check accessibility
-                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expressionType);
+                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(currentExpression.Name, expressionType);
 
                         if(isAccesible)
                         {
-                            expressionList.Add(dataMember);
+                            cleanedExpressionMembers.Add(currentExpression);
                         }
                     }
                     else //Add all (including private)
                     {
-                        expressionList.Add(dataMember);
+                        cleanedExpressionMembers.Add(currentExpression);
                     }
                 }
             }
 
-            foreach(Expression exp in expressionList)
+            foreach(Expression exp in cleanedExpressionMembers)
             {
                 PushIndent("\t");
-                bool isLastItem = expressionList.IsLast(exp);
+                bool isLastItem = cleanedExpressionMembers.IsLast(exp);
                 ExportMembers(exp, recursionLevel + 1, isLastItem);
                 PopIndent();
             }
@@ -315,28 +324,28 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 114 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 123 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write("}");
 
         
         #line default
         #line hidden
         
-        #line 114 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 123 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
             
         
         #line default
         #line hidden
         
-        #line 115 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 124 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 115 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
+        #line 124 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\CSharpGenerator.tt"
 
         }
     }

@@ -9,7 +9,7 @@ using Telerik.WinControls.UI;
 using Telerik.WinForms.Documents.Model;
 using Telerik.WinForms.Documents.Model.Code;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
+namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 {
     public partial class FormDisplayGeneratedText : Form
     {

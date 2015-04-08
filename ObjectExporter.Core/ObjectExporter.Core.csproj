@@ -74,7 +74,7 @@
     <Compile Include="Models\AccessibilityRetriever.cs" />
     <Compile Include="Models\PropertyAccessibilityChecker.cs" />
     <Compile Include="Models\ExpressionWithSource.cs" />
-    <Compile Include="Models\Options.cs" />
+    <Compile Include="Models\ExportParamaters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\Converters\CustomExpressionConverter.cs" />
     <Compile Include="Templates\Converters\IConverter.cs" />

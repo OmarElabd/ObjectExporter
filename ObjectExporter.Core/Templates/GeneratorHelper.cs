@@ -29,6 +29,30 @@ namespace ObjectExporter.Core.Templates
             }
         }
 
+        public static bool IsBase(Expression expression)
+        {
+            return (expression.Name == "base" && expression.Type.Contains("{"));
+        }
+
+        private static List<string> SimpleTypes = new List<string>()
+        {
+            "bool",
+            "byte",
+            "sbyte",
+            "char",
+            "decimal",
+            "double",
+            "float",
+            "int",
+            "uint",
+            "long",
+            "ulong",
+            "object",
+            "short",
+            "ushort",
+            "string"
+        };
+
         public static string WriteCommaIfNotLast(bool isLast)
         {
             if (isLast) return "";

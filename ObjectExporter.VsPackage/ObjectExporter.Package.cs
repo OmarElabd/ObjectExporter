@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
-using AccretionDynamics.ObjectExporter.VsPackage.UserInterface;
+using AccretionDynamics.ObjectExporter.VsPackage.Views;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -32,6 +32,8 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
     [Guid(GuidList.guidObjectExporter_PkgString)]
     //Used for the hidden menu item
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideOptionPage(typeof(PackageSettings),
+    "Object Exporter", "General", 0, 0, true)]
     public sealed class ObjectExporter : Package
     {
         readonly DTE2 dte2 = GetGlobalService(typeof(DTE)) as DTE2;
@@ -107,7 +109,8 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
                 dte2.Debugger.CurrentMode == dbgDebugMode.dbgBreakMode &&
                 dte2.Debugger.CurrentStackFrame != null)
             {
-                FormSelectObjects objForm = new FormSelectObjects(dte2);
+                PackageSettings settings = (PackageSettings) GetDialogPage(typeof (PackageSettings));
+                FormSelectObjects objForm = new FormSelectObjects(dte2, settings);
                 objForm.Show(new VsMainWindowWrapper(dte2));
             }
         }

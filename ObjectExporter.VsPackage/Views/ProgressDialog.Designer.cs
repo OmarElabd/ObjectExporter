@@ -1,4 +1,4 @@
-﻿namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
+﻿namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 {
     partial class ProgressDialog
     {

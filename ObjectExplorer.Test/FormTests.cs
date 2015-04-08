@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using AccretionDynamics.ObjectExporter.VsPackage.UserInterface;
+using AccretionDynamics.ObjectExporter.VsPackage.Views;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

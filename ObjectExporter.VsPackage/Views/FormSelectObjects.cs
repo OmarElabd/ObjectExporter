@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AccretionDynamics.ObjectExporter.VsPackage.ViewModels;
 using EnvDTE;
 using EnvDTE80;
 using ObjectExporter.Core;
@@ -15,16 +14,18 @@ using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
 using Task = System.Threading.Tasks.Task;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
+namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 {
     public partial class FormSelectObjects : Form
     {
         private readonly DTE2 dte2;
+        private readonly PackageSettings _settings;
         private ProgressDialog waitingDialog;
 
-        public FormSelectObjects(DTE2 dte2)
+        public FormSelectObjects(DTE2 dte2, PackageSettings settings)
         {
             this.dte2 = dte2;
+            _settings = settings;
 
             InitializeComponent();
             LoadLocals();
@@ -40,8 +41,11 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
 
                 var expressionList = localExpresisons.Cast<Expression>().ToList();
 
-                radCheckedListBoxLocals.DataSource = expressionList;
-                radCheckedListBoxLocals.DisplayMember = "Name";
+                List<ExpressionViewModel> expressionViewModels = expressionList.Select(x => new ExpressionViewModel(x, x.Name))
+                                                                               .ToList();
+
+                radCheckedListBoxLocals.DataSource = expressionViewModels;
+                radCheckedListBoxLocals.DisplayMember = "DisplayName";
             }
         }
 
@@ -52,15 +56,14 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
 
         private async void buttonExport_Click(object sender, EventArgs e)
         {
-            //Create Export Settings
+            //Create Export Paramaters
             bool excludePrivates = radCheckBoxExcludePrivate.Checked;
             ExportType exportType = GetExportType();
             int maxDepth = (int) numericUpDownMaxDepth.Value;
-            Options exportOptions = new Options(excludePrivates, maxDepth, exportType);
+            ExportParamaters exportParamaters = new ExportParamaters(excludePrivates, maxDepth, exportType);
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             waitingDialog = new ProgressDialog(cancellationTokenSource);
-
 
             List<ExpressionWithSource> expressions = GetAllExpressions();
 
@@ -71,7 +74,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
                 waitingDialog.Show(this);
 
                 AccessibilityRetriever retriever = new AccessibilityRetriever(dte2);
-                var exportGenerator = new ExportGenerator(expressions, retriever, exportOptions);
+                var exportGenerator = new ExportGenerator(expressions, retriever, exportParamaters);
 
                 try
                 {
@@ -169,7 +172,8 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
 
             foreach (ListViewDataItem lvItem in radCheckedListBoxLocals.CheckedItems)
             {
-                Expression expression = (Expression) lvItem.DataBoundItem;
+                ExpressionViewModel expressionVM = (ExpressionViewModel)lvItem.DataBoundItem;
+                Expression expression = expressionVM.Expression;
                 expressions.Add(new ExpressionWithSource(expression, ExpressionSourceType.Locals));
             }
 
@@ -226,39 +230,47 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
             }
         }
 
-        private void radCheckedListBoxLocals_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
+        private async void radCheckedListBoxLocals_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
         {
             if (e.Item.CheckState != ToggleState.On) return;
 
-            Expression checkedExpression = (Expression) e.Item.DataBoundItem;
+            ExpressionViewModel vm = (ExpressionViewModel) e.Item.DataBoundItem;
+            Expression checkedExpression = vm.Expression;
+            string expressionName = checkedExpression.Name;
 
-            const int cutoff = 25;
+            e.Item.Text = String.Format("{0} (calculating...)", expressionName);
+
+            uint cutoff = _settings.DepthSolverCutoff;
             ObjectDepthFinder depthFinder = new ObjectDepthFinder(cutoff);
 
-            //TODO: make this an async call
-            //TODO: use cancellation token, set timeout. If timedout display Calculating depth timeout.
-            //NOTE: timeout can be used as a setting as well as cutoff.
-            int maxDepth = depthFinder.GetMaximumObjectDepth(checkedExpression);
+            int timeoutMills = (int) _settings.DepthSolverTimeOut;
+            CancellationTokenSource tokenSource = new CancellationTokenSource(timeoutMills);
 
             string depth;
-            if (maxDepth == -1)
+            try
             {
-                depth = "∞";
+                int maxDepth = await depthFinder.GetMaximumObjectDepthAsync(checkedExpression, tokenSource.Token);
+                
+                if (maxDepth == -1)
+                {
+                    depth = "∞";
+                }
+                else if (maxDepth == cutoff)
+                {
+                    depth = "> " + maxDepth;
+                }
+                else
+                {
+                    depth = maxDepth.ToString();
+                }
             }
-            else if (maxDepth == cutoff)
+            catch (TypeLoadException)
             {
-                depth = "> " + maxDepth;
-            }
-            else
-            {
-                depth = maxDepth.ToString();
-            }
-            
-            string textToDisplay = String.Format("{0} (maxDepth: {1})", e.Item.Text, depth);
-            
-            //TODO: refactor to use ExpressionViewModel
-            //TODO: can use BeginUpdate() and EndUpdate()
-            //TODO: could use INotifyPropertyChanged
+                depth = "timed out";
+            }            
+
+            string textToDisplay = String.Format("{0} (max depth: {1})", expressionName, depth);
+            e.Item.Text = textToDisplay;
         }
     }
 }

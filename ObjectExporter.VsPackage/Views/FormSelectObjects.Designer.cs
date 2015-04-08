@@ -1,4 +1,4 @@
-﻿namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
+﻿namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 {
     partial class FormSelectObjects
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSelectObjects));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewImageColumn gridViewImageColumn1 = new Telerik.WinControls.UI.GridViewImageColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewImageColumn gridViewImageColumn3 = new Telerik.WinControls.UI.GridViewImageColumn();
             this.radioButtonCSharpObject = new System.Windows.Forms.RadioButton();
             this.radioButtonJson = new System.Windows.Forms.RadioButton();
             this.radioButtonXml = new System.Windows.Forms.RadioButton();
@@ -174,7 +174,9 @@
             // 
             // radCheckedListBoxLocals
             // 
-            this.radCheckedListBoxLocals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radCheckedListBoxLocals.AllowColumnReorder = false;
+            this.radCheckedListBoxLocals.AllowColumnResize = false;
+            this.radCheckedListBoxLocals.AutoScroll = true;
             this.radCheckedListBoxLocals.Location = new System.Drawing.Point(0, 0);
             this.radCheckedListBoxLocals.Name = "radCheckedListBoxLocals";
             this.radCheckedListBoxLocals.Size = new System.Drawing.Size(348, 257);
@@ -201,7 +203,7 @@
             this.radGridViewCustomExpressions.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.radGridViewCustomExpressions.Location = new System.Drawing.Point(0, 0);
             // 
-            // 
+            // radGridViewCustomExpressions
             // 
             this.radGridViewCustomExpressions.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.radGridViewCustomExpressions.MasterTemplate.AllowColumnChooser = false;
@@ -212,22 +214,22 @@
             this.radGridViewCustomExpressions.MasterTemplate.AllowRowResize = false;
             this.radGridViewCustomExpressions.MasterTemplate.AutoGenerateColumns = false;
             this.radGridViewCustomExpressions.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn1.AllowResize = false;
-            gridViewTextBoxColumn1.EnableExpressionEditor = false;
-            gridViewTextBoxColumn1.HeaderText = "Expression Name";
-            gridViewTextBoxColumn1.IsPinned = true;
-            gridViewTextBoxColumn1.MinWidth = 268;
-            gridViewTextBoxColumn1.Name = "columnExpressionName";
-            gridViewTextBoxColumn1.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
-            gridViewTextBoxColumn1.Width = 268;
-            gridViewImageColumn1.AllowResize = false;
-            gridViewImageColumn1.EnableExpressionEditor = false;
-            gridViewImageColumn1.HeaderText = "Valid";
-            gridViewImageColumn1.Name = "columnIsExpressionValid";
-            gridViewImageColumn1.Width = 60;
+            gridViewTextBoxColumn3.AllowResize = false;
+            gridViewTextBoxColumn3.EnableExpressionEditor = false;
+            gridViewTextBoxColumn3.HeaderText = "Expression Name";
+            gridViewTextBoxColumn3.IsPinned = true;
+            gridViewTextBoxColumn3.MinWidth = 268;
+            gridViewTextBoxColumn3.Name = "columnExpressionName";
+            gridViewTextBoxColumn3.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
+            gridViewTextBoxColumn3.Width = 268;
+            gridViewImageColumn3.AllowResize = false;
+            gridViewImageColumn3.EnableExpressionEditor = false;
+            gridViewImageColumn3.HeaderText = "Valid";
+            gridViewImageColumn3.Name = "columnIsExpressionValid";
+            gridViewImageColumn3.Width = 60;
             this.radGridViewCustomExpressions.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewImageColumn1});
+            gridViewTextBoxColumn3,
+            gridViewImageColumn3});
             this.radGridViewCustomExpressions.MasterTemplate.EnableGrouping = false;
             this.radGridViewCustomExpressions.MasterTemplate.EnableSorting = false;
             this.radGridViewCustomExpressions.MasterTemplate.ShowRowHeaderColumn = false;
@@ -237,7 +239,6 @@
             this.radGridViewCustomExpressions.ShowGroupPanel = false;
             this.radGridViewCustomExpressions.Size = new System.Drawing.Size(348, 257);
             this.radGridViewCustomExpressions.TabIndex = 0;
-            this.radGridViewCustomExpressions.Text = "radGridView1";
             this.radGridViewCustomExpressions.ThemeName = "TelerikMetroBlue";
             this.radGridViewCustomExpressions.CellValueChanged += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridViewCustomExpressions_CellValueChanged);
             // 

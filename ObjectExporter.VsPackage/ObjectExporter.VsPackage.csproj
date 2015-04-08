@@ -166,31 +166,35 @@
     <Compile Include="ObjectExporter.Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PkgCmdID.cs" />
-    <Compile Include="User Interface\FilesCreatedDialog.cs">
+    <Compile Include="PackageSettings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\FilesCreatedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User Interface\FilesCreatedDialog.Designer.cs">
+    <Compile Include="Views\FilesCreatedDialog.Designer.cs">
       <DependentUpon>FilesCreatedDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\FormDisplayGeneratedText.cs">
+    <Compile Include="Views\FormDisplayGeneratedText.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User Interface\FormDisplayGeneratedText.Designer.cs">
+    <Compile Include="Views\FormDisplayGeneratedText.Designer.cs">
       <DependentUpon>FormDisplayGeneratedText.cs</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\FormSelectObjects.cs">
+    <Compile Include="Views\FormSelectObjects.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User Interface\FormSelectObjects.Designer.cs">
+    <Compile Include="Views\FormSelectObjects.Designer.cs">
       <DependentUpon>FormSelectObjects.cs</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\ProgressDialog.cs">
+    <Compile Include="Views\ProgressDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User Interface\ProgressDialog.Designer.cs">
+    <Compile Include="Views\ProgressDialog.Designer.cs">
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="User Interface\UIExtensions.cs" />
+    <Compile Include="Views\UIExtensions.cs" />
+    <Compile Include="ViewModels\ExpressionViewModel.cs" />
     <Compile Include="VsMainWindowWrapper.cs" />
     <Compile Include="VSPackage.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -204,16 +208,16 @@
       <LastGenOutput>ImageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="User Interface\FilesCreatedDialog.resx">
+    <EmbeddedResource Include="Views\FilesCreatedDialog.resx">
       <DependentUpon>FilesCreatedDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User Interface\FormDisplayGeneratedText.resx">
+    <EmbeddedResource Include="Views\FormDisplayGeneratedText.resx">
       <DependentUpon>FormDisplayGeneratedText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User Interface\FormSelectObjects.resx">
+    <EmbeddedResource Include="Views\FormSelectObjects.resx">
       <DependentUpon>FormSelectObjects.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User Interface\ProgressDialog.resx">
+    <EmbeddedResource Include="Views\ProgressDialog.resx">
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
@@ -224,6 +228,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -285,6 +290,7 @@
       <Name>ObjectExporter.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>

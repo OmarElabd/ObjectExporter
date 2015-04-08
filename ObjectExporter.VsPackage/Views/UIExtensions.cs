@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
+namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 {
     public static class UIExtensions
     {

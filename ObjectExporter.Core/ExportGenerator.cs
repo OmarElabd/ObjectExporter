@@ -25,12 +25,12 @@ namespace ObjectExporter.Core
         private readonly bool _excludePrivates;
 
         public ExportGenerator(IEnumerable<ExpressionWithSource> expressionsWithSources,
-            AccessibilityRetriever retriever, Options exportOptions)
+            AccessibilityRetriever retriever, ExportParamaters exportParamaters)
         {
-            _type = exportOptions.ExportType;
+            _type = exportParamaters.ExportType;
             _expressionsWithSources = expressionsWithSources;
-            _maxDepth = exportOptions.MaxDepth;
-            _excludePrivates = exportOptions.ExludePrivateProperties;
+            _maxDepth = exportParamaters.MaxDepth;
+            _excludePrivates = exportParamaters.ExludePrivateProperties;
             _propertyChecker = new PropertyAccessibilityChecker(retriever);
         }
 

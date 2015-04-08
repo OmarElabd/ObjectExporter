@@ -22,9 +22,15 @@ namespace ObjectExporter.Core.Models
                 return true;
             }
 
-            List<string> properties = GetAccessibleProperties(expressionType);
-
-            return properties.Contains(childPropertyName);
+            try
+            {
+                List<string> properties = GetAccessibleProperties(expressionType);
+                return properties.Contains(childPropertyName);
+            }
+            catch (Exception ex)
+            {
+                return true;
+            }
         }
 
         private List<string> GetAccessibleProperties(string expressionType)

@@ -11,6 +11,7 @@ using EnvDTE80;
 using ObjectExporter.Core;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
+using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
 using Task = System.Threading.Tasks.Task;
 
@@ -39,8 +40,8 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
 
                 var expressionList = localExpresisons.Cast<Expression>().ToList();
 
-                ((ListBox)checkedListBoxWatchObjects).DataSource = expressionList;
-                ((ListBox)checkedListBoxWatchObjects).DisplayMember = "Name";
+                radCheckedListBoxLocals.DataSource = expressionList;
+                radCheckedListBoxLocals.DisplayMember = "Name";
             }
         }
 
@@ -166,8 +167,9 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
         {
             var expressions = new List<ExpressionWithSource>();
 
-            foreach (Expression expression in checkedListBoxWatchObjects.CheckedItems)
+            foreach (ListViewDataItem lvItem in radCheckedListBoxLocals.CheckedItems)
             {
+                Expression expression = (Expression) lvItem.DataBoundItem;
                 expressions.Add(new ExpressionWithSource(expression, ExpressionSourceType.Locals));
             }
 
@@ -222,6 +224,41 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.UserInterface
             {
                 row.Cells[1].Value = ImageResources.ExclamationCircle;
             }
+        }
+
+        private void radCheckedListBoxLocals_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
+        {
+            if (e.Item.CheckState != ToggleState.On) return;
+
+            Expression checkedExpression = (Expression) e.Item.DataBoundItem;
+
+            const int cutoff = 25;
+            ObjectDepthFinder depthFinder = new ObjectDepthFinder(cutoff);
+
+            //TODO: make this an async call
+            //TODO: use cancellation token, set timeout. If timedout display Calculating depth timeout.
+            //NOTE: timeout can be used as a setting as well as cutoff.
+            int maxDepth = depthFinder.GetMaximumObjectDepth(checkedExpression);
+
+            string depth;
+            if (maxDepth == -1)
+            {
+                depth = "∞";
+            }
+            else if (maxDepth == cutoff)
+            {
+                depth = "> " + maxDepth;
+            }
+            else
+            {
+                depth = maxDepth.ToString();
+            }
+            
+            string textToDisplay = String.Format("{0} (maxDepth: {1})", e.Item.Text, depth);
+            
+            //TODO: refactor to use ExpressionViewModel
+            //TODO: can use BeginUpdate() and EndUpdate()
+            //TODO: could use INotifyPropertyChanged
         }
     }
 }

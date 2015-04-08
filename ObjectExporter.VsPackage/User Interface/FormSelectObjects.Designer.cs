@@ -42,7 +42,7 @@
             this.radButtonExport = new Telerik.WinControls.UI.RadButton();
             this.radPageViewExport = new Telerik.WinControls.UI.RadPageView();
             this.radPageViewPageLocals = new Telerik.WinControls.UI.RadPageViewPage();
-            this.checkedListBoxWatchObjects = new System.Windows.Forms.CheckedListBox();
+            this.radCheckedListBoxLocals = new Telerik.WinControls.UI.RadCheckedListBox();
             this.radPageViewPageCustomExpression = new Telerik.WinControls.UI.RadPageViewPage();
             this.radGridViewCustomExpressions = new Telerik.WinControls.UI.RadGridView();
             this.radCheckBoxExcludePrivate = new Telerik.WinControls.UI.RadCheckBox();
@@ -53,6 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPageViewExport)).BeginInit();
             this.radPageViewExport.SuspendLayout();
             this.radPageViewPageLocals.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radCheckedListBoxLocals)).BeginInit();
             this.radPageViewPageCustomExpression.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGridViewCustomExpressions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridViewCustomExpressions.MasterTemplate)).BeginInit();
@@ -164,21 +165,22 @@
             // 
             // radPageViewPageLocals
             // 
-            this.radPageViewPageLocals.Controls.Add(this.checkedListBoxWatchObjects);
+            this.radPageViewPageLocals.Controls.Add(this.radCheckedListBoxLocals);
             this.radPageViewPageLocals.ItemSize = new System.Drawing.SizeF(113F, 25F);
             this.radPageViewPageLocals.Location = new System.Drawing.Point(5, 31);
             this.radPageViewPageLocals.Name = "radPageViewPageLocals";
             this.radPageViewPageLocals.Size = new System.Drawing.Size(348, 257);
             this.radPageViewPageLocals.Text = "Select From Locals";
             // 
-            // checkedListBoxWatchObjects
+            // radCheckedListBoxLocals
             // 
-            this.checkedListBoxWatchObjects.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBoxWatchObjects.FormattingEnabled = true;
-            this.checkedListBoxWatchObjects.Location = new System.Drawing.Point(0, 0);
-            this.checkedListBoxWatchObjects.Name = "checkedListBoxWatchObjects";
-            this.checkedListBoxWatchObjects.Size = new System.Drawing.Size(348, 257);
-            this.checkedListBoxWatchObjects.TabIndex = 3;
+            this.radCheckedListBoxLocals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radCheckedListBoxLocals.Location = new System.Drawing.Point(0, 0);
+            this.radCheckedListBoxLocals.Name = "radCheckedListBoxLocals";
+            this.radCheckedListBoxLocals.Size = new System.Drawing.Size(348, 257);
+            this.radCheckedListBoxLocals.TabIndex = 0;
+            this.radCheckedListBoxLocals.ThemeName = "TelerikMetroBlue";
+            this.radCheckedListBoxLocals.ItemCheckedChanged += new Telerik.WinControls.UI.ListViewItemEventHandler(this.radCheckedListBoxLocals_ItemCheckedChanged);
             // 
             // radPageViewPageCustomExpression
             // 
@@ -186,7 +188,7 @@
             this.radPageViewPageCustomExpression.ItemSize = new System.Drawing.SizeF(121F, 25F);
             this.radPageViewPageCustomExpression.Location = new System.Drawing.Point(5, 31);
             this.radPageViewPageCustomExpression.Name = "radPageViewPageCustomExpression";
-            this.radPageViewPageCustomExpression.Size = new System.Drawing.Size(348, 267);
+            this.radPageViewPageCustomExpression.Size = new System.Drawing.Size(348, 257);
             this.radPageViewPageCustomExpression.Text = "Custom Expressions";
             // 
             // radGridViewCustomExpressions
@@ -199,7 +201,7 @@
             this.radGridViewCustomExpressions.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.radGridViewCustomExpressions.Location = new System.Drawing.Point(0, 0);
             // 
-            // radGridViewCustomExpressions
+            // 
             // 
             this.radGridViewCustomExpressions.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.radGridViewCustomExpressions.MasterTemplate.AllowColumnChooser = false;
@@ -233,7 +235,7 @@
             this.radGridViewCustomExpressions.Name = "radGridViewCustomExpressions";
             this.radGridViewCustomExpressions.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridViewCustomExpressions.ShowGroupPanel = false;
-            this.radGridViewCustomExpressions.Size = new System.Drawing.Size(348, 267);
+            this.radGridViewCustomExpressions.Size = new System.Drawing.Size(348, 257);
             this.radGridViewCustomExpressions.TabIndex = 0;
             this.radGridViewCustomExpressions.Text = "radGridView1";
             this.radGridViewCustomExpressions.ThemeName = "TelerikMetroBlue";
@@ -279,6 +281,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPageViewExport)).EndInit();
             this.radPageViewExport.ResumeLayout(false);
             this.radPageViewPageLocals.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.radCheckedListBoxLocals)).EndInit();
             this.radPageViewPageCustomExpression.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radGridViewCustomExpressions.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridViewCustomExpressions)).EndInit();
@@ -301,9 +304,9 @@
         private Telerik.WinControls.UI.RadButton radButtonExport;
         private Telerik.WinControls.UI.RadPageView radPageViewExport;
         private Telerik.WinControls.UI.RadPageViewPage radPageViewPageLocals;
-        private System.Windows.Forms.CheckedListBox checkedListBoxWatchObjects;
         private Telerik.WinControls.UI.RadPageViewPage radPageViewPageCustomExpression;
         private Telerik.WinControls.UI.RadGridView radGridViewCustomExpressions;
         private Telerik.WinControls.UI.RadCheckBox radCheckBoxExcludePrivate;
+        private Telerik.WinControls.UI.RadCheckedListBox radCheckedListBoxLocals;
     }
 }

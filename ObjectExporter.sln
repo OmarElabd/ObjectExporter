@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B283BD4B-FB2
 	ProjectSection(SolutionItems) = preProject
 		lib\Microsoft.VisualStudio.Shell.11.0.dll = lib\Microsoft.VisualStudio.Shell.11.0.dll
 		lib\Microsoft.VisualStudio.Shell.11.0.xml = lib\Microsoft.VisualStudio.Shell.11.0.xml
+		lib\Scintilla\ScintillaNET.dll = lib\Scintilla\ScintillaNET.dll
 	EndProjectSection
 EndProject
 Global

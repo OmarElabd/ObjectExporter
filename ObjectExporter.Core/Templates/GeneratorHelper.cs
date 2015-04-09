@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EnvDTE;
 using EnvDTE80;
 using ObjectExporter.Core.ExtensionMethods;
 using ObjectExporter.Core.Globals;
+using ObjectExporter.Core.Models;
 
 namespace ObjectExporter.Core.Templates
 {
@@ -123,6 +125,42 @@ namespace ObjectExporter.Core.Templates
             {
                 return expressionName;
             }
+        }
+
+        public static List<Expression> SanitizeExpressions(Expression expression, PropertyAccessibilityChecker propertyAccessibilityChecker, bool excludePrivates, string expressionType)
+        {
+            var expressionMembers = expression.DataMembers.Cast<Expression>().ToList();
+            var cleanedExpressionMembers = new List<Expression>();
+
+            for (int i = 0; i < expressionMembers.Count; i++)
+            {
+                Expression currentExpression = expressionMembers[i];
+
+                //Add base type members to the list at the current level
+                if (IsBase(currentExpression))
+                {
+                    expressionMembers.AddRange(currentExpression.DataMembers.Cast<Expression>());
+                }
+                else if (IsSerializable(currentExpression.Name))
+                {
+                    if (excludePrivates)
+                    {
+                        //check accessibility
+                        bool isAccesible = propertyAccessibilityChecker.IsAccessiblePropertyOrField(currentExpression.Name, expressionType);
+
+                        if (isAccesible)
+                        {
+                            cleanedExpressionMembers.Add(currentExpression);
+                        }
+                    }
+                    else //Add all (including private)
+                    {
+                        cleanedExpressionMembers.Add(currentExpression);
+                    }
+                }
+            }
+
+            return cleanedExpressionMembers;
         }
     }
 }

@@ -262,58 +262,41 @@ this.Write(">");
                 node = expression.Name;
             }
 
+            List<Expression> cleanedExpressionMembers = GeneratorHelper.SanitizeExpressions(expression, _propertyAccessibilityChecker, excludePrivates, expressionType);
+        
             
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 71 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 71 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 71 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 71 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
-            foreach(Expression dataMember in expression.DataMembers)
+            foreach(Expression exp in cleanedExpressionMembers)
             {
-                if(GeneratorHelper.IsSerializable(dataMember.Name))
-                {
-                    if(excludePrivates)
-                    {
-                        //check accessibility
-                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expressionType);
-
-                        if(isAccesible)
-                        {
-                            //TODO: replace this
-                            PushIndent("\t");
-                            ExportMembers(dataMember, recursionLevel + 1);
-                            PopIndent();
-                        }
-                    }
-                    else //Add all (including private)
-                    {
-                        PushIndent("\t");
-                        ExportMembers(dataMember, recursionLevel + 1);
-                        PopIndent();
-                    }
-                }
+                PushIndent("\t");
+                ExportMembers(exp, recursionLevel + 1);
+                PopIndent();
             }
             WriteLine("");
             
@@ -321,28 +304,28 @@ this.Write(">");
         #line default
         #line hidden
         
-        #line 96 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write("</");
 
         
         #line default
         #line hidden
         
-        #line 96 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(node));
 
         
         #line default
         #line hidden
         
-        #line 96 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 this.Write(">");
 
         
         #line default
         #line hidden
         
-        #line 96 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\XmlGenerator.tt"
 
         }
     }

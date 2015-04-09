@@ -32,14 +32,14 @@
             this.folderBrowserDialogSaveObjects = new System.Windows.Forms.FolderBrowserDialog();
             this.radPageViewGeneratedText = new Telerik.WinControls.UI.RadPageView();
             this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
-            this.radRichTextEditor1 = new Telerik.WinControls.UI.RadRichTextEditor();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.scintillaDisplayObjects = new ScintillaNET.Scintilla();
             this.radButtonSaveObjects = new Telerik.WinControls.UI.RadButton();
             this.radButtonCopyClipboard = new Telerik.WinControls.UI.RadButton();
             this.radButtonCancel = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.radPageViewGeneratedText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radRichTextEditor1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaDisplayObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonSaveObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCopyClipboard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCancel)).BeginInit();
@@ -60,23 +60,9 @@
             ((Telerik.WinControls.UI.RadPageViewStripElement)(this.radPageViewGeneratedText.GetChildAt(0))).StripButtons = Telerik.WinControls.UI.StripViewButtons.Scroll;
             ((Telerik.WinControls.UI.RadPageViewStripElement)(this.radPageViewGeneratedText.GetChildAt(0))).ItemAlignment = Telerik.WinControls.UI.StripViewItemAlignment.Near;
             // 
-            // radRichTextEditor1
-            // 
-            this.radRichTextEditor1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.radRichTextEditor1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(189)))), ((int)(((byte)(232)))));
-            this.radRichTextEditor1.IsContextMenuEnabled = false;
-            this.radRichTextEditor1.IsReadOnly = true;
-            this.radRichTextEditor1.IsSelectionMiniToolBarEnabled = false;
-            this.radRichTextEditor1.Location = new System.Drawing.Point(18, 23);
-            this.radRichTextEditor1.Name = "radRichTextEditor1";
-            this.radRichTextEditor1.SelectionFill = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(78)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
-            this.radRichTextEditor1.SelectionStroke = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(205)))), ((int)(((byte)(217)))));
-            this.radRichTextEditor1.Size = new System.Drawing.Size(814, 340);
-            this.radRichTextEditor1.TabIndex = 9;
-            this.radRichTextEditor1.ThemeName = "TelerikMetroBlue";
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.scintillaDisplayObjects);
             this.panel1.Controls.Add(this.radButtonSaveObjects);
             this.panel1.Controls.Add(this.radButtonCopyClipboard);
             this.panel1.Controls.Add(this.radButtonCancel);
@@ -85,6 +71,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(864, 46);
             this.panel1.TabIndex = 10;
+            // 
+            // scintillaDisplayObjects
+            // 
+            this.scintillaDisplayObjects.Location = new System.Drawing.Point(350, -136);
+            this.scintillaDisplayObjects.Margins.Margin0.Width = 30;
+            this.scintillaDisplayObjects.Name = "scintillaDisplayObjects";
+            this.scintillaDisplayObjects.Size = new System.Drawing.Size(200, 100);
+            this.scintillaDisplayObjects.Styles.BraceBad.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.BraceLight.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.CallTip.FontName = "Segoe UI\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.ControlChar.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
+            this.scintillaDisplayObjects.Styles.Default.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.IndentGuide.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.LastPredefined.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.LineNumber.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.Styles.Max.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            this.scintillaDisplayObjects.TabIndex = 17;
             // 
             // radButtonSaveObjects
             // 
@@ -134,7 +138,6 @@
             this.CancelButton = this.radButtonCancel;
             this.ClientSize = new System.Drawing.Size(864, 466);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.radRichTextEditor1);
             this.Controls.Add(this.radPageViewGeneratedText);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(880, 505);
@@ -145,8 +148,8 @@
             this.Load += new System.EventHandler(this.FormDisplayGeneratedText_Load);
             this.Shown += new System.EventHandler(this.FormDisplayGeneratedText_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.radPageViewGeneratedText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radRichTextEditor1)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaDisplayObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonSaveObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCopyClipboard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCancel)).EndInit();
@@ -159,11 +162,11 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogSaveObjects;
         private Telerik.WinControls.UI.RadPageView radPageViewGeneratedText;
         private Telerik.WinControls.Themes.TelerikMetroBlueTheme telerikMetroBlueTheme1;
-        private Telerik.WinControls.UI.RadRichTextEditor radRichTextEditor1;
         private System.Windows.Forms.Panel panel1;
         private Telerik.WinControls.UI.RadButton radButtonSaveObjects;
         private Telerik.WinControls.UI.RadButton radButtonCopyClipboard;
         private Telerik.WinControls.UI.RadButton radButtonCancel;
+        private ScintillaNET.Scintilla scintillaDisplayObjects;
 
     }
 }

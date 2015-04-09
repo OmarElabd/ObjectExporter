@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using ObjectExporter.Core.Models;
 using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
 using Task = System.Threading.Tasks.Task;
+
+//NOTE: bug inradCheckListBox: http://feedback.telerik.com/Project/154/Feedback/Details/155730-fix-radcheckedlistbox-when-the-allowarbitraryitemwidth-property-is-set-to-true
 
 namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 {
@@ -59,7 +62,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             //Create Export Paramaters
             bool excludePrivates = radCheckBoxExcludePrivate.Checked;
             ExportType exportType = GetExportType();
-            int maxDepth = (int) numericUpDownMaxDepth.Value;
+            int maxDepth = (int)numericUpDownMaxDepth.Value;
             ExportParamaters exportParamaters = new ExportParamaters(excludePrivates, maxDepth, exportType);
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -69,7 +72,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 
             if (expressions.Any())
             {
-                //Hide and Show Progress Bar
+                //Hide and Show Progress Bar    
                 this.Hide();
                 waitingDialog.Show(this);
 
@@ -79,9 +82,9 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
                 try
                 {
                     Dictionary<string, string> lookupGeneratedTexts = await exportGenerator.GenerateTextWithKey(cancellationTokenSource.Token);
-                    FormDisplayGeneratedText formDisplayGeneratedText = await CreateAndShowFormAsync(lookupGeneratedTexts, exportType, cancellationTokenSource.Token);
 
                     //Setup event for when the form is shown to close the waiting dialog
+                    FormDisplayGeneratedText formDisplayGeneratedText = new FormDisplayGeneratedText(lookupGeneratedTexts, exportType);
                     formDisplayGeneratedText.Shown += formDisplayGeneratedText_Shown;
                     formDisplayGeneratedText.ShowDialog(this);
                 }
@@ -110,7 +113,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             return Task.Run(() => new FormDisplayGeneratedText(lookupGeneratedTexts, exportType));
         }
 
-        private Task<FormDisplayGeneratedText> CreateAndShowFormAsync(Dictionary<string, string> lookupGeneratedTexts, 
+        private Task<FormDisplayGeneratedText> CreateAndShowFormAsync(Dictionary<string, string> lookupGeneratedTexts,
             ExportType exportType, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
@@ -234,7 +237,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
         {
             if (e.Item.CheckState != ToggleState.On) return;
 
-            ExpressionViewModel vm = (ExpressionViewModel) e.Item.DataBoundItem;
+            ExpressionViewModel vm = (ExpressionViewModel)e.Item.DataBoundItem;
             Expression checkedExpression = vm.Expression;
             string expressionName = checkedExpression.Name;
 
@@ -243,14 +246,14 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             uint cutoff = _settings.DepthSolverCutoff;
             ObjectDepthFinder depthFinder = new ObjectDepthFinder(cutoff);
 
-            int timeoutMills = (int) _settings.DepthSolverTimeOut;
+            int timeoutMills = (int)_settings.DepthSolverTimeOut;
             CancellationTokenSource tokenSource = new CancellationTokenSource(timeoutMills);
 
             string depth;
             try
             {
                 int maxDepth = await depthFinder.GetMaximumObjectDepthAsync(checkedExpression, tokenSource.Token);
-                
+
                 if (maxDepth == -1)
                 {
                     depth = "∞";
@@ -267,7 +270,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             catch (TypeLoadException)
             {
                 depth = "timed out";
-            }            
+            }
 
             string textToDisplay = String.Format("{0} (max depth: {1})", expressionName, depth);
             e.Item.Text = textToDisplay;

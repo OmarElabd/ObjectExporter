@@ -66,31 +66,14 @@
                 node = expression.Name;
             }
 
+            List<Expression> cleanedExpressionMembers = GeneratorHelper.SanitizeExpressions(expression, _propertyAccessibilityChecker, excludePrivates, expressionType);
+        
             #><<#= node #>><#+
-            foreach(Expression dataMember in expression.DataMembers)
+            foreach(Expression exp in cleanedExpressionMembers)
             {
-                if(GeneratorHelper.IsSerializable(dataMember.Name))
-                {
-                    if(excludePrivates)
-                    {
-                        //check accessibility
-                        bool isAccesible = _propertyAccessibilityChecker.IsAccessiblePropertyOrField(dataMember.Name, expressionType);
-
-                        if(isAccesible)
-                        {
-                            //TODO: replace this
-                            PushIndent("\t");
-                            ExportMembers(dataMember, recursionLevel + 1);
-                            PopIndent();
-                        }
-                    }
-                    else //Add all (including private)
-                    {
-                        PushIndent("\t");
-                        ExportMembers(dataMember, recursionLevel + 1);
-                        PopIndent();
-                    }
-                }
+                PushIndent("\t");
+                ExportMembers(exp, recursionLevel + 1);
+                PopIndent();
             }
             WriteLine("");
             #></<#= node #>><#+

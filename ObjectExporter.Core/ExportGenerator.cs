@@ -7,6 +7,7 @@ using EnvDTE;
 using EnvDTE80;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
+using ObjectExporter.Core.Models.RuleSets;
 using ObjectExporter.Core.Templates;
 using ObjectExporter.Core.Templates.Converters;
 
@@ -21,17 +22,27 @@ namespace ObjectExporter.Core
         private readonly LocalsConverter _localsConverter = new LocalsConverter();
         private readonly CustomExpressionConverter _customExpressionConverter = new CustomExpressionConverter();
 
-        private readonly PropertyAccessibilityChecker _propertyChecker;
-        private readonly bool _excludePrivates;
+        private readonly RuleSetValidator _ruleSetValidator;
 
         public ExportGenerator(IEnumerable<ExpressionWithSource> expressionsWithSources,
-            AccessibilityRetriever retriever, ExportParamaters exportParamaters)
+            TypeRetriever retriever, ExportParamaters exportParamaters)
         {
             _type = exportParamaters.ExportType;
             _expressionsWithSources = expressionsWithSources;
             _maxDepth = exportParamaters.MaxDepth;
-            _excludePrivates = exportParamaters.ExludePrivateProperties;
-            _propertyChecker = new PropertyAccessibilityChecker(retriever);
+
+
+            List<IRuleSet> ruleSets = new List<IRuleSet>();
+            if (exportParamaters.ExcludePropertiesNotInClass)
+            {
+                ruleSets.Add(new PropertyInClassRuleSet(retriever));
+            }
+            if (exportParamaters.ExludePrivateProperties)
+            {
+                ruleSets.Add(new AccesiblePropertiesRuleSet(retriever));
+            }
+
+            _ruleSetValidator = new RuleSetValidator(ruleSets);
         }
 
         public async Task<Dictionary<string, string>> GenerateTextWithKey(CancellationToken cancellationToken)
@@ -102,14 +113,13 @@ namespace ObjectExporter.Core
 
         private string GenerateText(Expression expression, ExpressionSourceType source)
         {
-            IGenerator template = GeneratorFactory.CreateGenerator(_type, _propertyChecker);
+            IGenerator template = GeneratorFactory.CreateGenerator(_type, _ruleSetValidator);
 
             //TODO: can most likely remove this templateInitialization and replace with constructor in partial class
             var templateInitialization = new Dictionary<string, object>
             {
                 {"objectExpression", expression},
                 {"maxDepth", _maxDepth},
-                {"excludePrivates", _excludePrivates}
             };
 
             template.Session = templateInitialization;

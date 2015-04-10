@@ -60,7 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionMethods\TypeExtensions.cs" />
     <Compile Include="Models\ObjectDepthFinder.cs" />
+    <Compile Include="Models\RuleSets\IRuleSet.cs" />
+    <Compile Include="Models\RuleSets\PropertyInClassRuleSet.cs" />
+    <Compile Include="Models\RuleSets\RuleSetValidator.cs" />
     <Compile Include="Templates\CSharpGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -71,8 +75,8 @@
     <Compile Include="Globals\ExportType.cs" />
     <Compile Include="Globals\ExpressionSourceType.cs" />
     <Compile Include="Globals\ReservedWords.cs" />
-    <Compile Include="Models\AccessibilityRetriever.cs" />
-    <Compile Include="Models\PropertyAccessibilityChecker.cs" />
+    <Compile Include="Models\TypeRetriever.cs" />
+    <Compile Include="Models\RuleSets\AccesiblePropertiesRuleSet.cs" />
     <Compile Include="Models\ExpressionWithSource.cs" />
     <Compile Include="Models\ExportParamaters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using EnvDTE80;
+using ObjectExporter.Core.ExtensionMethods;
 
-namespace ObjectExporter.Core.Models
+namespace ObjectExporter.Core.Models.RuleSets
 {
-    public class PropertyAccessibilityChecker
+    public class AccesiblePropertiesRuleSet : IRuleSet
     {
-        private readonly AccessibilityRetriever _retriever;
+        private readonly TypeRetriever _retriever;
         private readonly Dictionary<Type, List<string>> AccessiblePropertiesInType = new Dictionary<Type, List<string>>();
 
-        public PropertyAccessibilityChecker(AccessibilityRetriever retriever)
+        public AccesiblePropertiesRuleSet(TypeRetriever retriever)
         {
             _retriever = retriever;
         }
 
-        public bool IsAccessiblePropertyOrField(string childPropertyName, string expressionType)
+        public bool IsValid(string expressionType, string childPropertyName)
         {
             if (childPropertyName.Contains("<") || childPropertyName.Contains(">") ||
                 childPropertyName.Contains("[") || childPropertyName.Contains("]"))
@@ -43,7 +43,7 @@ namespace ObjectExporter.Core.Models
             }
             else
             {
-                List<string> properties = _retriever.GetAccessibleFieldsAndProperties(type);
+                List<string> properties = type.GetAccessibleFieldAndPropertyNames();
                 AccessiblePropertiesInType.Add(type, properties);
                 return properties;
             }

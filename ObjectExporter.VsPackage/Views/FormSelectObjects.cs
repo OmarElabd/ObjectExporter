@@ -61,9 +61,10 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
         {
             //Create Export Paramaters
             bool excludePrivates = radCheckBoxExcludePrivate.Checked;
+            bool ignoreDynamicProperties = _settings.IgnoreDynamicallyAddedProperties;
             ExportType exportType = GetExportType();
             int maxDepth = (int)numericUpDownMaxDepth.Value;
-            ExportParamaters exportParamaters = new ExportParamaters(excludePrivates, maxDepth, exportType);
+            ExportParamaters exportParamaters = new ExportParamaters(excludePrivates, ignoreDynamicProperties, maxDepth, exportType);
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             waitingDialog = new ProgressDialog(cancellationTokenSource);
@@ -76,7 +77,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
                 this.Hide();
                 waitingDialog.Show(this);
 
-                AccessibilityRetriever retriever = new AccessibilityRetriever(dte2);
+                TypeRetriever retriever = new TypeRetriever(dte2);
                 var exportGenerator = new ExportGenerator(expressions, retriever, exportParamaters);
 
                 try

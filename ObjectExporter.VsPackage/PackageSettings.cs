@@ -12,7 +12,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
         private uint _depthSolverTimeOut = 20000;
 
         [Category("Depth Solver")]
-        [DisplayName("Max Depth Time Out")]
+        [DisplayName("Maximum Depth Time Out")]
         [Description("Sets the timeout for calculating the depth of a selected object")]
         public uint DepthSolverTimeOut
         {
@@ -23,12 +23,25 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
         private uint _depthSolverCutoff = 25;
 
         [Category("Depth Solver")]
-        [DisplayName("Max Depth Cutoff")]
+        [DisplayName("Maximum Depth Cutoff")]
         [Description("Sets the maximum depth cutofff for calculating the depth of a selected object")]
         public uint DepthSolverCutoff
         {
             get { return _depthSolverCutoff; }
             set { _depthSolverCutoff = value; }
         }
+
+        private bool _ignoreDynamicallyAddedProperties = true;
+
+        [Category("Object Generation")]
+        [DisplayName("Ignore Dynamically Added Properties")]
+        [Description("Some frameworks may add dynamic properties to an object instance. A good example of this is Entity Framework which will add DynamicProxy properties" +
+                     "to your object, if you do not wish for these properties to be exported select this option.")]
+        public bool IgnoreDynamicallyAddedProperties
+        {
+            get { return _ignoreDynamicallyAddedProperties; }
+            set { _ignoreDynamicallyAddedProperties = value; }
+        }
+
     }
 }

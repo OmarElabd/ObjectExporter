@@ -1,7 +1,7 @@
 ﻿using System;
 using ObjectExporter.Core.Templates.Converters;
 using EnvDTE;
-using ObjectExporter.Core.Models;
+using ObjectExporter.Core.Models.RuleSets;
 
 namespace ObjectExporter.Core.Templates
 {
@@ -9,10 +9,10 @@ namespace ObjectExporter.Core.Templates
     {
         public IConverter Converter { get; set; }
 
-        private readonly PropertyAccessibilityChecker _propertyAccessibilityChecker;
-        public CSharpGenerator(PropertyAccessibilityChecker checker)
+        private readonly RuleSetValidator _ruleSetValidator;
+        public CSharpGenerator(RuleSetValidator ruleSetValidator)
         {
-            _propertyAccessibilityChecker = checker;
+            _ruleSetValidator = ruleSetValidator;
         }
 
         private bool CanBeExpressedAsSingleType(string expressionType)

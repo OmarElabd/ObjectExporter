@@ -6,6 +6,7 @@ using EnvDTE80;
 using ObjectExporter.Core.ExtensionMethods;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
+using ObjectExporter.Core.Models.RuleSets;
 
 namespace ObjectExporter.Core.Templates
 {
@@ -102,6 +103,19 @@ namespace ObjectExporter.Core.Templates
             }
         }
 
+        public static string StripChildReference(string input)
+        {
+            if (input.Contains("{") && input.Contains("}"))
+            {
+                int index = input.IndexOf("{");
+                return input.Substring(0, index - 1).Trim();
+            }
+            else
+            {
+                return input;
+            }
+        }
+
         public static string GetBugFixedDateTimeOffset(Expression expression)
         {
             string dateTimePartStr = StripCurleyBraces(expression.DataMembers.Item(2).Value);
@@ -127,7 +141,7 @@ namespace ObjectExporter.Core.Templates
             }
         }
 
-        public static List<Expression> SanitizeExpressions(Expression expression, PropertyAccessibilityChecker propertyAccessibilityChecker, bool excludePrivates, string expressionType)
+        public static List<Expression> SanitizeExpressions(Expression expression, RuleSetValidator ruleSetValidator, string parentExpressionType)
         {
             var expressionMembers = expression.DataMembers.Cast<Expression>().ToList();
             var cleanedExpressionMembers = new List<Expression>();
@@ -136,27 +150,26 @@ namespace ObjectExporter.Core.Templates
             {
                 Expression currentExpression = expressionMembers[i];
 
+                //Ignore collections
+                if (IsTypeOfCollection(currentExpression.Type))
+                {
+                    cleanedExpressionMembers.Add(currentExpression);
+                }
                 //Add base type members to the list at the current level
-                if (IsBase(currentExpression))
+                else if (IsBase(currentExpression))
                 {
                     expressionMembers.AddRange(currentExpression.DataMembers.Cast<Expression>());
                 }
                 else if (IsSerializable(currentExpression.Name))
                 {
-                    if (excludePrivates)
-                    {
-                        //check accessibility
-                        bool isAccesible = propertyAccessibilityChecker.IsAccessiblePropertyOrField(currentExpression.Name, expressionType);
+                    //check accessibility
+                    bool isValid = ruleSetValidator.ValidateAllSubRules(parentExpressionType, currentExpression.Name);
 
-                        if (isAccesible)
-                        {
-                            cleanedExpressionMembers.Add(currentExpression);
-                        }
-                    }
-                    else //Add all (including private)
+                    if (isValid)
                     {
                         cleanedExpressionMembers.Add(currentExpression);
                     }
+
                 }
             }
 

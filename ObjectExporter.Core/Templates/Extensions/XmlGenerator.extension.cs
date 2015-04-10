@@ -2,6 +2,7 @@
 using System.Xml;
 using EnvDTE;
 using ObjectExporter.Core.Models;
+using ObjectExporter.Core.Models.RuleSets;
 using ObjectExporter.Core.Templates.Converters;
 
 namespace ObjectExporter.Core.Templates
@@ -10,10 +11,10 @@ namespace ObjectExporter.Core.Templates
     {
         public IConverter Converter { get; set; }
 
-        private readonly PropertyAccessibilityChecker _propertyAccessibilityChecker;
-        public XmlGenerator(PropertyAccessibilityChecker checker)
+        private readonly RuleSetValidator _ruleSetValidator;
+        public XmlGenerator(RuleSetValidator ruleSetValidator)
         {
-            _propertyAccessibilityChecker = checker;
+            _ruleSetValidator = ruleSetValidator;
         }
 
         public void Clear()

@@ -9,11 +9,11 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace ObjectExporter.Core.Models
 {
-    public class AccessibilityRetriever
+    public class TypeRetriever
     {
         private readonly DTE2 _dte2;
 
-        public AccessibilityRetriever(DTE2 dte2)
+        public TypeRetriever(DTE2 dte2)
         {
             _dte2 = dte2;
         }
@@ -32,20 +32,5 @@ namespace ObjectExporter.Core.Models
             return typeService.GetTypeResolutionService(hier).GetType(type, true);
         }
 
-        public List<string> GetAccessibleFieldsAndProperties(Type type)
-        {
-            List<string> properties = new List<string>();
-
-            //Add Settable Properties
-            properties.AddRange(type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                                    .Where(y => y.CanWrite)
-                                    .Select(x => x.Name));
-
-            //Add Fields
-            properties.AddRange(type.GetFields(BindingFlags.Instance | BindingFlags.Public)
-                      .Select(x => x.Name));
-
-            return properties;
-        }
     }
 }

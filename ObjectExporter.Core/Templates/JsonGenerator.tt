@@ -1,7 +1,6 @@
 ﻿<#@ template language="C#" #>
 <#@ parameter name="objectExpression" type="EnvDTE.Expression" #>
 <#@ parameter name="maxDepth" type="System.Int32" #>
-<#@ parameter name="excludePrivates" type="System.Boolean" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -71,7 +70,7 @@
                 #>{<#+
             }
 
-            List<Expression> cleanedExpressionMembers = GeneratorHelper.SanitizeExpressions(expression, _propertyAccessibilityChecker, excludePrivates, expressionType);
+            List<Expression> cleanedExpressionMembers = GeneratorHelper.SanitizeExpressions(expression, _ruleSetValidator, expressionType);
 
             foreach(Expression exp in cleanedExpressionMembers)
             {

@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using System.IO;
+using System.Reflection;
 using AccretionDynamics.ObjectExporter.VsPackage.Views;
 using EnvDTE;
 using EnvDTE80;
@@ -48,6 +50,14 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
         /// </summary>
         public ObjectExporter()
         {
+            string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            IntPtr pDll = NativeMethods.LoadLibrary(Path.Combine(assemblyPath, "SciLexer.dll"));
+
+            if (pDll == IntPtr.Zero)
+            {
+                throw new DllNotFoundException("Could not find SciLexer.dll - This is unmanaged assembly is required by ScintillaNet.dll");
+            }
+
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", ToString()));
         }
 

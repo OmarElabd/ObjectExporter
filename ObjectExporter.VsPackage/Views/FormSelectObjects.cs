@@ -99,7 +99,8 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
                 catch (Exception ex)
                 {
                     waitingDialog.Close();
-                    MessageBox.Show("Error: Unable to export all objects");
+                    //MessageBox.Show("Error: Unable to export all objects");
+                    MessageBox.Show(ex.ToString());
                 }
                 finally
                 {

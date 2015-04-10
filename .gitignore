@@ -15,3 +15,4 @@ ObjectExporter.Core/bin/
 ObjectExporter.Core/obj/
 ObjectExporter.VsPackage/bin/
 ObjectExporter.VsPackage/obj/
+/ObjectExporter.VsPackage/Resources

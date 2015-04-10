@@ -88,6 +88,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -174,6 +175,12 @@
     <Compile Include="PackageSettings.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\ErrorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ErrorDialog.Designer.cs">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FilesCreatedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +220,9 @@
       <LastGenOutput>ImageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Views\ErrorDialog.resx">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FilesCreatedDialog.resx">
       <DependentUpon>FilesCreatedDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +261,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="Resources\paper-plane.png" />
     <Content Include="Resources\times_circle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

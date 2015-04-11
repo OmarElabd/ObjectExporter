@@ -11,10 +11,19 @@
 <#+
     bool isFirstElement = true;
 
-    public void ExportMembers(Expression expression, int recursionLevel)
+    public void ExportMembers(Expression expression, int currentDepth)
     {
-        //members of objects have a type of: object { theType } - Strip out object { }
-        string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+        string expressionType;
+        if(isFirstElement) //TODO: can probably replace isFirstElement with currentDepth = 0
+        {
+            //Frameworks can add theType { dynamicType} - strip out the {dynamic type}
+            expressionType = GeneratorHelper.StripChildReference(expression.Type);
+        }
+        else
+        {
+            //members of objects have a type of: object { theType } - strip out object { }
+            expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+        }
 
         if(!GeneratorHelper.IsSerializable(expression.Name))
         {
@@ -47,7 +56,7 @@
 
             #><<#= node #>><#= expression.Value #></<#= node #>><#+
         }
-        else if (expression.DataMembers.Count > 0 && recursionLevel <= maxDepth)
+        else if (expression.DataMembers.Count > 0 && currentDepth <= maxDepth)
         {
             //used for the very first object (top most) to be completed as var objName = new objType, without a space in between.
             if(isFirstElement)
@@ -71,7 +80,7 @@
             foreach(Expression exp in cleanedExpressionMembers)
             {
                 PushIndent("\t");
-                ExportMembers(exp, recursionLevel + 1);
+                ExportMembers(exp, currentDepth + 1);
                 PopIndent();
             }
             WriteLine("");

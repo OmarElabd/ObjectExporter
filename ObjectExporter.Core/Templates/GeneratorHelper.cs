@@ -169,7 +169,6 @@ namespace ObjectExporter.Core.Templates
                     {
                         cleanedExpressionMembers.Add(currentExpression);
                     }
-
                 }
             }
 

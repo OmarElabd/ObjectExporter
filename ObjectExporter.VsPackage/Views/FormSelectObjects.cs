@@ -11,6 +11,7 @@ using EnvDTE80;
 using ObjectExporter.Core;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
+using ObjectExporter.Core.Models.RuleSets;
 using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
 using Task = System.Threading.Tasks.Task;
@@ -21,26 +22,43 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 {
     public partial class FormSelectObjects : Form
     {
-        private readonly DTE2 dte2;
+        private readonly DTE2 _dte2;
         private readonly PackageSettings _settings;
-        private ProgressDialog waitingDialog;
+        private ProgressDialog _waitingDialog;
+
+        private readonly RuleSetValidator _ruleSetValidator;
 
         public FormSelectObjects(DTE2 dte2, PackageSettings settings)
         {
-            this.dte2 = dte2;
+            _dte2 = dte2;
             _settings = settings;
 
             InitializeComponent();
             LoadLocals();
+
+            TypeRetriever retriever = new TypeRetriever(dte2);
+            List<IRuleSet> ruleSets = new List<IRuleSet>();
+            if (settings.IgnoreDynamicallyAddedProperties)
+            {
+                ruleSets.Add(new PropertyInClassRuleSet(retriever));
+            }
+
+            bool excludePrivates = radCheckBoxExcludePrivate.Checked;
+            if (excludePrivates)
+            {
+                ruleSets.Add(new AccesiblePropertiesRuleSet(retriever));
+            }
+
+            _ruleSetValidator = new RuleSetValidator(ruleSets);
         }
 
         private void LoadLocals()
         {
-            if (dte2.Debugger.CurrentMode == EnvDTE.dbgDebugMode.dbgBreakMode &&
-                dte2.Debugger != null &&
-                dte2.Debugger.CurrentStackFrame != null)
+            if (_dte2.Debugger.CurrentMode == EnvDTE.dbgDebugMode.dbgBreakMode &&
+                _dte2.Debugger != null &&
+                _dte2.Debugger.CurrentStackFrame != null)
             {
-                Expressions localExpresisons = dte2.Debugger.CurrentStackFrame.Locals;
+                Expressions localExpresisons = _dte2.Debugger.CurrentStackFrame.Locals;
 
                 var expressionList = localExpresisons.Cast<Expression>().ToList();
 
@@ -67,7 +85,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             ExportParamaters exportParamaters = new ExportParamaters(excludePrivates, ignoreDynamicProperties, maxDepth, exportType);
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            waitingDialog = new ProgressDialog(cancellationTokenSource);
+            _waitingDialog = new ProgressDialog(cancellationTokenSource);
 
             List<ExpressionWithSource> expressions = GetAllExpressions();
 
@@ -75,9 +93,9 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             {
                 //Hide and Show Progress Bar    
                 this.Hide();
-                waitingDialog.Show(this);
+                _waitingDialog.Show(this);
 
-                TypeRetriever retriever = new TypeRetriever(dte2);
+                TypeRetriever retriever = new TypeRetriever(_dte2);
                 var exportGenerator = new ExportGenerator(expressions, retriever, exportParamaters);
 
                 try
@@ -91,15 +109,15 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
                 }
                 catch (ThreadAbortException ex)
                 {
-                    waitingDialog.Close();
+                    _waitingDialog.Close();
                 }
                 catch (ObjectDisposedException ex)
                 {
-                    waitingDialog.Close();
+                    _waitingDialog.Close();
                 }
                 catch (Exception ex)
                 {
-                    waitingDialog.Close();
+                    _waitingDialog.Close();
                     //MessageBox.Show("Error: Unable to export all objects");
                     MessageBox.Show(ex.ToString());
                 }
@@ -137,9 +155,9 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 
         void formDisplayGeneratedText_Shown(object sender, EventArgs e)
         {
-            if (waitingDialog != null)
+            if (_waitingDialog != null)
             {
-                waitingDialog.Close();
+                _waitingDialog.Close();
             }
         }
 
@@ -160,7 +178,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             foreach (var row in radGridViewCustomExpressions.Rows)
             {
                 string expressionName = row.Cells[0].Value.ToString(); //First Column is Expression Name
-                Expression customExpression = dte2.Debugger.GetExpression(expressionName);
+                Expression customExpression = _dte2.Debugger.GetExpression(expressionName);
 
                 if (customExpression.IsValidValue)
                 {
@@ -205,33 +223,67 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
             }
         }
 
-        private void radGridViewCustomExpressions_CellValueChanged(object sender, GridViewCellEventArgs e)
+        private async void radGridViewCustomExpressions_CellValueChanged(object sender, GridViewCellEventArgs e)
         {
             if (e.Column.Index == 0 && e.Value != null) //Expression Name Column
             {
                 string expressionName = e.Value.ToString();
-                UpdateIsValidColumnImage(expressionName, e.Row);
-            }
-        }
+                Expression expression = _dte2.Debugger.GetExpression(expressionName);
+                bool isValid = expression.IsValidValue;
 
-        private void UpdateIsValidColumnImage(string expressionName, GridViewRowInfo row)
-        {
-            try
-            {
-                Expression addedExpression = dte2.Debugger.GetExpression(expressionName);
 
-                if (addedExpression.IsValidValue)
+                UpdateIsValidColumnImage(isValid, e.Row);
+
+                if (isValid)
                 {
-                    row.Cells[1].Value = ImageResources.CheckCircle;
+                    int index = e.Row.Index;
+                    e.Row.Cells[1].Value = "(calculating...)";
+
+                    string depth;
+                    try
+                    {
+                        CancellationTokenSource tokenSource = new CancellationTokenSource((int) _settings.DepthSolverTimeOut);
+                        depth = await GetDepth(expression, tokenSource.Token);
+                    }
+                    catch (Exception ex)
+                    {
+                        depth = "timed out";
+                    }
+
+                    if (index == -1) //newly created row
+                    {
+                        int lastRow = radGridViewCustomExpressions.Rows.Count - 1;
+                        radGridViewCustomExpressions.Rows[lastRow].Cells[1].Value = depth;
+                    }
+                    else
+                    {
+                        //set x,y as index changes after calculation.
+                        e.Row.Cells[1].Value = depth;
+                    }
                 }
                 else
                 {
-                    row.Cells[1].Value = ImageResources.ExclamationCircle;
+                    e.Row.Cells[1].Value = String.Empty;
+                }
+            }
+        }
+
+        private void UpdateIsValidColumnImage(bool isValid, GridViewRowInfo row)
+        {
+            try
+            {
+                if (isValid)
+                {
+                    row.Cells[2].Value = ImageResources.CheckCircle;
+                }
+                else
+                {
+                    row.Cells[2].Value = ImageResources.ExclamationCircle;
                 }
             }
             catch (Exception ex)
             {
-                row.Cells[1].Value = ImageResources.ExclamationCircle;
+                row.Cells[2].Value = ImageResources.ExclamationCircle;
             }
         }
 
@@ -245,16 +297,23 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 
             e.Item.Text = String.Format("{0} (calculating...)", expressionName);
 
-            uint cutoff = _settings.DepthSolverCutoff;
-            ObjectDepthFinder depthFinder = new ObjectDepthFinder(cutoff);
 
-            int timeoutMills = (int)_settings.DepthSolverTimeOut;
-            CancellationTokenSource tokenSource = new CancellationTokenSource(timeoutMills);
+            CancellationTokenSource tokenSource = new CancellationTokenSource((int) _settings.DepthSolverTimeOut);
+            string depth = await GetDepth(checkedExpression, tokenSource.Token);
+
+            string textToDisplay = String.Format("{0} (max depth: {1})", expressionName, depth);
+            e.Item.Text = textToDisplay;
+        }
+
+        private async Task<string> GetDepth(Expression expression, CancellationToken token)
+        {
+            uint cutoff = _settings.DepthSolverCutoff;
+            ObjectDepthFinder depthFinder = new ObjectDepthFinder(_ruleSetValidator, cutoff);
 
             string depth;
             try
             {
-                int maxDepth = await depthFinder.GetMaximumObjectDepthAsync(checkedExpression, tokenSource.Token);
+                int maxDepth = await depthFinder.GetMaximumObjectDepthAsync(expression, token);
 
                 if (maxDepth == -1)
                 {
@@ -274,8 +333,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
                 depth = "timed out";
             }
 
-            string textToDisplay = String.Format("{0} (max depth: {1})", expressionName, depth);
-            e.Item.Text = textToDisplay;
+            return depth;
         }
     }
 }

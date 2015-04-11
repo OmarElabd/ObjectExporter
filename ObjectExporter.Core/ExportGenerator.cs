@@ -31,7 +31,6 @@ namespace ObjectExporter.Core
             _expressionsWithSources = expressionsWithSources;
             _maxDepth = exportParamaters.MaxDepth;
 
-
             List<IRuleSet> ruleSets = new List<IRuleSet>();
             if (exportParamaters.ExcludePropertiesNotInClass)
             {

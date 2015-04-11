@@ -42,10 +42,19 @@ namespace ObjectExporter.Core.Templates
 
     bool isFirstElement = true;
     
-    public void ExportMembers(Expression expression, int recursionLevel, bool isLast)
+    public void ExportMembers(Expression expression, int currentDepth, bool isLast)
     {
-        //members of objects have a type of: object { theType } - Strip out object { }
-        string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+        string expressionType;
+        if(isFirstElement) //TODO: can probably replace isFirstElement with currentDepth = 0
+        {
+            //Frameworks can add theType { dynamicType} - strip out the {dynamic type}
+            expressionType = GeneratorHelper.StripChildReference(expression.Type);
+        }
+        else
+        {
+            //members of objects have a type of: object { theType } - strip out object { }
+            expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+        }
 
         if(!GeneratorHelper.IsSerializable(expression.Name))
         {
@@ -62,14 +71,14 @@ namespace ObjectExporter.Core.Templates
         #line default
         #line hidden
         
-        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 37 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 28 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 37 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
             }
             else
@@ -79,35 +88,35 @@ this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression
         #line default
         #line hidden
         
-        #line 32 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 41 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("\"");
 
         
         #line default
         #line hidden
         
-        #line 32 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 41 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 32 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 41 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("\": ");
 
         
         #line default
         #line hidden
         
-        #line 32 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 41 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 32 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 41 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
             }
         }
@@ -121,14 +130,14 @@ this.Write(this.ToStringHelper.ToStringWithCulture(GetSingleTypeValue(expression
         #line default
         #line hidden
         
-        #line 40 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 49 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 40 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 49 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
             }
             else
@@ -138,39 +147,39 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
         #line default
         #line hidden
         
-        #line 44 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("\"");
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("\": ");
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 53 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
             }
         }
-        else if (expression.DataMembers.Count > 0 && recursionLevel <= maxDepth)
+        else if (expression.DataMembers.Count > 0 && currentDepth <= maxDepth)
         {
             //used for the very first object (top most) to be completed as var objName = new objType, without a space in between.
             if(isFirstElement)
@@ -189,14 +198,14 @@ this.Write(this.ToStringHelper.ToStringWithCulture(expression.Value + GeneratorH
         #line default
         #line hidden
         
-        #line 61 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("[");
 
         
         #line default
         #line hidden
         
-        #line 61 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
             }
             else if(GeneratorHelper.IsTypeOfCollection(expressionType))
@@ -206,42 +215,42 @@ this.Write("[");
         #line default
         #line hidden
         
-        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("\"");
 
         
         #line default
         #line hidden
         
-        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(expression.Name));
 
         
         #line default
         #line hidden
         
-        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("\": ");
 
         
         #line default
         #line hidden
         
-        #line 65 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 74 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
  
                 WriteLine(""); 
         
         #line default
         #line hidden
         
-        #line 66 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 75 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("[");
 
         
         #line default
         #line hidden
         
-        #line 66 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 75 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
             }
             else
@@ -251,14 +260,14 @@ this.Write("[");
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("{");
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 79 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
             }
 
@@ -268,7 +277,7 @@ this.Write("{");
             {
                 PushIndent("\t");
                 bool isLastItem = cleanedExpressionMembers.IsLast(exp);
-                ExportMembers(exp, recursionLevel + 1, isLastItem);
+                ExportMembers(exp, currentDepth + 1, isLastItem);
                 PopIndent();
             }
 
@@ -278,21 +287,21 @@ this.Write("{");
         #line default
         #line hidden
         
-        #line 84 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.WriteCommaIfNotLast(isLast)));
 
         
         #line default
         #line hidden
         
-        #line 84 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 84 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 
         }
     }
@@ -307,14 +316,14 @@ this.Write(" ");
         #line default
         #line hidden
         
-        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 102 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("]");
 
         
         #line default
         #line hidden
         
-        #line 93 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 102 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
  
         }
         else
@@ -324,14 +333,14 @@ this.Write("]");
         #line default
         #line hidden
         
-        #line 97 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 106 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
 this.Write("}");
 
         
         #line default
         #line hidden
         
-        #line 97 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
+        #line 106 "C:\Users\Arel\Documents\GitHub\ObjectExporter\ObjectExporter.Core\Templates\JsonGenerator.tt"
      
         }
     }

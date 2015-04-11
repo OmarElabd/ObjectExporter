@@ -13,7 +13,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
 
         [Category("Depth Solver")]
         [DisplayName("Maximum Depth Time Out")]
-        [Description("Sets the timeout for calculating the depth of a selected object")]
+        [Description("Sets the timeout (in milliseconds) for calculating the depth of a selected object.")]
         public uint DepthSolverTimeOut
         {
             get { return _depthSolverTimeOut; }
@@ -24,7 +24,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
 
         [Category("Depth Solver")]
         [DisplayName("Maximum Depth Cutoff")]
-        [Description("Sets the maximum depth cutofff for calculating the depth of a selected object")]
+        [Description("Sets the maximum depth cutofff for calculating the depth of a selected object.")]
         public uint DepthSolverCutoff
         {
             get { return _depthSolverCutoff; }

@@ -1,9 +1,12 @@
-Release Notes (v0.97) - 3/31/2015:
+Release Notes (v1.1.0) - 4/10/2015:
 1. Fix: Fixed issue with exporting objects contained in an array of objects (Issue #12).
 2. Feature: Can now exclude private properties and fields, this includes properties with private setters (Feature #4).
 3. Fix: Fixed issue with exporting reserved names such as class (Issue #13).
-4. Added shortcut (Control + E, Control + O) or (Control + E, O). E, O is short for Export Object.
+4. Feature: Added shortcut (Control + E, Control + O) or (Control + E, O). E, O is short for Export Object.
 5. Feature: Replaced .Parse() calls with actual object creation (Feature #14).
+6. Fix: Object exporting is now up to seven times faster. The performance for exporting large objects has been greatly improved.
+7. Feature: The ability to ignore dynamically added properties (such as EF proxies) has been added to the options menu and is selected by default (Feature #19).
+8. Fix: The performance of switching between large objects in the text display screen has been great improved.
 
 Release Notes (v0.95) - 3/10/2015:
 1. Fix: Removed progress bar stall when displaying text.

@@ -157,7 +157,7 @@
             this.radPageViewExport.Controls.Add(this.radPageViewPageCustomExpression);
             this.radPageViewExport.Location = new System.Drawing.Point(12, 116);
             this.radPageViewExport.Name = "radPageViewExport";
-            this.radPageViewExport.SelectedPage = this.radPageViewPageLocals;
+            this.radPageViewExport.SelectedPage = this.radPageViewPageCustomExpression;
             this.radPageViewExport.Size = new System.Drawing.Size(358, 293);
             this.radPageViewExport.TabIndex = 18;
             this.radPageViewExport.ThemeName = "TelerikMetroBlue";
@@ -226,6 +226,7 @@
             gridViewTextBoxColumn2.MaxWidth = 85;
             gridViewTextBoxColumn2.Name = "columnDepth";
             gridViewTextBoxColumn2.ReadOnly = true;
+            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn2.Width = 85;
             gridViewImageColumn1.AllowResize = false;
             gridViewImageColumn1.EnableExpressionEditor = false;

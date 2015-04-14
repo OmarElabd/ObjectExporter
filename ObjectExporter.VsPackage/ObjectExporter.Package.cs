@@ -10,6 +10,7 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell;
+using Mindscape.Raygun4Net;
 
 namespace AccretionDynamics.ObjectExporter.VsPackage
 {
@@ -50,6 +51,11 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
         /// </summary>
         public ObjectExporter()
         {
+
+                //const string apiKey = ApiKeys.Raygun;
+                //RaygunClient client = new RaygunClient(apiKey);
+                //client.Send(e);
+
             string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             IntPtr pDll = NativeMethods.LoadLibrary(Path.Combine(assemblyPath, "SciLexer.dll"));
 
@@ -57,8 +63,6 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
             {
                 throw new DllNotFoundException("Could not find SciLexer.dll - This is unmanaged assembly is required by ScintillaNet.dll");
             }
-
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", ToString()));
         }
 
         /////////////////////////////////////////////////////////////////////////////

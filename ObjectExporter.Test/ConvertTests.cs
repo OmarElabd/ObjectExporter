@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ObjectExplorer.Test
+namespace ObjectExporter.Test
 {
     [TestClass]
     public class XmlTests

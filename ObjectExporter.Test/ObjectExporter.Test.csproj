@@ -6,8 +6,8 @@
     <ProjectGuid>{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ObjectExplorer.Test</RootNamespace>
-    <AssemblyName>ObjectExplorer.Test</AssemblyName>
+    <RootNamespace>ObjectExporter.Test</RootNamespace>
+    <AssemblyName>ObjectExporter.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

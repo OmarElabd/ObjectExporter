@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ObjectExporter.VsPackage.Helpers;
+﻿using ObjectExporter.VsPackage.Helpers;
 
-namespace ObjectExplorer.Test
+namespace ObjectExporter.Test
 {
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
     public class MyTestClass

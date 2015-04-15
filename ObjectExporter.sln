@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectExporter.VsPackage", "ObjectExporter.VsPackage\ObjectExporter.VsPackage.csproj", "{4327676D-2B8D-42C9-AF0D-833D7812C15E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectExplorer.Test", "ObjectExplorer.Test\ObjectExplorer.Test.csproj", "{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectExporter.Core", "ObjectExporter.Core\ObjectExporter.Core.csproj", "{29D6D910-2865-4243-AABE-31E8180DE906}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Projects", "Test Projects", "{EBA56731-B3A8-47FC-A5BA-07A26A7926E8}"
@@ -18,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B283BD4B-FB2
 		lib\Microsoft.VisualStudio.Shell.Design.dll = lib\Microsoft.VisualStudio.Shell.Design.dll
 		lib\Scintilla\ScintillaNET.dll = lib\Scintilla\ScintillaNET.dll
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectExporter.Test", "ObjectExporter.Test\ObjectExporter.Test.csproj", "{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,16 +41,6 @@ Global
 		{4327676D-2B8D-42C9-AF0D-833D7812C15E}.Release|ARM.ActiveCfg = Release|Any CPU
 		{4327676D-2B8D-42C9-AF0D-833D7812C15E}.Release|x64.ActiveCfg = Release|Any CPU
 		{4327676D-2B8D-42C9-AF0D-833D7812C15E}.Release|x86.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|ARM.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|x64.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|x86.ActiveCfg = Release|Any CPU
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -61,6 +51,16 @@ Global
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Release|ARM.ActiveCfg = Release|Any CPU
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Release|x64.ActiveCfg = Release|Any CPU
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Release|x86.ActiveCfg = Release|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|x64.ActiveCfg = Release|Any CPU
+		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

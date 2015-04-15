@@ -2,6 +2,6 @@
 {
     public static class ApiKeys
     {
-        public const string RayGun = "{YOUR KEY HERE}";
+        public const string RayGun = "s";
     }
 }

@@ -278,6 +278,13 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Documentation\Object Exporter - Custom Expressions.png" />
+    <Resource Include="Documentation\Object Exporter - Generated C#.png" />
+    <Resource Include="Documentation\Object Exporter - Generated JSON.png" />
+    <Resource Include="Documentation\Object Exporter - Generated XML.png" />
+    <Resource Include="Documentation\Object Exporter - Options.png" />
+    <Resource Include="Documentation\Object Exporter - Select From Locals 1.png" />
+    <Resource Include="Documentation\Object Exporter - Select From Locals 2.png" />
     <Content Include="Documentation\Release Notes.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

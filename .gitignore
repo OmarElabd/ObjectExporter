@@ -9,12 +9,12 @@ _NCrunch_*
 *.vsp
 *.vspx
 *.vssscc
-ObjectExplorer.Test/obj/
-ObjectExplorer.Test/bin/
+ObjectExporter.Test/obj/
+ObjectExporter.Test/bin/
 ObjectExporter.Core/bin/
 ObjectExporter.Core/obj/
 ObjectExporter.VsPackage/bin/
 ObjectExporter.VsPackage/obj/
-/ObjectExporter.VsPackage/Resources
+ObjectExporter.VsPackage/Resources
 ObjectExporter.Core/ApiKeys.cs
 ObjectExporter.VsPackage/Documentation/Thumbs.db

@@ -103,8 +103,6 @@ namespace ObjectExporter.VsPackage.Views
 
                 try
                 {
-                    throw new Exception();
-
                     Dictionary<string, string> lookupGeneratedTexts = await exportGenerator.GenerateTextWithKey(cancellationTokenSource.Token);
 
                     //Setup event for when the form is shown to close the waiting dialog

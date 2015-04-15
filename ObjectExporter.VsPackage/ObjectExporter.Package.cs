@@ -10,6 +10,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using ObjectExporter.Core;
+using ObjectExporter.VsPackage.Logging;
 using ObjectExporter.VsPackage.Settings;
 using ObjectExporter.VsPackage.Views;
 
@@ -79,9 +80,18 @@ namespace ObjectExporter.VsPackage
                 mcs.AddCommand(menuItem);
             }
 
+            //Initialize Object Exporter settings for use with Aspects (can't pass any objects into constructor)
             _packageSettings = (PackageSettings)GetDialogPage(typeof(PackageSettings));
             GlobalPackageSettings.Initialize(_packageSettings);
 
+            //Add user information for exception handling with raygun
+            UserInfo info = new UserInfo()
+            {
+                VisualStudioVersion = _dte2.Version
+            };
+            Raygun.InitializeUserInfo(info);
+
+            //Load Scintilla dependencies (SciLexer.dll)
             LoadUnmanagedLibraries();
         }
 

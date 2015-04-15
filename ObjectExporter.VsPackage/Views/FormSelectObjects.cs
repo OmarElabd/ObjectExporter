@@ -12,6 +12,7 @@ using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
 using ObjectExporter.Core.Models.RuleSets;
 using ObjectExporter.VsPackage.Aspects;
+using ObjectExporter.VsPackage.Logging;
 using ObjectExporter.VsPackage.Settings;
 using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
@@ -102,6 +103,8 @@ namespace ObjectExporter.VsPackage.Views
 
                 try
                 {
+                    throw new Exception();
+
                     Dictionary<string, string> lookupGeneratedTexts = await exportGenerator.GenerateTextWithKey(cancellationTokenSource.Token);
 
                     //Setup event for when the form is shown to close the waiting dialog
@@ -121,8 +124,8 @@ namespace ObjectExporter.VsPackage.Views
                 {
                     _waitingDialog.Close();
                     Raygun.LogException(ex);
-                    MessageBox.Show("Error when attempting to export objects. If error reporting has not been disabled" +
-                                    "then your error has already been logged.");
+                    MessageBox.Show("Error when attempting to export objects. If error reporting has not been disabled," +
+                                    " then your error has already been logged.");
                 }
                 finally
                 {

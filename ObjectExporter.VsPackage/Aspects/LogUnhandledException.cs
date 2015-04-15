@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using ObjectExporter.VsPackage.Logging;
 using ObjectExporter.VsPackage.Settings;
 using PostSharp.Aspects;
 using PostSharp.Extensibility;

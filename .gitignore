@@ -16,3 +16,4 @@ ObjectExporter.Core/obj/
 ObjectExporter.VsPackage/bin/
 ObjectExporter.VsPackage/obj/
 /ObjectExporter.VsPackage/Resources
+ObjectExporter.Core/ApiKeys.cs

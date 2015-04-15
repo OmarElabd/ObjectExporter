@@ -25,7 +25,11 @@ namespace ObjectExporter.VsPackage.Logging
                     { "visual studio version", _info.VisualStudioVersion }
                 };
 
-                RaygunClient client = new RaygunClient(ApiKeys.Raygun);                
+                RaygunClient client = new RaygunClient(ApiKeys.RayGun)
+                {
+                    ApplicationVersion = "1.2.2"
+                };
+
                 client.Send(ex, null, userInfo);
             }
         }

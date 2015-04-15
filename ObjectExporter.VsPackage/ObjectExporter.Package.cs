@@ -1,18 +1,19 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.InteropServices;
-using System.ComponentModel.Design;
 using System.IO;
 using System.Reflection;
-using AccretionDynamics.ObjectExporter.VsPackage.Views;
+using System.Runtime.InteropServices;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell;
-using Mindscape.Raygun4Net;
+using Microsoft.VisualStudio.Shell.Interop;
+using ObjectExporter.Core;
+using ObjectExporter.VsPackage.Settings;
+using ObjectExporter.VsPackage.Views;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage
+namespace ObjectExporter.VsPackage
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -39,8 +40,8 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
     "Object Exporter", "General", 0, 0, true)]
     public sealed class ObjectExporter : Package
     {
-        readonly DTE2 dte2 = GetGlobalService(typeof(DTE)) as DTE2;
-
+        private readonly DTE2 _dte2 = GetGlobalService(typeof(DTE)) as DTE2;
+        private PackageSettings _packageSettings;
 
         /// <summary>
         /// Default constructor of the package.
@@ -51,18 +52,6 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
         /// </summary>
         public ObjectExporter()
         {
-
-                //const string apiKey = ApiKeys.Raygun;
-                //RaygunClient client = new RaygunClient(apiKey);
-                //client.Send(e);
-
-            string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            IntPtr pDll = NativeMethods.LoadLibrary(Path.Combine(assemblyPath, "SciLexer.dll"));
-
-            if (pDll == IntPtr.Zero)
-            {
-                throw new DllNotFoundException("Could not find SciLexer.dll - This is unmanaged assembly is required by ScintillaNet.dll");
-            }
         }
 
         /////////////////////////////////////////////////////////////////////////////
@@ -89,6 +78,26 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
                 menuItem.BeforeQueryStatus += menuItem_BeforeQueryStatus;
                 mcs.AddCommand(menuItem);
             }
+
+            _packageSettings = (PackageSettings)GetDialogPage(typeof(PackageSettings));
+            GlobalPackageSettings.Initialize(_packageSettings);
+
+            LoadUnmanagedLibraries();
+        }
+
+        private void LoadUnmanagedLibraries()
+        {
+            string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            IntPtr pDll = NativeMethods.LoadLibrary(Path.Combine(assemblyPath, "SciLexer.dll"));
+
+            if (pDll == IntPtr.Zero)
+            {
+                Exception ex = new DllNotFoundException("Could not find SciLexer.dll - This is unmanaged assembly is required by ScintillaNet.dll");
+
+                Raygun.LogException(ex);
+
+                throw ex;
+            }
         }
 
         void menuItem_BeforeQueryStatus(object sender, EventArgs e)
@@ -101,9 +110,9 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
                 menuCommand.Visible = false;
                 menuCommand.Enabled = false;
 
-                if (dte2.Debugger != null &&
-                    dte2.Debugger.CurrentMode == dbgDebugMode.dbgBreakMode &&
-                    dte2.Debugger.CurrentStackFrame != null)
+                if (_dte2.Debugger != null &&
+                    _dte2.Debugger.CurrentMode == dbgDebugMode.dbgBreakMode &&
+                    _dte2.Debugger.CurrentStackFrame != null)
                 {
                     menuCommand.Visible = true;
                     menuCommand.Enabled = true;
@@ -119,13 +128,12 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            if (dte2.Debugger != null && 
-                dte2.Debugger.CurrentMode == dbgDebugMode.dbgBreakMode &&
-                dte2.Debugger.CurrentStackFrame != null)
+            if (_dte2.Debugger != null &&
+                _dte2.Debugger.CurrentMode == dbgDebugMode.dbgBreakMode &&
+                _dte2.Debugger.CurrentStackFrame != null)
             {
-                PackageSettings settings = (PackageSettings) GetDialogPage(typeof (PackageSettings));
-                FormSelectObjects objForm = new FormSelectObjects(dte2, settings);
-                objForm.Show(new VsMainWindowWrapper(dte2));
+                FormSelectObjects objForm = new FormSelectObjects(_dte2, _packageSettings);
+                objForm.Show(new VsMainWindowWrapper(_dte2));
             }
         }
     }

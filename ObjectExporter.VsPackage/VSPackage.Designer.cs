@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AccretionDynamics.ObjectExporter.VsPackage {
+namespace ObjectExporter.VsPackage {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AccretionDynamics.ObjectExporter.VsPackage.VSPackage", typeof(VSPackage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ObjectExporter.VsPackage.VSPackage", typeof(VSPackage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,4 +1,4 @@
-﻿namespace ObjectExporter.UI
+﻿namespace ObjectExporter.VsPackage.Views
 {
     partial class FilesCreatedDialog
     {

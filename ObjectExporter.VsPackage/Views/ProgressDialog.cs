@@ -2,7 +2,7 @@
 using System.Threading;
 using Telerik.WinControls.UI;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.Views
+namespace ObjectExporter.VsPackage.Views
 {
     public partial class ProgressDialog : RadForm
     {

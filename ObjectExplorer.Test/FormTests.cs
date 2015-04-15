@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using AccretionDynamics.ObjectExporter.VsPackage.Views;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using ObjectExporter.Core.Globals;
-using ObjectExporter.UI;
+using ObjectExporter.VsPackage.Views;
 
 namespace ObjectExplorer.Test
 {

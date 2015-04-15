@@ -1,4 +1,4 @@
-﻿namespace AccretionDynamics.ObjectExporter.VsPackage.Views
+﻿namespace ObjectExporter.VsPackage.Views
 {
     partial class FormSelectObjects
     {
@@ -157,7 +157,7 @@
             this.radPageViewExport.Controls.Add(this.radPageViewPageCustomExpression);
             this.radPageViewExport.Location = new System.Drawing.Point(12, 116);
             this.radPageViewExport.Name = "radPageViewExport";
-            this.radPageViewExport.SelectedPage = this.radPageViewPageCustomExpression;
+            this.radPageViewExport.SelectedPage = this.radPageViewPageLocals;
             this.radPageViewExport.Size = new System.Drawing.Size(358, 293);
             this.radPageViewExport.TabIndex = 18;
             this.radPageViewExport.ThemeName = "TelerikMetroBlue";

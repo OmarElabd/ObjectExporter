@@ -1,3 +1,9 @@
+Release Notes (v1.2.0) - 4/14/2015:
+1. Fix: Fixed column formatting for custom expressions.
+2. Feature: Added exception logging.
+3. Featured: Added code folding in displayed text dialog.
+4. Updated documentation.
+
 Release Notes (v1.1.0) - 4/10/2015:
 1. Fix: Fixed issue with exporting objects contained in an array of objects (Issue #12).
 2. Feature: Can now exclude private properties and fields, this includes properties with private setters (Feature #4).

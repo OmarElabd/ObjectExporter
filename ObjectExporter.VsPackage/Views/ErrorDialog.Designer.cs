@@ -1,4 +1,4 @@
-﻿namespace AccretionDynamics.ObjectExporter.VsPackage.Views
+﻿namespace ObjectExporter.VsPackage.Views
 {
     partial class ErrorDialog
     {
@@ -60,7 +60,7 @@
             // 
             // radButtonSendError
             // 
-            this.radButtonSendError.Image = global::AccretionDynamics.ObjectExporter.VsPackage.ImageResources.paper_plane;
+            this.radButtonSendError.Image = global::ObjectExporter.VsPackage.ImageResources.paper_plane;
             this.radButtonSendError.Location = new System.Drawing.Point(320, 69);
             this.radButtonSendError.Name = "radButtonSendError";
             this.radButtonSendError.Size = new System.Drawing.Size(149, 24);

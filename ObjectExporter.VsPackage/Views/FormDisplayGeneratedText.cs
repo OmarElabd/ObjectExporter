@@ -4,14 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AccretionDynamics.ObjectExporter.VsPackage.ExtensionMethods;
 using ObjectExporter.Core.Globals;
-using ObjectExporter.UI;
+using ObjectExporter.VsPackage.ExtensionMethods;
 using Telerik.WinControls.UI;
-using Telerik.WinForms.Documents.Model;
 using Telerik.WinForms.Documents.Model.Code;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.Views
+namespace ObjectExporter.VsPackage.Views
 {
     public partial class FormDisplayGeneratedText : Form
     {

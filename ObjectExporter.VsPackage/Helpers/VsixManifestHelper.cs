@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.Helpers
+namespace ObjectExporter.VsPackage.Helpers
 {
     public static class VsixManifestHelper
     {

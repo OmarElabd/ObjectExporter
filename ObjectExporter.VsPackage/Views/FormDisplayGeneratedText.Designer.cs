@@ -1,4 +1,4 @@
-﻿namespace AccretionDynamics.ObjectExporter.VsPackage.Views
+﻿namespace ObjectExporter.VsPackage.Views
 {
     partial class FormDisplayGeneratedText
     {
@@ -76,6 +76,7 @@
             // 
             this.scintillaDisplayObjects.Location = new System.Drawing.Point(350, -136);
             this.scintillaDisplayObjects.Margins.Margin0.Width = 30;
+            this.scintillaDisplayObjects.Margins.Margin2.Width = 20;
             this.scintillaDisplayObjects.Name = "scintillaDisplayObjects";
             this.scintillaDisplayObjects.Size = new System.Drawing.Size(200, 100);
             this.scintillaDisplayObjects.Styles.BraceBad.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";

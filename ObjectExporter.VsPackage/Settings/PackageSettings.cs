@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage
+namespace ObjectExporter.VsPackage.Settings
 {
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [CLSCompliant(false), ComVisible(true)]
     public class PackageSettings : DialogPage
     {
-        private uint _depthSolverTimeOut = 20000;
+        private uint _depthSolverTimeOut = Defaults.DepthSolverTimeOut;
 
         [Category("Depth Solver")]
         [DisplayName("Maximum Depth Time Out")]
@@ -20,7 +20,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
             set { _depthSolverTimeOut = value; }
         }
 
-        private uint _depthSolverCutoff = 25;
+        private uint _depthSolverCutoff = Defaults.DepthSolverCutOff;
 
         [Category("Depth Solver")]
         [DisplayName("Maximum Depth Cutoff")]
@@ -31,7 +31,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
             set { _depthSolverCutoff = value; }
         }
 
-        private bool _ignoreDynamicallyAddedProperties = true;
+        private bool _ignoreDynamicallyAddedProperties = Defaults.IgnoreDynamicallyAddedProperties;
 
         [Category("Object Generation")]
         [DisplayName("Ignore Dynamically Added Properties")]
@@ -43,5 +43,16 @@ namespace AccretionDynamics.ObjectExporter.VsPackage
             set { _ignoreDynamicallyAddedProperties = value; }
         }
 
+        private bool _errorReportingEnabled = Defaults.ErrorReportingEnabled;
+
+        [Category("Feedback")]
+        [DisplayName("Enable Error Reporting")]
+        [Description("When enabled Object Exporter will automatically send exception details to our servers. " +
+                     "This will allow us to improve Object Exporter and keep it bug free. The turnaround for a bug fix is usually two days.")]
+        public bool ErrorReportingEnabled
+        {
+            get { return _errorReportingEnabled; }
+            set { _errorReportingEnabled = value; }
+        }
     }
 }

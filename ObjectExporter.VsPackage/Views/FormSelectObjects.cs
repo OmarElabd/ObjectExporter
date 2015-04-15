@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,13 +11,15 @@ using ObjectExporter.Core;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
 using ObjectExporter.Core.Models.RuleSets;
+using ObjectExporter.VsPackage.Aspects;
+using ObjectExporter.VsPackage.Settings;
 using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
 using Task = System.Threading.Tasks.Task;
 
 //NOTE: bug inradCheckListBox: http://feedback.telerik.com/Project/154/Feedback/Details/155730-fix-radcheckedlistbox-when-the-allowarbitraryitemwidth-property-is-set-to-true
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.Views
+namespace ObjectExporter.VsPackage.Views
 {
     public partial class FormSelectObjects : Form
     {
@@ -28,6 +29,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 
         private readonly RuleSetValidator _ruleSetValidator;
 
+        //TODO: can remove PackageSettings and use GlobalPackageSettings
         public FormSelectObjects(DTE2 dte2, PackageSettings settings)
         {
             _dte2 = dte2;
@@ -51,7 +53,7 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
 
             _ruleSetValidator = new RuleSetValidator(ruleSets);
         }
-
+        
         private void LoadLocals()
         {
             if (_dte2.Debugger.CurrentMode == EnvDTE.dbgDebugMode.dbgBreakMode &&
@@ -118,8 +120,9 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.Views
                 catch (Exception ex)
                 {
                     _waitingDialog.Close();
-                    //MessageBox.Show("Error: Unable to export all objects");
-                    MessageBox.Show(ex.ToString());
+                    Raygun.LogException(ex);
+                    MessageBox.Show("Error when attempting to export objects. If error reporting has not been disabled" +
+                                    "then your error has already been logged.");
                 }
                 finally
                 {

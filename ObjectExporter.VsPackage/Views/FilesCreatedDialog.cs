@@ -2,10 +2,8 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using AccretionDynamics.ObjectExporter.VsPackage;
-using AccretionDynamics.ObjectExporter.VsPackage.Views;
 
-namespace ObjectExporter.UI
+namespace ObjectExporter.VsPackage.Views
 {
     public partial class FilesCreatedDialog : Form
     {

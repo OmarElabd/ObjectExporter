@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using EnvDTE80;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage
+namespace ObjectExporter.VsPackage
 {
     public class VsMainWindowWrapper : IWin32Window
     {

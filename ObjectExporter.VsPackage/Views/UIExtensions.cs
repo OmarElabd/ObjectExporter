@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.Views
+namespace ObjectExporter.VsPackage.Views
 {
-    public static class UIExtensions
+    public static class UiExtensions
     {
         public static void AppendText(this RichTextBox box, string text, Color color)
         {

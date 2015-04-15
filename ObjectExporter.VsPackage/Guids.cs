@@ -1,8 +1,9 @@
 ﻿// Guids.cs
 // MUST match guids.h
+
 using System;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage
+namespace ObjectExporter.VsPackage
 {
     static class GuidList
     {

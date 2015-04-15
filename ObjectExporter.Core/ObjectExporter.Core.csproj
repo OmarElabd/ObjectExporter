@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiKeys.cs" />
     <Compile Include="ExtensionMethods\TypeExtensions.cs" />
     <Compile Include="Models\ObjectDepthFinder.cs" />
     <Compile Include="Models\RuleSets\IRuleSet.cs" />

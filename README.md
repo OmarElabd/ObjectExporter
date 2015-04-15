@@ -54,3 +54,9 @@ XML:
 Object exporter settings is access through Tools -> Options -> Object Exporter
 
 ![Settings](https://raw.githubusercontent.com/OmarElabd/ObjectExporter/master/ObjectExporter.VsPackage/Documentation/Object%20Exporter%20-%20Options.png)
+
+# Info
+
+Object Exporter is powered by [RayGun](https://raygun.io/).
+
+![Raygun](https://brandfolder.com/raygun/assets/14l8cwle)

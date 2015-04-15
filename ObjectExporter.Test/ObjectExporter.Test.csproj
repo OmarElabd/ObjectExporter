@@ -74,7 +74,6 @@
   <ItemGroup>
     <Compile Include="HelperTests.cs" />
     <Compile Include="TemplateTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConvertTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="TestResources.Designer.cs">
@@ -139,6 +138,9 @@
       <Project>{4327676d-2b8d-42c9-af0d-833d7812c15e}</Project>
       <Name>ObjectExporter.VsPackage</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

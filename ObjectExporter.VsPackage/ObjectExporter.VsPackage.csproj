@@ -287,6 +287,7 @@
     <Resource Include="Documentation\Object Exporter - Select From Locals 1.png" />
     <Resource Include="Documentation\Object Exporter - Select From Locals 2.png" />
     <Resource Include="Documentation\Object Exporter - Tools Menu.png" />
+    <Resource Include="Documentation\Object Exporter.gif" />
     <Content Include="Documentation\Release Notes.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

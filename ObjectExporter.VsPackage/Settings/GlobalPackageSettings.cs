@@ -6,6 +6,7 @@
         public static uint DepthSolverCutOff = Defaults.DepthSolverCutOff;
         public static bool IgnoreDynamicallyAddedProperties = Defaults.IgnoreDynamicallyAddedProperties;
         public static bool ErrorReportingEnabled = Defaults.ErrorReportingEnabled;
+        public static bool IgnoreEntityFrameworkProxyTypes = Defaults.IgnoreEntityFrameworkProxyTypes;
 
         public static void Initialize(PackageSettings settings)
         {
@@ -13,6 +14,7 @@
             DepthSolverCutOff = settings.DepthSolverCutoff;
             IgnoreDynamicallyAddedProperties = settings.IgnoreDynamicallyAddedProperties;
             ErrorReportingEnabled = settings.ErrorReportingEnabled;
+            IgnoreEntityFrameworkProxyTypes = settings.IgnoreEntityFrameworkProxyTypes;
         }
     }
 }

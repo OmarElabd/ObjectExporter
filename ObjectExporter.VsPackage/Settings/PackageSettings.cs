@@ -31,6 +31,17 @@ namespace ObjectExporter.VsPackage.Settings
             set { _depthSolverCutoff = value; }
         }
 
+        private bool _ignoreEntityFrameworkProxyTypes = Defaults.IgnoreEntityFrameworkProxyTypes;
+
+        [Category("Object Generation")]
+        [DisplayName("Ignore Entity Framework Proxy Types")]
+        [Description("Entity Framework by default will use a proxy class for change tracking and lazy loading, enabling this feature will set Object Exporter to use the actual types and not the generated proxy types.")]
+        public bool IgnoreEntityFrameworkProxyTypes
+        {
+            get { return _ignoreEntityFrameworkProxyTypes; }
+            set { _ignoreEntityFrameworkProxyTypes = value; }
+        }
+
         private bool _ignoreDynamicallyAddedProperties = Defaults.IgnoreDynamicallyAddedProperties;
 
         [Category("Object Generation")]
@@ -48,11 +59,14 @@ namespace ObjectExporter.VsPackage.Settings
         [Category("Feedback")]
         [DisplayName("Enable Error Reporting")]
         [Description("When enabled Object Exporter will automatically send exception details to our servers. " +
-                     "This will allow us to improve Object Exporter and keep it bug free. The turnaround for a bug fix is usually two days.")]
+                     "This will allow us to improve Object Exporter and keep it bug free.")]
         public bool ErrorReportingEnabled
         {
             get { return _errorReportingEnabled; }
             set { _errorReportingEnabled = value; }
         }
+
+
+
     }
 }

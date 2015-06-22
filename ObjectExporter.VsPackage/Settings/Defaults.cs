@@ -12,5 +12,6 @@ namespace ObjectExporter.VsPackage.Settings
         public const uint DepthSolverCutOff = 25;
         public const bool IgnoreDynamicallyAddedProperties = true;
         public const bool ErrorReportingEnabled = true;
+        public const bool IgnoreEntityFrameworkProxyTypes = true;
     }
 }

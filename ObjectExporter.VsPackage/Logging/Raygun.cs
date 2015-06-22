@@ -27,7 +27,7 @@ namespace ObjectExporter.VsPackage.Logging
 
                 RaygunClient client = new RaygunClient(ApiKeys.RayGun)
                 {
-                    ApplicationVersion = "1.2.4"
+                    ApplicationVersion = "1.4.0"
                 };
 
                 client.Send(ex, null, userInfo);

@@ -18,12 +18,10 @@ namespace ObjectExporter.Core.Models.RuleSets
             _retriever = retriever;
         }
 
-        //NOTE: dataMemberPropertyName is unused
         public bool IsValid(string expressionType, string dataMemberPropertyName)
         {
             Type type = _retriever.GetTypeFromString(expressionType);
             List<string> properties = type.GetAllPropertyNames();
-
 
             return properties.Contains(dataMemberPropertyName);
         }

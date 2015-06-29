@@ -4,12 +4,12 @@ using ObjectExporter.Core.ExtensionMethods;
 
 namespace ObjectExporter.Core.Models.RuleSets
 {
-    public class AccesiblePropertiesRuleSet : IRuleSet
+    public class AccessiblePropertiesRuleSet : IRuleSet
     {
         private readonly TypeRetriever _retriever;
         private readonly Dictionary<Type, List<string>> AccessiblePropertiesInType = new Dictionary<Type, List<string>>();
 
-        public AccesiblePropertiesRuleSet(TypeRetriever retriever)
+        public AccessiblePropertiesRuleSet(TypeRetriever retriever)
         {
             _retriever = retriever;
         }

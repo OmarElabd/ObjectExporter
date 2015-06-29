@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSelectObjects));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewImageColumn gridViewImageColumn1 = new Telerik.WinControls.UI.GridViewImageColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewImageColumn gridViewImageColumn2 = new Telerik.WinControls.UI.GridViewImageColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radioButtonCSharpObject = new System.Windows.Forms.RadioButton();
             this.radioButtonJson = new System.Windows.Forms.RadioButton();
             this.radioButtonXml = new System.Windows.Forms.RadioButton();
@@ -175,6 +176,7 @@
             // 
             // radCheckedListBoxLocals
             // 
+            this.radCheckedListBoxLocals.AllowArbitraryItemWidth = true;
             this.radCheckedListBoxLocals.AllowColumnReorder = false;
             this.radCheckedListBoxLocals.AllowColumnResize = false;
             this.radCheckedListBoxLocals.AutoScroll = true;
@@ -204,7 +206,7 @@
             this.radGridViewCustomExpressions.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.radGridViewCustomExpressions.Location = new System.Drawing.Point(0, 0);
             // 
-            // radGridViewCustomExpressions
+            // 
             // 
             this.radGridViewCustomExpressions.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.radGridViewCustomExpressions.MasterTemplate.AllowColumnChooser = false;
@@ -215,33 +217,34 @@
             this.radGridViewCustomExpressions.MasterTemplate.AllowRowResize = false;
             this.radGridViewCustomExpressions.MasterTemplate.AutoGenerateColumns = false;
             this.radGridViewCustomExpressions.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn1.AllowResize = false;
-            gridViewTextBoxColumn1.EnableExpressionEditor = false;
-            gridViewTextBoxColumn1.HeaderText = "Expression Name";
-            gridViewTextBoxColumn1.IsPinned = true;
-            gridViewTextBoxColumn1.Name = "columnExpressionName";
-            gridViewTextBoxColumn1.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
-            gridViewTextBoxColumn1.Width = 200;
-            gridViewTextBoxColumn2.HeaderText = "Depth";
-            gridViewTextBoxColumn2.MaxWidth = 85;
-            gridViewTextBoxColumn2.Name = "columnDepth";
-            gridViewTextBoxColumn2.ReadOnly = true;
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn2.Width = 85;
-            gridViewImageColumn1.AllowResize = false;
-            gridViewImageColumn1.EnableExpressionEditor = false;
-            gridViewImageColumn1.HeaderText = "Valid";
-            gridViewImageColumn1.MaxWidth = 45;
-            gridViewImageColumn1.Name = "columnIsExpressionValid";
-            gridViewImageColumn1.Width = 45;
+            gridViewTextBoxColumn3.AllowResize = false;
+            gridViewTextBoxColumn3.EnableExpressionEditor = false;
+            gridViewTextBoxColumn3.HeaderText = "Expression Name";
+            gridViewTextBoxColumn3.IsPinned = true;
+            gridViewTextBoxColumn3.Name = "columnExpressionName";
+            gridViewTextBoxColumn3.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
+            gridViewTextBoxColumn3.Width = 200;
+            gridViewTextBoxColumn4.HeaderText = "Depth";
+            gridViewTextBoxColumn4.MaxWidth = 85;
+            gridViewTextBoxColumn4.Name = "columnDepth";
+            gridViewTextBoxColumn4.ReadOnly = true;
+            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn4.Width = 85;
+            gridViewImageColumn2.AllowResize = false;
+            gridViewImageColumn2.EnableExpressionEditor = false;
+            gridViewImageColumn2.HeaderText = "Valid";
+            gridViewImageColumn2.MaxWidth = 45;
+            gridViewImageColumn2.Name = "columnIsExpressionValid";
+            gridViewImageColumn2.Width = 45;
             this.radGridViewCustomExpressions.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewImageColumn1});
+            gridViewTextBoxColumn3,
+            gridViewTextBoxColumn4,
+            gridViewImageColumn2});
             this.radGridViewCustomExpressions.MasterTemplate.EnableGrouping = false;
             this.radGridViewCustomExpressions.MasterTemplate.EnableSorting = false;
             this.radGridViewCustomExpressions.MasterTemplate.ShowRowHeaderColumn = false;
             this.radGridViewCustomExpressions.MasterTemplate.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysHide;
+            this.radGridViewCustomExpressions.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.radGridViewCustomExpressions.Name = "radGridViewCustomExpressions";
             this.radGridViewCustomExpressions.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridViewCustomExpressions.ShowGroupPanel = false;

@@ -38,7 +38,7 @@ namespace ObjectExporter.Core
             }
             if (exportParamaters.ExludePrivateProperties)
             {
-                ruleSets.Add(new AccesiblePropertiesRuleSet(retriever));
+                ruleSets.Add(new AccessiblePropertiesRuleSet(retriever));
             }
 
             _ruleSetValidator = new RuleSetValidator(ruleSets);

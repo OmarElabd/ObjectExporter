@@ -49,7 +49,7 @@ namespace ObjectExporter.VsPackage.Views
             bool excludePrivates = radCheckBoxExcludePrivate.Checked;
             if (excludePrivates)
             {
-                ruleSets.Add(new AccesiblePropertiesRuleSet(retriever));
+                ruleSets.Add(new AccessiblePropertiesRuleSet(retriever));
             }
 
             _ruleSetValidator = new RuleSetValidator(ruleSets);

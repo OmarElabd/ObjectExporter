@@ -77,7 +77,7 @@
     <Compile Include="Globals\ExpressionSourceType.cs" />
     <Compile Include="Globals\ReservedWords.cs" />
     <Compile Include="Models\TypeRetriever.cs" />
-    <Compile Include="Models\RuleSets\AccesiblePropertiesRuleSet.cs" />
+    <Compile Include="Models\RuleSets\AccessiblePropertiesRuleSet.cs" />
     <Compile Include="Models\ExpressionWithSource.cs" />
     <Compile Include="Models\ExportParamaters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

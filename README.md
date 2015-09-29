@@ -1,7 +1,7 @@
 # Object Exporter
 [![Join the chat at https://gitter.im/OmarElabd/ObjectExporter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OmarElabd/ObjectExporter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Object Exporter creates serializations of in memory objects from your various debugging windows. Currently supported output formats are: CSharp Object Initialization Code, JSON and XML.
+Object Exporter creates serializations of in memory objects from your various debugging windows. Currently supported output formats are: C# Object Initialization Code, JSON and XML.
 
 # Release Notes
 https://raw.githubusercontent.com/OmarElabd/ObjectExporter/master/ObjectExporter.VsPackage/Documentation/Release%20Notes.txt

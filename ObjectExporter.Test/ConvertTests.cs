@@ -10,10 +10,7 @@ namespace ObjectExporter.Test
         [TestMethod]
         public void XmlConverter()
         {
-            
-            string dateNow = DateTime.Now.ToString();
-            DateTime time = DateTime.Parse(dateNow);
-            string dateTime = XmlConvert.ToString(DateTime.Now);
+
         }
     }
 }

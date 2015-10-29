@@ -1,14 +1,15 @@
-﻿using ObjectExporter.VsPackage.Helpers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ObjectExporter.VsPackage.Helpers;
 
 namespace ObjectExporter.Test
 {
-    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+    [TestClass]
     public class MyTestClass
     {
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        [TestMethod]
         public void TestGetVersionNumber()
         {
-            string version = VsixManifestHelper.GetVersionNumber();
+            //string version = VsixManifestHelper.GetVersionNumber();
         }
     }
 }

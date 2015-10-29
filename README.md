@@ -1,5 +1,6 @@
 # Object Exporter
 [![Join the chat at https://gitter.im/OmarElabd/ObjectExporter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OmarElabd/ObjectExporter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build status](https://ci.appveyor.com/api/projects/status/fouwuwpqluy5qo5i?svg=true)](https://ci.appveyor.com/project/OmarElabd/objectexporter)
 
 Object Exporter creates serializations of in memory objects from your various debugging windows. Currently supported output formats are: C# Object Initialization Code, JSON and XML.
 

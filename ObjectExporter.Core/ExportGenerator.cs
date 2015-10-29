@@ -7,6 +7,7 @@ using EnvDTE;
 using EnvDTE80;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
+using ObjectExporter.Core.Models.Expressions;
 using ObjectExporter.Core.Models.RuleSets;
 using ObjectExporter.Core.Templates;
 using ObjectExporter.Core.Templates.Converters;

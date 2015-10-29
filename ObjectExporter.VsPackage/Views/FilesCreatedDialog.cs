@@ -28,7 +28,7 @@ namespace ObjectExporter.VsPackage.Views
             }
             catch (Exception)
             {
-                
+                //Do Nothing, eat the exception
             }
         }
     }

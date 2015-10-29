@@ -7,11 +7,12 @@ using ObjectExporter.VsPackage.Settings;
 
 namespace ObjectExporter.VsPackage.Logging
 {
+    //TODO: Could move into core, or possibly into it's own project. NOTE: PostSharp needs to be on the project using the aspect.
     public static class Raygun
     {       
         private static UserInfo _info;
 
-        public static void InitializeUserInfo(UserInfo info)
+        public static void Initialize(UserInfo info)
         {
             _info = info;
         }

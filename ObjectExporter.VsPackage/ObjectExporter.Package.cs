@@ -9,7 +9,6 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using ObjectExporter.Core;
 using ObjectExporter.VsPackage.Logging;
 using ObjectExporter.VsPackage.Settings;
 using ObjectExporter.VsPackage.Views;
@@ -89,7 +88,8 @@ namespace ObjectExporter.VsPackage
             {
                 VisualStudioVersion = _dte2.Version
             };
-            Raygun.InitializeUserInfo(info);
+
+            Raygun.Initialize(info);
 
             //Load Scintilla dependencies (SciLexer.dll)
             LoadUnmanagedLibraries();

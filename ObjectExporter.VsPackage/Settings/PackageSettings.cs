@@ -46,7 +46,7 @@ namespace ObjectExporter.VsPackage.Settings
 
         [Category("Object Generation")]
         [DisplayName("Ignore Dynamically Added Properties")]
-        [Description("Some frameworks may add dynamic properties to an object instance. A good example of this is Entity Framework which will add DynamicProxy properties" +
+        [Description("Some frameworks may add dynamic properties to an object instance. A good example of this is Entity Framework which will add DynamicProxy properties " +
                      "to your object, if you do not wish for these properties to be exported select this option.")]
         public bool IgnoreDynamicallyAddedProperties
         {
@@ -65,8 +65,5 @@ namespace ObjectExporter.VsPackage.Settings
             get { return _errorReportingEnabled; }
             set { _errorReportingEnabled = value; }
         }
-
-
-
     }
 }

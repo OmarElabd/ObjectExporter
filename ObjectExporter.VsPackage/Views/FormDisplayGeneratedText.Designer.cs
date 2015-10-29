@@ -74,22 +74,19 @@
             // 
             // scintillaDisplayObjects
             // 
-            this.scintillaDisplayObjects.Location = new System.Drawing.Point(350, -136);
-            this.scintillaDisplayObjects.Margins.Margin0.Width = 30;
-            this.scintillaDisplayObjects.Margins.Margin2.Width = 20;
+            this.scintillaDisplayObjects.Location = new System.Drawing.Point(0, 0);
             this.scintillaDisplayObjects.Name = "scintillaDisplayObjects";
             this.scintillaDisplayObjects.Size = new System.Drawing.Size(200, 100);
             this.scintillaDisplayObjects.Styles.BraceBad.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.Styles.BraceLight.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.Styles.CallTip.FontName = "Segoe UI\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.Styles.ControlChar.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.Default.BackColor = System.Drawing.SystemColors.Window;
             this.scintillaDisplayObjects.Styles.Default.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.Styles.IndentGuide.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.Styles.LastPredefined.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.Styles.LineNumber.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.Styles.Max.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.TabIndex = 17;
+            this.scintillaDisplayObjects.TabIndex = 0;
             // 
             // radButtonSaveObjects
             // 

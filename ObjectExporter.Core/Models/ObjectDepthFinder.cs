@@ -43,12 +43,12 @@ namespace ObjectExporter.Core.Models
             if (currentDepth == 0) //if is root element
             {
                 //Frameworks can add theType { dynamicType} - strip out the {dynamic type}
-                expressionType = GeneratorHelper.StripChildReference(expression.Type);
+                expressionType = GeneratorHelper.GetSubClassFromType(expression.Type);
             }
             else
             {
                 //members of objects have a type of: object { theType } - strip out object { }
-                expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+                expressionType = GeneratorHelper.GetBaseClassFromType(expression.Type);
             }
 
 

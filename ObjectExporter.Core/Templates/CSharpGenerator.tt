@@ -29,12 +29,12 @@
         if(isFirstElement) //TODO: can probably replace isFirstElement with currentDepth = 0
         {
             //Frameworks can add theType { dynamicType} - strip out the {dynamic type}
-            expressionType = GeneratorHelper.StripChildReference(expression.Type);
+            expressionType = GeneratorHelper.GetBaseClassFromType(expression.Type);
         }
         else
         {
             //members of objects have a type of: object { theType } - strip out object { }
-            expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+            expressionType = GeneratorHelper.GetSubClassFromType(expression.Type);
         }
 
         if(!GeneratorHelper.IsSerializable(expressionName))

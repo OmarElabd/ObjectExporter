@@ -4,6 +4,10 @@ using ObjectExporter.Core.ExtensionMethods;
 
 namespace ObjectExporter.Core.Models.RuleSets
 {
+    /// <summary>
+    /// Validates that the property contained inside the class is "accessible" (or public).
+    /// This is used for ignoring private fields and properties.
+    /// </summary>
     public class AccessiblePropertiesRuleSet : IRuleSet
     {
         private readonly TypeRetriever _retriever;

@@ -19,8 +19,6 @@ namespace ObjectExporter.Core.Models.RuleSets
 
         public bool ValidateAllSubRules(string expressionType, string dataMemberName)
         {
-            
-
             //If any rule is not valid, return false. Otherwise return true
             foreach (IRuleSet ruleSet in _ruleSets)
             {

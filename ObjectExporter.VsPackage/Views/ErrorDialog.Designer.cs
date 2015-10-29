@@ -50,7 +50,7 @@
             // radButtonCancel
             // 
             this.radButtonCancel.Image = ((System.Drawing.Image)(resources.GetObject("radButtonCancel.Image")));
-            this.radButtonCancel.Location = new System.Drawing.Point(12, 69);
+            this.radButtonCancel.Location = new System.Drawing.Point(12, 74);
             this.radButtonCancel.Name = "radButtonCancel";
             this.radButtonCancel.Size = new System.Drawing.Size(91, 24);
             this.radButtonCancel.TabIndex = 1;
@@ -61,7 +61,7 @@
             // radButtonSendError
             // 
             this.radButtonSendError.Image = global::ObjectExporter.VsPackage.ImageResources.paper_plane;
-            this.radButtonSendError.Location = new System.Drawing.Point(320, 69);
+            this.radButtonSendError.Location = new System.Drawing.Point(320, 74);
             this.radButtonSendError.Name = "radButtonSendError";
             this.radButtonSendError.Size = new System.Drawing.Size(149, 24);
             this.radButtonSendError.TabIndex = 0;

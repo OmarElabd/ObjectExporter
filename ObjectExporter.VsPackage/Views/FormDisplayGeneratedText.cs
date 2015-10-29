@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.VsPackage.ExtensionMethods;
 using Telerik.WinControls.UI;
-using Telerik.WinForms.Documents.Model.Code;
+using Telerik.Windows.Documents.Model.Code;
 
 namespace ObjectExporter.VsPackage.Views
 {
@@ -150,7 +150,7 @@ namespace ObjectExporter.VsPackage.Views
                 case ExportType.CSharpObject:
                     return "cs";
                 default:
-                    throw new ArgumentOutOfRangeException("type");
+                    throw new ArgumentOutOfRangeException(nameof(type));
             }
         }
     }

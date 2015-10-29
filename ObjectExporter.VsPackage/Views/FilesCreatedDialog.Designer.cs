@@ -78,6 +78,5 @@
 
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.RichTextBox richTextBoxOutput;
-
     }
 }

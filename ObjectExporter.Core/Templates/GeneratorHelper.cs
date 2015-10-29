@@ -75,6 +75,7 @@ namespace ObjectExporter.Core.Templates
             }
         }
 
+
         public static bool IsTypeOfCollection(string expressionType)
         {
             return (expressionType.Contains("<") || expressionType.Contains(">") || expressionType.Contains("[") ||
@@ -86,33 +87,62 @@ namespace ObjectExporter.Core.Templates
             return (expressionName.Contains("[") || expressionName.Contains("]"));
         }
 
+        /// <returns></returns>
         public static string StripCurleyBraces(string input)
         {
             return input.Replace("{", "").Replace("}", "");
         }
 
-        public static string StripObjectReference(string input)
+        /// <summary>
+        /// Strips the subclass from a string.
+        /// <example>e.g. baseclass { subclass } returns subclass</example>
+        /// </summary>
+        /// <param name="inputType">input String</param>
+        /// <returns>subclass type</returns>
+        public static string GetSubClassFromType(string inputType)
         {
-            if (input.Contains("{") && input.Contains("}"))
+            if (inputType.Contains("{") && inputType.Contains("}"))
             {
-                return input.Between('{', '}').Trim();
+                return inputType.Between('{', '}').Trim();
             }
             else
             {
-                return input;
+                return inputType;
             }
         }
 
-        public static string StripChildReference(string input)
+        /// <summary>
+        /// Strips the base class from a string.
+        /// <example>e.g. baseclass { subclass } returns baseclass</example>
+        /// </summary>
+        /// <param name="inputType">input string</param>
+        /// <returns>base class type</returns>
+        public static string GetBaseClassFromType(string inputType)
         {
-            if (input.Contains("{") && input.Contains("}"))
+            if (inputType.Contains("{") && inputType.Contains("}"))
             {
-                int index = input.IndexOf("{");
-                return input.Substring(0, index - 1).Trim();
+                int index = inputType.IndexOf("{");
+                return inputType.Substring(0, index - 1).Trim();
             }
             else
             {
-                return input;
+                return inputType;
+            }
+        }
+
+        public static bool HasEfDynamicProxiesReference(string inputType)
+        {
+            //TODO should probably check that it also ends with "_GUID" (of length 64)
+
+            if (inputType.Contains("{") && inputType.Contains("}"))
+            {
+                string subclassType = GetSubClassFromType(inputType);
+                return subclassType.StartsWith("System.Data.Entity.DynamicProxies.");
+
+            }
+            else
+            {
+                return inputType.StartsWith("System.Data.Entity.DynamicProxies.");
             }
         }
 

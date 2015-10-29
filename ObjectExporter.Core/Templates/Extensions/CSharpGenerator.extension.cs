@@ -45,7 +45,7 @@ namespace ObjectExporter.Core.Templates
         {
             string formattedString;
 
-            string expressionType = GeneratorHelper.StripObjectReference(expression.Type);
+            string expressionType = GeneratorHelper.GetBaseClassFromType(expression.Type);
 
             switch (expressionType)
             {

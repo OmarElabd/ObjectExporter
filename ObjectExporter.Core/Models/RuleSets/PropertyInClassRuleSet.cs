@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EnvDTE;
-using EnvDTE80;
 using ObjectExporter.Core.ExtensionMethods;
 
 namespace ObjectExporter.Core.Models.RuleSets
 {
+    /// <summary>
+    /// Validate that the property we are attempting to export is actually contained in the object's class.
+    /// This allows for dynamically added properties to be ignored
+    /// </summary>
     public class PropertyInClassRuleSet : IRuleSet
     {
         private readonly TypeRetriever _retriever;

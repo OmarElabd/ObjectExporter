@@ -1,5 +1,6 @@
 ﻿namespace ObjectExporter.VsPackage.Settings
 {
+    //TODO: should subclass this from the core.exportparamaters
     public static class GlobalPackageSettings
     {
         public static uint DepthSolverTimeOut = Defaults.DepthSolverTimeOut;

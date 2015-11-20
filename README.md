@@ -19,7 +19,7 @@ The currently supported output formats are: C# Object Initialization Code, JSON 
 
 # Instructions
 
-Object Exporter is accessed through the tools menu and is only visible when you are debugging.
+Object Exporter is accessed through the tools menu and is only visible when you are debugging and stopped at a breakpoint.
 
 ![Select from tool menu](https://raw.githubusercontent.com/OmarElabd/ObjectExporter/master/ObjectExporter.VsPackage/Documentation/Object%20Exporter%20-%20Tools%20Menu.png)
 

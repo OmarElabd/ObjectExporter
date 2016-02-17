@@ -82,8 +82,8 @@ namespace ObjectExporter.Core.Templates
                     DateTime dateTime = DateTime.Parse(formattedString);
 
                     return String.Format("new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6})", 
-                        dateTime.Year, dateTime.Month, dateTime.Month, dateTime.Day, dateTime.Hour, 
-                        dateTime.Minute, dateTime.Second);
+                        dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, 
+                        dateTime.Minute, dateTime.Second, dateTime.Millisecond);
                 case "System.Decimal":
                 case "decimal":
                     return Converter.GetDecimalWithLiteral(expression.Value);

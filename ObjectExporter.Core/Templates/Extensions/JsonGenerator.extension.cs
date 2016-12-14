@@ -4,6 +4,7 @@ using EnvDTE;
 using ObjectExporter.Core.Models.RuleSets;
 using ObjectExporter.Core.Templates.Converters;
 
+// ReSharper disable once CheckNamespace
 namespace ObjectExporter.Core.Templates
 {
     public partial class JsonGenerator : IGenerator

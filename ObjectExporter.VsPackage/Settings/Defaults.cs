@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ObjectExporter.VsPackage.Settings
+﻿namespace ObjectExporter.VsPackage.Settings
 {
     public static class Defaults
     {

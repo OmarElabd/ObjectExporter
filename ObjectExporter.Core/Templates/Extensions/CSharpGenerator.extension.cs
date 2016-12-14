@@ -3,6 +3,7 @@ using ObjectExporter.Core.Templates.Converters;
 using EnvDTE;
 using ObjectExporter.Core.Models.RuleSets;
 
+// ReSharper disable once CheckNamespace
 namespace ObjectExporter.Core.Templates
 {
     public partial class CSharpGenerator : IGenerator
@@ -81,9 +82,10 @@ namespace ObjectExporter.Core.Templates
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     DateTime dateTime = DateTime.Parse(formattedString);
 
-                    return String.Format("new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6})", 
+                    // TODO parse children for milisecond and datetime.kind
+                    return String.Format("new DateTime({0}, {1}, {2}, {3}, {4}, {5})", 
                         dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, 
-                        dateTime.Minute, dateTime.Second, dateTime.Millisecond);
+                        dateTime.Minute, dateTime.Second);
                 case "System.Decimal":
                 case "decimal":
                     return Converter.GetDecimalWithLiteral(expression.Value);

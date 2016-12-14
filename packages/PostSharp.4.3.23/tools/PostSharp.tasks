@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30DetectNativeFrameworkVersion" />
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30" />
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30TouchWithDelay" />
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30CheckPfx" />
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30GetDirectory" />
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30MoveWithRetry"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30CopyWithRetry"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30Shutdown"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30ParseAssemblyNames"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30ChangeAppConfig"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30GetPlugInSearchPath"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30CopyBindingRedirects"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30LoadBindingRedirects"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30SetupAppDomains"/>
+  <UsingTask AssemblyFile="$(PostSharp30MSBuildAssemblyPath)" TaskName="PostSharp.MSBuild.PostSharp30DetectVsx"/>
+</Project>

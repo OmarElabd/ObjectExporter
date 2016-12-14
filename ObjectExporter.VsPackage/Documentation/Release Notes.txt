@@ -1,3 +1,6 @@
+Release Notes (v1.4.1) - 12/14/2016:
+1. Fixed bug with output of DateTime in C# Exporter
+
 Release Notes (v1.2.0) - 4/14/2015:
 1. Fix: Fixed column formatting for custom expressions.
 2. Feature: Added exception logging.

@@ -20,6 +20,7 @@ namespace ObjectExporter.Core.Models.RuleSets
         public bool IsValid(string expressionType, string dataMemberPropertyName)
         {
             Type type = _retriever.GetTypeFromString(expressionType);
+
             List<string> properties = type.GetAllPropertyNames();
 
             return properties.Contains(dataMemberPropertyName);

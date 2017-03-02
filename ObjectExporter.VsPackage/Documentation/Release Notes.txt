@@ -1,3 +1,9 @@
+Release Notes (v1.7.0) - 01/03/2017:
+1. Added Support for VS2017
+2. Fixed bug which would prevent loading of Object Exporter (Issue #59)
+3. Updated Scintilla to use Scintilla.NET
+4. Removed unused dependencies
+
 Release Notes (v1.4.1) - 12/14/2016:
 1. Fixed bug with output of DateTime in C# Exporter
 

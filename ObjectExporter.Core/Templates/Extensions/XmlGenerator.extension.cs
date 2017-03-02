@@ -32,12 +32,15 @@ namespace ObjectExporter.Core.Templates
             switch (expressionType)
             {
                 case "System.Guid":
+                case "System.Guid?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     return XmlConvert.ToString(Guid.Parse(formattedString));
                 case "System.TimeSpan":
+                case "System.TimeSpan?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     return XmlConvert.ToString(TimeSpan.Parse(formattedString));
                 case "System.DateTimeOffset":
+                case "System.DateTimeOffset?":
                     if (expression.Value == "{System.DateTimeOffset}")
                     {
                         //Fix: for some reason the expression.Value is not being set correctly 
@@ -51,20 +54,27 @@ namespace ObjectExporter.Core.Templates
 
                     return XmlConvert.ToString(DateTimeOffset.Parse(formattedString));
                 case "System.DateTime":
+                case "System.DateTime?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     return XmlConvert.ToString(DateTime.Parse(formattedString));
                 case "System.Char":
+                case "System.Char?":
                 case "char":
+                case "char?":
                     string charValue = Converter.GetCharAsciiCode(expression.Value); //Retrieve the CharValue as a number
                     return charValue;
                 case "System.Decimal":
+                case "System.Decimal?":
                 case "decimal":
+                case "decimal?":
                     return Converter.GetDecimal(expression.Value);
                 case "System.Single":
+                case "System.Single?":
                 case "float":
+                case "float?":
                     return Converter.GetFloat(expression.Value);
                 default:
-                    return "";
+                    return String.Empty;
             }
         }
     }

@@ -2,8 +2,6 @@
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using EnvDTE;
 using EnvDTE80;
@@ -90,24 +88,6 @@ namespace ObjectExporter.VsPackage
             };
 
             Raygun.Initialize(info);
-
-            //Load Scintilla dependencies (SciLexer.dll)
-            LoadUnmanagedLibraries();
-        }
-
-        private void LoadUnmanagedLibraries()
-        {
-            string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            IntPtr pDll = NativeMethods.LoadLibrary(Path.Combine(assemblyPath, "SciLexer.dll"));
-
-            if (pDll == IntPtr.Zero)
-            {
-                Exception ex = new DllNotFoundException("Could not find SciLexer.dll - This is unmanaged assembly is required by ScintillaNet.dll");
-
-                Raygun.LogException(ex);
-
-                throw ex;
-            }
         }
 
         void menuItem_BeforeQueryStatus(object sender, EventArgs e)

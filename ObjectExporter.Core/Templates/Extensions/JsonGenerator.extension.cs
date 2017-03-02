@@ -29,15 +29,23 @@ namespace ObjectExporter.Core.Templates
 
             string expressionType = GeneratorHelper.GetBaseClassFromType(expression.Type);
 
+            if (expression.Value == "null")
+            {
+                return "null";
+            }
+
             switch (expressionType)
             {
                 case "System.Guid":
+                case "System.Guid?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     return String.Format("\"{0}\"", formattedString);
                 case "System.TimeSpan":
+                case "System.TimeSpan?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     return String.Format("\"{0}\"", formattedString);
                 case "System.DateTimeOffset":
+                case "System.DateTimeOffset?":
                     if (expression.Value == "{System.DateTimeOffset}")
                     {
                         //Fix: for some reason the expression.Value is not being set correctly 
@@ -52,11 +60,14 @@ namespace ObjectExporter.Core.Templates
                     DateTimeOffset currentOffset = DateTimeOffset.Parse(formattedString);
                     return String.Format("\"{0}\"", XmlConvert.ToString(currentOffset));
                 case "System.DateTime":
+                case "System.DateTime?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     DateTime currentDateTime = DateTime.Parse(formattedString);
                     return String.Format("\"{0}\"", XmlConvert.ToString(currentDateTime));
                 case "System.Char":
+                case "System.Char?":
                 case "char":
+                case "char?":
                     string charValue = Converter.GetCharWithLiteral(expression.Value); //Retrieve Character Value as a Letter
 
                     if (charValue == "'\\0'")
@@ -70,13 +81,17 @@ namespace ObjectExporter.Core.Templates
 
                     return charValue;
                 case "System.Decimal":
+                case "System.Decimal?":
                 case "decimal":
+                case "decimal?":
                     return Converter.GetDecimal(expression.Value);
                 case "System.Single":
+                case "System.Single?":
                 case "float":
+                case "float?":
                     return Converter.GetFloat(expression.Value);
                 default:
-                    return "";
+                    return String.Empty;
             }
         }
     }

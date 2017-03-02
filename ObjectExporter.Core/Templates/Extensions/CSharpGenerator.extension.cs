@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ObjectExporter.Core.Templates.Converters;
 using EnvDTE;
 using ObjectExporter.Core.Models.RuleSets;
@@ -9,8 +10,8 @@ namespace ObjectExporter.Core.Templates
     public partial class CSharpGenerator : IGenerator
     {
         public IConverter Converter { get; set; }
-
         private readonly RuleSetValidator _ruleSetValidator;
+
         public CSharpGenerator(RuleSetValidator ruleSetValidator)
         {
             _ruleSetValidator = ruleSetValidator;
@@ -18,22 +19,31 @@ namespace ObjectExporter.Core.Templates
 
         private bool CanBeExpressedAsSingleType(string expressionType)
         {
-            switch (expressionType)
+            List<string> whiteList = new List<string>()
             {
-                case "System.Guid":
-                case "System.TimeSpan":
-                case "System.DateTimeOffset":
-                case "System.DateTime":
-                case "System.Decimal":
-                case "decimal":
-                case "System.Char":
-                case "char":
-                case "System.Single":
-                case "float":
-                    return true;
-                default:
-                    return false;
-            }
+                "System.Guid",
+                "System.Guid?",
+                "System.TimeSpan",
+                "System.TimeSpan?",
+                "System.DateTime",
+                "System.DateTime?",
+                "System.DateTimeOffset",
+                "System.DateTimeOffset?",
+                "System.Decimal",
+                "System.Decimal?",
+                "decimal",
+                "decimal?",
+                "System.Char",
+                "System.Char?",
+                "char",
+                "char?",
+                "System.Single",
+                "System.Single?",
+                "float",
+                "float?"
+            };
+
+            return whiteList.Contains(expressionType);
         }
 
         public void Clear()
@@ -48,18 +58,27 @@ namespace ObjectExporter.Core.Templates
 
             string expressionType = GeneratorHelper.GetBaseClassFromType(expression.Type);
 
+            if (expression.Value == "null")
+            {
+                return "null";
+            }
+
             switch (expressionType)
             {
                 case "System.Guid":
+                case "System.Guid?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     return String.Format("new Guid(\"{0}\")", formattedString);
                 case "System.TimeSpan":
+                case "System.TimeSpan?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     TimeSpan timeSpan = TimeSpan.Parse(formattedString);
 
                     return String.Format("new TimeSpan({0}, {1}, {2}, {3}, {4})", 
                         timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
                 case "System.DateTimeOffset":
+                case "System.DateTimeOffset?":
+                    // TODO check System.DateTimeOffset?
                     if (expression.Value == "{System.DateTimeOffset}")
                     {
                         //NOTE: for some reason the expression.Value is not being set correctly 
@@ -79,6 +98,7 @@ namespace ObjectExporter.Core.Templates
                         dateTimeOffset.Offset.Days, dateTimeOffset.Offset.Hours, dateTimeOffset.Offset.Minutes, 
                         dateTimeOffset.Offset.Seconds, dateTimeOffset.Millisecond);
                 case "System.DateTime":
+                case "System.DateTime?":
                     formattedString = GeneratorHelper.StripCurleyBraces(expression.Value);
                     DateTime dateTime = DateTime.Parse(formattedString);
 
@@ -87,17 +107,23 @@ namespace ObjectExporter.Core.Templates
                         dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, 
                         dateTime.Minute, dateTime.Second);
                 case "System.Decimal":
+                case "System.Decimal?":
                 case "decimal":
+                case "decimal?":
                     return Converter.GetDecimalWithLiteral(expression.Value);
                 case "System.Char":
+                case "System.Char?":
                 case "char":
+                case "char?":
                     string charValue = Converter.GetCharWithLiteral(expression.Value); //Retrieve Character Value as a Letter
                     return charValue;
                 case "System.Single":
+                case "System.Single?":
                 case "float":
+                case "float?":
                     return Converter.GetFloatWithLiteral(expression.Value);
                 default:
-                    return "";
+                    return String.Empty;
             }
         }
     }

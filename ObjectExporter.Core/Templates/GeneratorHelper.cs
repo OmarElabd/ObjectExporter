@@ -5,7 +5,6 @@ using EnvDTE;
 using EnvDTE80;
 using ObjectExporter.Core.ExtensionMethods;
 using ObjectExporter.Core.Globals;
-using ObjectExporter.Core.Models;
 using ObjectExporter.Core.Models.RuleSets;
 
 namespace ObjectExporter.Core.Templates
@@ -14,22 +13,31 @@ namespace ObjectExporter.Core.Templates
     {
         public static bool CanBeExpressedAsSingleType(string expressionType)
         {
-            switch (expressionType)
+            List<string> whiteList = new List<string>()
             {
-                case "System.Guid":
-                case "System.TimeSpan":
-                case "System.DateTimeOffset":
-                case "System.Char":
-                case "char":
-                case "System.DateTime":
-                case "System.Decimal":
-                case "decimal":
-                case "System.Single":
-                case "float":
-                    return true;
-                default:
-                    return false;
-            }
+                "System.Guid",
+                "System.Guid?",
+                "System.TimeSpan",
+                "System.TimeSpan?",
+                "System.DateTime",
+                "System.DateTime?",
+                "System.DateTimeOffset",
+                "System.DateTimeOffset?",
+                "System.Decimal",
+                "System.Decimal?",
+                "decimal",
+                "decimal?",
+                "System.Char",
+                "System.Char?",
+                "char",
+                "char?",
+                "System.Single",
+                "System.Single?",
+                "float",
+                "float?"
+            };
+
+            return whiteList.Contains(expressionType);
         }
 
         public static bool IsBase(Expression expression)
@@ -40,26 +48,46 @@ namespace ObjectExporter.Core.Templates
         private static List<string> SimpleTypes = new List<string>()
         {
             "bool",
+            "bool?",
             "byte",
+            "byte?",
             "sbyte",
+            "sbyte?",
             "char",
+            "char?",
             "decimal",
+            "decimal?",
             "double",
+            "double?",
             "float",
+            "float?",
             "int",
+            "int?",
             "uint",
+            "uint?",
             "long",
+            "long?",
             "ulong",
+            "ulong?",
             "object",
+            "object?",
             "short",
+            "short?",
             "ushort",
+            "ushort?",
             "string"
         };
 
         public static string WriteCommaIfNotLast(bool isLast)
         {
-            if (isLast) return "";
-            else return ",";
+            if (isLast)
+            {
+                return "";
+            }
+            else
+            {
+                return ",";
+            }
         }
 
         public static bool IsSerializable(string expressionName)
@@ -74,7 +102,6 @@ namespace ObjectExporter.Core.Templates
                     return true;
             }
         }
-
 
         public static bool IsTypeOfCollection(string expressionType)
         {

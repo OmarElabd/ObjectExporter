@@ -42,7 +42,7 @@ Once your objects and settings are selected, you may export them in your desired
 
 C#:
 
-![Generated C#](https://raw.githubusercontent.com/OmarElabd/ObjectExporter/master/ObjectExporter.VsPackage/Documentation/Object%20Exporter%20-%20Generated%20C%23.png)
+![Generated C#](https://raw.githubusercontent.com/OmarElabd/ObjectExporter/master/ObjectExporter.VsPackage/Documentation/Object%20Exporter%20-%20Generated%20CSharp.png)
 
 JSON:
 

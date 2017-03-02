@@ -29,7 +29,16 @@ namespace ObjectExporter.Core.Models.RuleSets
             try
             {
                 List<string> properties = GetAccessibleProperties(expressionType);
-                return properties.Contains(childPropertyName);
+
+                // if unable to retrieve type from the TypeRetriever
+                if (properties == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return properties.Contains(childPropertyName);
+                }
             }
             catch (Exception ex)
             {
@@ -40,6 +49,11 @@ namespace ObjectExporter.Core.Models.RuleSets
         private List<string> GetAccessibleProperties(string expressionType)
         {
             Type type = _retriever.GetTypeFromString(expressionType);
+
+            if (type == null)
+            {
+                return null;
+            }
 
             if (AccessiblePropertiesInType.ContainsKey(type))
             {

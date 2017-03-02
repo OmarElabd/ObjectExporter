@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Design;
@@ -21,15 +18,20 @@ namespace ObjectExporter.Core.Models
         public Type GetTypeFromString(string type)
         {
             IServiceProvider serviceProvider = new ServiceProvider(_dte2 as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
-
             DynamicTypeService typeService = serviceProvider.GetService(typeof(DynamicTypeService)) as DynamicTypeService;
+            IVsSolution solution = serviceProvider.GetService(typeof(IVsSolution)) as IVsSolution;
 
-            IVsSolution sln = serviceProvider.GetService(typeof(IVsSolution)) as IVsSolution;
+            if (solution == null)
+            {
+                return null;
+            }
 
-            IVsHierarchy hier;
-            sln.GetProjectOfUniqueName(_dte2.ActiveDocument.ProjectItem.ContainingProject.UniqueName, out hier);
+            IVsHierarchy hierarchy;            
+            solution.GetProjectOfUniqueName(_dte2.ActiveDocument.ProjectItem.ContainingProject.UniqueName, out hierarchy);
+            
+            Type returnType = typeService?.GetTypeResolutionService(hierarchy)?.GetType(type, false);
 
-            return typeService.GetTypeResolutionService(hier).GetType(type, true);
+            return returnType;
         }
 
     }

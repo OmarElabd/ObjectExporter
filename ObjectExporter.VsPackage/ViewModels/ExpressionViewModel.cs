@@ -1,6 +1,6 @@
 ﻿using EnvDTE;
 
-namespace AccretionDynamics.ObjectExporter.VsPackage.ViewModels
+namespace ObjectExporter.VsPackage.ViewModels
 {
     public class ExpressionViewModel
     {
@@ -12,6 +12,5 @@ namespace AccretionDynamics.ObjectExporter.VsPackage.ViewModels
             DisplayName = displayName;
             Expression = expression;
         }
-
     }
 }

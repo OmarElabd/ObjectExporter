@@ -39,7 +39,6 @@
             this.radButtonCancel = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.radPageViewGeneratedText)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scintillaDisplayObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonSaveObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCopyClipboard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCancel)).BeginInit();
@@ -77,15 +76,15 @@
             this.scintillaDisplayObjects.Location = new System.Drawing.Point(0, 0);
             this.scintillaDisplayObjects.Name = "scintillaDisplayObjects";
             this.scintillaDisplayObjects.Size = new System.Drawing.Size(200, 100);
-            this.scintillaDisplayObjects.Styles.BraceBad.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.BraceLight.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.CallTip.FontName = "Segoe UI\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.ControlChar.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.Default.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.IndentGuide.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.LastPredefined.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.LineNumber.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
-            this.scintillaDisplayObjects.Styles.Max.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.BraceBad.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.BraceLight.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.CallTip.FontName = "Segoe UI\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.ControlChar.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.Default.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.IndentGuide.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.LastPredefined.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.LineNumber.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
+            //this.scintillaDisplayObjects.Styles.Max.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.scintillaDisplayObjects.TabIndex = 0;
             // 
             // radButtonSaveObjects
@@ -147,7 +146,6 @@
             this.Shown += new System.EventHandler(this.FormDisplayGeneratedText_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.radPageViewGeneratedText)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.scintillaDisplayObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonSaveObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCopyClipboard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButtonCancel)).EndInit();

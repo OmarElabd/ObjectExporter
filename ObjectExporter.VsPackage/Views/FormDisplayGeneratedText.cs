@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectExporter.Core.Globals;
 using ObjectExporter.VsPackage.ExtensionMethods;
+using ObjectExporter.VsPackage.Settings;
+using ScintillaNET;
 using Telerik.WinControls.UI;
 using Telerik.Windows.Documents.Model.Code;
 
@@ -15,8 +17,8 @@ namespace ObjectExporter.VsPackage.Views
     {
         private readonly Dictionary<string, string> _dicTexts;
         private readonly ExportType _type;
-        private CodeFormattingSettings formattingSettings;
-        private string extension;
+        private CodeFormattingSettings _formattingSettings;
+        private string _extension;
 
         public FormDisplayGeneratedText(Dictionary<string, string> dicTexts, ExportType type)
         {
@@ -32,16 +34,16 @@ namespace ObjectExporter.VsPackage.Views
             switch (type)
             {
                 case ExportType.CSharpObject:
-                    formattingSettings = new CodeFormattingSettings(CodeLanguages.CSharp);
-                    extension = ".cs";
+                    _formattingSettings = new CodeFormattingSettings(CodeLanguages.CSharp);
+                    _extension = ".cs";
                     break;
                 case ExportType.Json:
-                    formattingSettings = new CodeFormattingSettings(CodeLanguages.JavaScript);
-                    extension = ".json";
+                    _formattingSettings = new CodeFormattingSettings(CodeLanguages.JavaScript);
+                    _extension = ".json";
                     break;
                 case ExportType.Xml:
-                    formattingSettings = new CodeFormattingSettings(CodeLanguages.Xml);
-                    extension = ".xml";
+                    _formattingSettings = new CodeFormattingSettings(CodeLanguages.Xml);
+                    _extension = ".xml";
                     break;
             }
 
@@ -71,11 +73,12 @@ namespace ObjectExporter.VsPackage.Views
             string expressionName = radPageViewGeneratedText.SelectedPage.Text;
             var expressionText = _dicTexts[expressionName];
 
-            string language = GetLanguage(_type);
             scintillaDisplayObjects.Text = expressionText;
-            scintillaDisplayObjects.ConfigurationManager.Language = language;
-            scintillaDisplayObjects.ConfigurationManager.Configure();
-            scintillaDisplayObjects.Lexing.Colorize();
+            scintillaDisplayObjects.Lexer = GetLexer(_type);
+
+            // Configure the default style
+
+            ScintillaStyles.InitStyle(scintillaDisplayObjects, _type);
             scintillaDisplayObjects.Update();
         }
 
@@ -95,7 +98,7 @@ namespace ObjectExporter.VsPackage.Views
                 {
                     string fileName = kvp.Key;
                     string fileText = kvp.Value;
-                    string path = saveToPath + "\\" + fileName + extension;
+                    string path = saveToPath + "\\" + fileName + _extension;
 
                     File.WriteAllText(path, fileText);
                 }
@@ -134,9 +137,9 @@ namespace ObjectExporter.VsPackage.Views
             long maxNumberOfLines = dicTexts.Select(x => x.Value).Max(x => x.Lines());
 
             //Calculater the number of digits
-            int numberOfDigits = (int) Math.Floor(Math.Log10(maxNumberOfLines) + 1);
+            int numberOfDigits = (int)Math.Floor(Math.Log10(maxNumberOfLines) + 1);
 
-            scintillaDisplayObjects.Margins[0].Width = 10*numberOfDigits; //10px for every digit
+            scintillaDisplayObjects.Margins[0].Width = 10 * numberOfDigits; //10px for every digit
         }
 
         private string GetLanguage(ExportType type)
@@ -149,6 +152,21 @@ namespace ObjectExporter.VsPackage.Views
                     return "xml";
                 case ExportType.CSharpObject:
                     return "cs";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type));
+            }
+        }
+
+        private Lexer GetLexer(ExportType type)
+        {
+            switch (type)
+            {
+                case ExportType.Json:
+                    return Lexer.Json;
+                case ExportType.Xml:
+                    return Lexer.Xml;
+                case ExportType.CSharpObject:
+                    return Lexer.Cpp;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type));
             }

@@ -5,7 +5,7 @@
 Object Exporter lets you export out an object while debugging in Visual Studio. Currently supported output formats are: C# Object Initialization Code, JSON and XML.
 
 # Release Notes
-[1.2.4] (https://raw.githubusercontent.com/OmarElabd/ObjectExporter/master/ObjectExporter.VsPackage/Documentation/Release%20Notes.txt)
+[1.7.0] (https://raw.githubusercontent.com/OmarElabd/ObjectExporter/master/ObjectExporter.VsPackage/Documentation/Release%20Notes.txt)
 
 # Use Cases
 1. Persisting an object state for debugging comparisons.

@@ -55,8 +55,8 @@ namespace ObjectExporter.VsPackage.Views
         
         private void LoadLocals()
         {
-            if (_dte2.Debugger.CurrentMode == EnvDTE.dbgDebugMode.dbgBreakMode &&
-                _dte2.Debugger != null &&
+            if (_dte2.Debugger != null &&
+                _dte2.Debugger.CurrentMode == EnvDTE.dbgDebugMode.dbgBreakMode &&
                 _dte2.Debugger.CurrentStackFrame != null)
             {
                 Expressions localExpresisons = _dte2.Debugger.CurrentStackFrame.Locals;

@@ -1,3 +1,6 @@
+Release Notes (v1.7.1) - 04/18/2019:
+1. Added Support for VS2019
+
 Release Notes (v1.7.0) - 01/03/2017:
 1. Added Support for VS2017
 2. Fixed bug which would prevent loading of Object Exporter (Issue #59)

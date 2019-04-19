@@ -18,3 +18,5 @@ ObjectExporter.VsPackage/obj/
 ObjectExporter.VsPackage/Resources
 ObjectExporter.Core/ApiKeys.cs
 ObjectExporter.VsPackage/Documentation/Thumbs.db
+/.vs
+/packages

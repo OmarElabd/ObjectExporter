@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26206.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{EBA56731-B3A8-47FC-A5BA-07A26A7926E8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B283BD4B-FB2D-4FE2-B8F4-0DB6F79F645F}"
 	ProjectSection(SolutionItems) = preProject
 		lib\Telerik\Telerik.WinControls.dll = lib\Telerik\Telerik.WinControls.dll
@@ -24,8 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectExporter.VsPackage", "ObjectExporter.VsPackage\ObjectExporter.VsPackage.csproj", "{4327676D-2B8D-42C9-AF0D-833D7812C15E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectExporter.Core", "ObjectExporter.Core\ObjectExporter.Core.csproj", "{29D6D910-2865-4243-AABE-31E8180DE906}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectExporter.Test", "ObjectExporter.Test\ObjectExporter.Test.csproj", "{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,16 +55,6 @@ Global
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Release|ARM.ActiveCfg = Release|Any CPU
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Release|x64.ActiveCfg = Release|Any CPU
 		{29D6D910-2865-4243-AABE-31E8180DE906}.Release|x86.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|ARM.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|x64.ActiveCfg = Release|Any CPU
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +62,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4327676D-2B8D-42C9-AF0D-833D7812C15E} = {14FBF15E-5665-45A1-99E9-E36029AA11C1}
 		{29D6D910-2865-4243-AABE-31E8180DE906} = {14FBF15E-5665-45A1-99E9-E36029AA11C1}
-		{526521E3-EE0C-4E2F-80C1-CC3BFC8991F1} = {EBA56731-B3A8-47FC-A5BA-07A26A7926E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0AEE3DB-D6F5-4846-B5D4-318D1E18A46E}
 	EndGlobalSection
 EndGlobal

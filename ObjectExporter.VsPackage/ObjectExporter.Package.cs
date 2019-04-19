@@ -3,6 +3,8 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
@@ -25,7 +27,7 @@ namespace ObjectExporter.VsPackage
     /// </summary>
     // This attribute tells the PkgDef creation utility (CreatePkgDef.exe) that this class is
     // a package.
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
@@ -33,10 +35,10 @@ namespace ObjectExporter.VsPackage
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidObjectExporter_PkgString)]
     //Used for the hidden menu item
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideOptionPage(typeof(PackageSettings),
     "Object Exporter", "General", 0, 0, true)]
-    public sealed class ObjectExporter : Package
+    public sealed class ObjectExporter : AsyncPackage
     {
         private readonly DTE2 _dte2 = GetGlobalService(typeof(DTE)) as DTE2;
         private PackageSettings _packageSettings;
@@ -60,11 +62,8 @@ namespace ObjectExporter.VsPackage
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
         /// where you can put all the initialization code that rely on services provided by VisualStudio.
         /// </summary>
-        protected override void Initialize()
+        protected override System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", ToString()));
-            base.Initialize();
-
             // Add our command handlers for menu (commands must exist in the .vsct file)
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != mcs)
@@ -88,6 +87,8 @@ namespace ObjectExporter.VsPackage
             };
 
             Raygun.Initialize(info);
+
+            return base.InitializeAsync(cancellationToken, progress);
         }
 
         void menuItem_BeforeQueryStatus(object sender, EventArgs e)

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="07fb5b16-f4be-4488-9a19-b4f36d2c05a6" Version="1.7.0" Language="en-US" Publisher="Omar Elabd" />
+    <DisplayName>Object Exporter</DisplayName>
+    <Description xml:space="preserve">Object Exporter creates serializations of in memory objects from your various debugging windows. Currently supported output formats are: CSharp Object Initialization Code, JSON and XML.</Description>
+    <MoreInfo>http://www.omarelabd.net/exporting-objects-from-the-visual-studio-debugger/</MoreInfo>
+    <License>LICENSE.txt</License>
+    <GettingStartedGuide>https://github.com/OmarElabd/ObjectExporter</GettingStartedGuide>
+    <ReleaseNotes>Documentation\Release Notes.txt</ReleaseNotes>
+    <Icon>Resources\export_large.png</Icon>
+    <PreviewImage>Resources\screenpreview.png</PreviewImage>
+    <Tags> Object Exporter, Serialize, Serializer, Save, Object, Export, Debugger, XML, Debugging, C#, JSON, CSharp, Watch, Locals, Generate, Autos, Immediate</Tags>
+  </Metadata>
+  <Installation InstalledByMsi="false">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0, 17.0)" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+  </Assets>
+  <Prerequisites>
+    <!--<Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[11.0, 16.0)" DisplayName="Visual Studio core editor" />-->
+    <!--<Prerequisite Id="Microsoft.VisualStudio.Shell.11.0" Version="[11.0]" DisplayName="Visual Studio Shell"/>-->
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" />
+    <!--<Prerequisite Id="Microsoft.VisualStudio.Component.DiagnosticTools" Version="[15.0.25814.0,)" />
+    <Prerequisite Id="Microsoft.VisualStudio.Shell.12.0" Version="[12.0]" />-->
+  </Prerequisites>
+</PackageManifest>

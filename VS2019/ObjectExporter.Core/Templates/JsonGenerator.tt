@@ -1,0 +1,109 @@
+﻿<#@ template language="C#" #>
+<#@ parameter name="objectExpression" type="EnvDTE.Expression" #>
+<#@ parameter name="maxDepth" type="System.Int32" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System.Collections.Generic" #>
+<# ExportMembers(objectExpression, 0, true); #>
+<#+
+    bool isFirstElement = true;
+    
+    public void ExportMembers(Expression expression, int currentDepth, bool isLast)
+    {
+        string expressionType;
+        if(isFirstElement) //TODO: can probably replace isFirstElement with currentDepth = 0
+        {
+            //Frameworks can add theType { dynamicType} - strip out the {dynamic type}
+            expressionType = GeneratorHelper.GetBaseClassFromType(expression.Type);
+        }
+        else
+        {
+            //members of objects have a type of: object { theType } - strip out object { }
+            expressionType = GeneratorHelper.GetSubClassFromType(expression.Type);
+        }
+
+        if(!GeneratorHelper.IsSerializable(expression.Name))
+        {
+            return;
+        }
+        else if(GeneratorHelper.CanBeExpressedAsSingleType(expressionType))
+        {
+            WriteLine("");
+
+            if(GeneratorHelper.IsCollectionMember(expression.Name))
+            {
+                #><#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+            else
+            {
+                #>"<#= expression.Name #>": <#= GetSingleTypeValue(expression) + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+        }
+        else if (expression.DataMembers.Count == 0)
+        {
+            WriteLine("");
+            if(GeneratorHelper.IsCollectionMember(expression.Name))
+            {
+                #><#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+            else
+            {   
+                #>"<#= expression.Name #>": <#= expression.Value + GeneratorHelper.WriteCommaIfNotLast(isLast) #><#+
+            }
+        }
+        else if (expression.DataMembers.Count > 0 && currentDepth <= maxDepth)
+        {
+            //used for the very first object (top most) to be completed as var objName = new objType, without a space in between.
+            if(isFirstElement)
+            {
+                isFirstElement = false;
+            }
+            else
+            {
+                WriteLine("");
+            }
+
+            if(GeneratorHelper.IsCollectionMember(expression.Name) && GeneratorHelper.IsTypeOfCollection(expressionType))
+            {
+                #>[<#+
+            }
+            else if(GeneratorHelper.IsTypeOfCollection(expressionType))
+            {
+                #>"<#= expression.Name #>": <#+ 
+                WriteLine(""); #>[<#+
+            }
+            else
+            {
+                #>{<#+
+            }
+
+            List<Expression> cleanedExpressionMembers = GeneratorHelper.SanitizeExpressions(expression, _ruleSetValidator, expressionType);
+
+            foreach(Expression exp in cleanedExpressionMembers)
+            {
+                PushIndent("\t");
+                bool isLastItem = cleanedExpressionMembers.IsLast(exp);
+                ExportMembers(exp, currentDepth + 1, isLastItem);
+                PopIndent();
+            }
+
+            TerminateObjectOrCollection(expressionType);
+            #><#= GeneratorHelper.WriteCommaIfNotLast(isLast) #> <#+
+        }
+    }
+
+    private void TerminateObjectOrCollection(string expressionType)
+    {
+        WriteLine("");
+        if(GeneratorHelper.IsTypeOfCollection(expressionType))
+        {
+            #>]<#+ 
+        }
+        else
+        {
+            #>}<#+     
+        }
+    }
+#>

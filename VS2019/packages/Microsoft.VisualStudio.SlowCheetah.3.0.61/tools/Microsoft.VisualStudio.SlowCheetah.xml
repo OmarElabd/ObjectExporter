@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.VisualStudio.SlowCheetah</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.TransformTask">
+            <summary>
+            Task that performs the transformation of the XML file
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.SlowCheetah.TransformTask.Source">
+            <summary>
+            Gets or sets the source file path for the transformation
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.SlowCheetah.TransformTask.Transform">
+            <summary>
+            Gets or sets the transformation file path
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.SlowCheetah.TransformTask.Destination">
+            <summary>
+            Gets or sets the destination path for the transformation
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformTask.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.Exceptions.TransformFailedException">
+            <summary>
+            Exception thrown on transformation failiure.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.Exceptions.TransformFailedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.Exceptions.TransformFailedException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.Exceptions.TransformFailedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.Exceptions.TransformFailedException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.Exceptions.TransformFailedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.Exceptions.TransformFailedException"/> class.
+            </summary>
+            <param name="info">The System.Runtime.Serialization.SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The System.Runtime.Serialization.StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.LogMessageImportance">
+            <summary>
+            Importance of a message
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.SlowCheetah.LogMessageImportance.High">
+            <summary>
+            High importace. Prioritize
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.SlowCheetah.LogMessageImportance.Normal">
+            <summary>
+            Normal importance.
+            </summary>
+        </member>
+        <member name="F:Microsoft.VisualStudio.SlowCheetah.LogMessageImportance.Low">
+            <summary>
+            Low Importance. Do not show if unnecessary
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger">
+            <summary>
+            Interface for using an internal logger in an <see cref="T:Microsoft.VisualStudio.SlowCheetah.ITransformer"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger.LogError(System.String,System.Object[])">
+            <summary>
+            Log an error
+            </summary>
+            <param name="message">The error message.</param>
+            <param name="messageArgs">Optional message arguments</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger.LogError(System.String,System.Int32,System.Int32,System.String,System.Object[])">
+            <summary>
+            Log an error specifying the file, line and position
+            </summary>
+            <param name="file">The file containing the error</param>
+            <param name="lineNumber">Line of the error</param>
+            <param name="linePosition">Position of the error</param>
+            <param name="message">The error message</param>
+            <param name="messageArgs">Optional message arguments</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger.LogErrorFromException(System.Exception)">
+            <summary>
+            Logs an error from an exception.
+            </summary>
+            <param name="ex">The exception</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger.LogErrorFromException(System.Exception,System.String,System.Int32,System.Int32)">
+            <summary>
+            Logs an error from an exception specifying the file, line number and position
+            </summary>
+            <param name="ex">The exception</param>
+            <param name="file">The file containing the error</param>
+            <param name="lineNumber">Line of the error</param>
+            <param name="linePosition">Position of the error</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger.LogMessage(Microsoft.VisualStudio.SlowCheetah.LogMessageImportance,System.String,System.Object[])">
+            <summary>
+            Log a message
+            </summary>
+            <param name="importance">Importance of the message</param>
+            <param name="message">The message.</param>
+            <param name="messageArgs">Optional message arguments</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger.LogWarning(System.String,System.Object[])">
+            <summary>
+            Log a warning
+            </summary>
+            <param name="message">The warning message.</param>
+            <param name="messageArgs">Optional message arguments</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger.LogWarning(System.String,System.Int32,System.Int32,System.String,System.Object[])">
+            <summary>
+            Log a warning specifying the file, line and position
+            </summary>
+            <param name="file">The file containing the warning</param>
+            <param name="lineNumber">Line of the warning</param>
+            <param name="linePosition">Position of the error</param>
+            <param name="message">The warning message</param>
+            <param name="messageArgs">Optional message arguments</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger">
+            <summary>
+            Shim for using <see cref="T:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.#ctor(Microsoft.VisualStudio.SlowCheetah.ITransformationLogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger"/> class.
+            </summary>
+            <param name="logger">Our own logger</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogError(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogError(System.String,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogErrorFromException(System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogErrorFromException(System.Exception,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogMessage(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogMessage(System.String,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogWarning(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogWarning(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonShimLogger.LogWarning(System.String,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger">
+            <summary>
+            Shim for using MSBuild logger in <see cref="T:Microsoft.VisualStudio.SlowCheetah.ITransformer"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.#ctor(Microsoft.Build.Utilities.TaskLoggingHelper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger"/> class.
+            </summary>
+            <param name="logger">The MSBuild logger</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.LogError(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.LogError(System.String,System.Int32,System.Int32,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.LogErrorFromException(System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.LogErrorFromException(System.Exception,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.LogMessage(Microsoft.VisualStudio.SlowCheetah.LogMessageImportance,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.LogWarning(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformationTaskLogger.LogWarning(System.String,System.Int32,System.Int32,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger">
+            <summary>
+            Shim for using an <see cref="T:Microsoft.VisualStudio.SlowCheetah.ITransformationLogger"/> as a <see cref="T:Microsoft.Web.XmlTransform.IXmlTransformationLogger"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.#ctor(Microsoft.VisualStudio.SlowCheetah.ITransformationLogger,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger"/> class.
+            </summary>
+            <param name="logger">Our own logger</param>
+            <param name="useSections">Wheter or not to use sections</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogError(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogError(System.String,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogError(System.String,System.Int32,System.Int32,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogErrorFromException(System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogErrorFromException(System.Exception,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogErrorFromException(System.Exception,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogMessage(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogMessage(Microsoft.Web.XmlTransform.MessageType,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogWarning(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogWarning(System.String,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.LogWarning(System.String,System.Int32,System.Int32,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.StartSection(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.StartSection(Microsoft.Web.XmlTransform.MessageType,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.EndSection(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlShimLogger.EndSection(Microsoft.Web.XmlTransform.MessageType,System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.Resources.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.SlowCheetah.Resources.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.SlowCheetah.Resources.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.SlowCheetah.Resources.Resources.ErrorMessage_SourceFileNotFound">
+            <summary>
+              Looks up a localized string similar to File to transform not found.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.SlowCheetah.Resources.Resources.ErrorMessage_TransformFileNotFound">
+            <summary>
+              Looks up a localized string similar to Transform file not found.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.ITransformer">
+            <summary>
+            Interface for file tranformers
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.ITransformer.Transform(System.String,System.String,System.String)">
+            <summary>
+            Main method that tranforms a source file accoring to a transformation file and puts it in a destination file
+            </summary>
+            <param name="source">Path to source file</param>
+            <param name="transform">Path to tranformation file</param>
+            <param name="destination">Path to destination of transformed file</param>
+            <returns>True if the transform succeeded</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.JsonTransformer">
+            <summary>
+            Transforms JSON files using JSON Document Transformations
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonTransformer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.JsonTransformer"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonTransformer.#ctor(Microsoft.VisualStudio.SlowCheetah.ITransformationLogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.JsonTransformer"/> class with a logger
+            </summary>
+            <param name="logger">The logger to use</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.JsonTransformer.Transform(System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.TransformerFactory">
+            <summary>
+            Factory for <see cref="T:Microsoft.VisualStudio.SlowCheetah.ITransformer"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformerFactory.GetTransformer(System.String,Microsoft.VisualStudio.SlowCheetah.ITransformationLogger,System.Boolean)">
+            <summary>
+            Gets the appropriate <see cref="T:Microsoft.VisualStudio.SlowCheetah.ITransformer"/> for the given transformation
+            </summary>
+            <param name="source">Path to the file to be transformed</param>
+            <param name="logger">Logger to be used in the transformer</param>
+            <param name="useSections">Wheter or not to use sections while logging</param>
+            <returns>The appropriate transformer for the given file</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformerFactory.IsXmlFile(System.String)">
+            <summary>
+            Verifies if a file is in XML format.
+            Attempts to open a file using an XML Reader.
+            </summary>
+            <param name="filepath">Full path to the file</param>
+            <returns>True is the file is XML</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformerFactory.IsJsonFile(System.String)">
+            <summary>
+            Verifies if the given file is JSON
+            </summary>
+            <param name="filePath">The path to the file</param>
+            <returns>True if the file is JSON</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.TransformerFactory.IsSupportedFile(System.String)">
+            <summary>
+            Verifies if a file is of a supported format.
+            JSON or XML
+            </summary>
+            <param name="filepath">Full path to the file</param>
+            <returns>True is the file type is supported</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.SlowCheetah.XmlTransformer">
+            <summary>
+            Transforms XML files utilizing Microsoft Web XmlTransform library
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlTransformer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.XmlTransformer"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlTransformer.#ctor(Microsoft.VisualStudio.SlowCheetah.ITransformationLogger,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.VisualStudio.SlowCheetah.XmlTransformer"/> class with an external logger.
+            </summary>
+            <param name="logger">External logger. Passed into the transformation</param>
+            <param name="useSections">Wheter or not to use sections while logging</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.SlowCheetah.XmlTransformer.Transform(System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
